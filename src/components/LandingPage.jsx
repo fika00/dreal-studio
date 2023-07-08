@@ -9,7 +9,7 @@ import {
   Float,
   Sparkles,
 } from "@react-three/drei";
-import { degToRad } from "three/src/math/MathUtils";
+import { degToRad, radToDeg } from "three/src/math/MathUtils";
 import "./LandingPage.css";
 import {
   Bloom,
@@ -53,11 +53,11 @@ const LandingPage = ({ isPhone }) => {
     setTimeout(() => {
       EyeRef.current.triggerUVEffect();
       headerRef.current.bringIn();
-      gsap.to(CamRef.current.position, {
-        y: 0,
+      gsap.to(CamRef.current.rotation, {
+        x: 0,
 
-        duration: 8, // Duration of the animation in seconds
-        ease: "power1.inOut",
+        duration: 5, // Duration of the animation in seconds
+        ease: "power3.inOut",
       });
     }, 1500);
   }, []);
@@ -68,8 +68,8 @@ const LandingPage = ({ isPhone }) => {
           ref={CamRef}
           makeDefault
           fov={40}
-          position={[0, 0.5, 3.5]}
-          rotation={[0, 0, 0]}
+          position={[0, 0, 3.5]}
+          rotation={[degToRad(18), 0, 0]}
         />
         <Background />
         <group position={eyePos} rotation={eyeRot}>

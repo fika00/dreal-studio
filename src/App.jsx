@@ -12,7 +12,7 @@ function App() {
   }
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
   const isPhone = () => {
-    if (screenSize.width < screenSize.height) {
+    if (screenSize.width * 2 < screenSize.height) {
       return true;
     } else {
       return false;

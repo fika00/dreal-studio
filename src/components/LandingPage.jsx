@@ -19,14 +19,17 @@ import {
   ToneMapping,
 } from "@react-three/postprocessing";
 import Background from "./Background";
+import TextTransitionSlide from "./TextTransitionSlide";
 import { BlendFunction, KernelSize } from "postprocessing";
 import { MeshBasicMaterial } from "three";
 import logo from "/imgs/logo.svg";
+import { gsap } from "gsap";
 
 const LandingPage = ({ isPhone }) => {
   const EyeRef = useRef();
   const CamRef = useRef();
   const envRef = useRef();
+  const headerRef = useRef();
   const positions = [2, 0, 2, 0, 2, 0, 2, 0];
   //   setTimeout(() => {
   //     setTimeout(() => {
@@ -49,16 +52,23 @@ const LandingPage = ({ isPhone }) => {
   useEffect(() => {
     setTimeout(() => {
       EyeRef.current.triggerUVEffect();
+      headerRef.current.bringIn();
+      gsap.to(CamRef.current.position, {
+        y: 0,
+
+        duration: 8, // Duration of the animation in seconds
+        ease: "power1.inOut",
+      });
     }, 1500);
   }, []);
   return (
-    <>
+    <div className="landingpage_wrapper">
       <Canvas>
         <PerspectiveCamera
           ref={CamRef}
           makeDefault
           fov={40}
-          position={[0, 0, 3.5]}
+          position={[0, 0.5, 3.5]}
           rotation={[0, 0, 0]}
         />
         <Background />
@@ -101,13 +111,15 @@ const LandingPage = ({ isPhone }) => {
         </EffectComposer>
       </Canvas>
       <div className="landingtext">
-        <h1 className="landingh">Dreal Studio</h1>
+        <div className="landingh">
+          <TextTransitionSlide ref={headerRef} text={"Dreal Studio"} />
+        </div>
         <p className="text">The art of making dreams, real.</p>
       </div>
       <div className="navbar">
         <img src={logo} alt="" className="logo" />
       </div>
-    </>
+    </div>
   );
 };
 

@@ -44,9 +44,30 @@
   left: 0;
   width: 100%;
   height: 5%;
-  padding: 10px;
   /* background-color: aliceblue; */
 }
 .logo {
   height: 75%;
+  margin: 10px;
+}
+.landingpage_wrapper {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+.TextTransitionSlide {
+  transition: transform 2s cubic-bezier(0.48, 0.09, 0.17, 0.96),
+    filter 3s ease-in-out, opacity 2s cubic-bezier(0.48, 0.09, 0.17, 0.96);
+
+  display: inline-block;
+  white-space: pre;
+}
+.eachword {
+  display: inline;
+}
+.transitionslidewrapper {
+  display: flex;
+  flex-direction: row;
+  column-gap: 30px;
+  justify-content: center;
 }

@@ -28,7 +28,7 @@ function App() {
         backgroundColor: "black",
       }}
     >
-      <LandingPage isPhone={isPhoneProp} />
+      <LandingPage isPhone={false} />
     </div>
   );
 }

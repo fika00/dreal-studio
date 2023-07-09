@@ -1,6 +1,6 @@
 import { Canvas, useFrame } from "@react-three/fiber";
 import Eye from "./Eye";
-import { Cloud } from "@react-three/drei";
+import { Cloud, Stars } from "@react-three/drei";
 import { useEffect, useRef, useState } from "react";
 import {
   PerspectiveCamera,
@@ -17,6 +17,7 @@ import {
   EffectComposer,
   Noise,
   ToneMapping,
+  SelectiveBloom,
 } from "@react-three/postprocessing";
 import Background from "./Background";
 import TextTransitionSlide from "./TextTransitionSlide";
@@ -85,7 +86,7 @@ const LandingPage = ({ isPhone }) => {
             scale={1.3}
           />
         </group>
-        <Sparkles size={2} scale={5} speed={0.2} count={300} opacity={0.01} />
+        <Sparkles size={0.5} scale={5} speed={0.2} count={300} opacity={0.1} />
         <Cloud
           scale={0.3}
           speed={0.7}

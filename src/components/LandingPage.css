@@ -24,8 +24,12 @@
   margin: 0;
   padding: 0;
 }
-
-.text {
+.pcont {
+  display: inline;
+  overflow: hidden;
+}
+.slogan {
+  position: relative;
   display: inline;
   /* font-family: "Inter", sans-serif; */
   font-family: "Montserrat", sans-serif;
@@ -38,6 +42,8 @@
   padding: 0;
   margin-top: -1rem;
   letter-spacing: 0.1rem;
+  transition: 1.5s cubic-bezier(0.35, 0.14, 0.4, 1);
+  transform: translateY(100%);
 }
 .navbar {
   position: absolute;

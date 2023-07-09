@@ -8,7 +8,6 @@ import {
   Environment,
   Float,
   Sparkles,
-  Trail,
 } from "@react-three/drei";
 import { degToRad, radToDeg } from "three/src/math/MathUtils";
 import "./LandingPage.css";
@@ -25,20 +24,18 @@ import { BlendFunction, KernelSize } from "postprocessing";
 import { MeshBasicMaterial } from "three";
 import logo from "/imgs/logo.svg";
 import { gsap } from "gsap";
+import ShootingStar from "./ShootingStar";
 
 const LandingPage = ({ isPhone }) => {
   const EyeRef = useRef();
   const CamRef = useRef();
   const envRef = useRef();
   const headerRef = useRef();
+  // const [isMoving, setisMoving] = useState(true);
   const shootingStarRef = useRef();
-  const positions = [2, 0, 2, 0, 2, 0, 2, 0];
-  //   setTimeout(() => {
-  //     setTimeout(() => {
-  //       envRef.current.rotation.y += 1;
-  //     }, 30);
-  //     console.log(envRef.current.position);
-  //   }, 1000);
+  const trailRef = useRef();
+  const [isTrailEnabled, setTrailEnabled] = useState(true);
+
   let eyeRot = [degToRad(6), degToRad(10), degToRad(90)];
   let eyePos = [-0.5, 0.3, -1];
 
@@ -53,14 +50,10 @@ const LandingPage = ({ isPhone }) => {
 
   useEffect(() => {
     setTimeout(() => {
-      gsap.to(shootingStarRef.current.position, {
-        x: 7,
-        y: 1,
+      const slogan = document.getElementById("slogan");
+      slogan.style.transform = "translateY(0%)";
+    }, 500);
 
-        duration: 2, // Duration of the animation in seconds
-        ease: "power3.InOut",
-      });
-    }, 1200);
     setTimeout(() => {
       EyeRef.current.triggerUVEffect();
       headerRef.current.bringIn();
@@ -70,7 +63,7 @@ const LandingPage = ({ isPhone }) => {
         duration: 5, // Duration of the animation in seconds
         ease: "power3.inOut",
       });
-    }, 1500);
+    }, 4500);
   }, []);
   return (
     <div className="landingpage_wrapper">
@@ -83,17 +76,7 @@ const LandingPage = ({ isPhone }) => {
           rotation={[degToRad(18), 0, 0]}
         />
         <Background />
-        <Trail
-          width={0.5}
-          length={4}
-          color={"hotpink"}
-          attenuation={(t) => t * t}
-        >
-          <mesh ref={shootingStarRef} scale={0.1} position={[-7, 6, -9]}>
-            <sphereGeometry args={[0.01]} />
-            <meshBasicMaterial color={"cyan"} toneMapped={false} />
-          </mesh>
-        </Trail>
+        <ShootingStar />
         <group position={eyePos} rotation={eyeRot}>
           <Eye
             ref={EyeRef}
@@ -136,7 +119,10 @@ const LandingPage = ({ isPhone }) => {
         <div className="landingh">
           <TextTransitionSlide ref={headerRef} text={"Dreal Studio"} />
         </div>
-        <p className="text">The art of making dreams, real.</p>
+        <div className="pcont"></div>
+        <p id="slogan" className="slogan">
+          The art of making dreams, real.
+        </p>
       </div>
       <div className="navbar">
         <img src={logo} alt="" className="logo" />

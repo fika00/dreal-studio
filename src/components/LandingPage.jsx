@@ -8,6 +8,7 @@ import {
   Environment,
   Float,
   Sparkles,
+  Trail,
 } from "@react-three/drei";
 import { degToRad, radToDeg } from "three/src/math/MathUtils";
 import "./LandingPage.css";
@@ -30,6 +31,7 @@ const LandingPage = ({ isPhone }) => {
   const CamRef = useRef();
   const envRef = useRef();
   const headerRef = useRef();
+  const shootingStarRef = useRef();
   const positions = [2, 0, 2, 0, 2, 0, 2, 0];
   //   setTimeout(() => {
   //     setTimeout(() => {
@@ -50,6 +52,15 @@ const LandingPage = ({ isPhone }) => {
   }
 
   useEffect(() => {
+    setTimeout(() => {
+      gsap.to(shootingStarRef.current.position, {
+        x: 7,
+        y: 1,
+
+        duration: 2, // Duration of the animation in seconds
+        ease: "power3.InOut",
+      });
+    }, 1200);
     setTimeout(() => {
       EyeRef.current.triggerUVEffect();
       headerRef.current.bringIn();
@@ -72,6 +83,17 @@ const LandingPage = ({ isPhone }) => {
           rotation={[degToRad(18), 0, 0]}
         />
         <Background />
+        <Trail
+          width={0.5}
+          length={4}
+          color={"hotpink"}
+          attenuation={(t) => t * t}
+        >
+          <mesh ref={shootingStarRef} scale={0.1} position={[-7, 6, -9]}>
+            <sphereGeometry args={[0.01]} />
+            <meshBasicMaterial color={"cyan"} toneMapped={false} />
+          </mesh>
+        </Trail>
         <group position={eyePos} rotation={eyeRot}>
           <Eye
             ref={EyeRef}

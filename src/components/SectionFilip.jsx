@@ -19,12 +19,12 @@ import ink2 from "/imgs/filip/inkblot.jpg";
 
 // NEW ALPHAS
 
-import mask1 from "/imgs/filip/videocontent/alpha/mask1.mp4";
-import mask3 from "/imgs/filip/videocontent/alpha/mask3.mp4";
+// import mask1 from "/imgs/filip/videocontent/alpha/mask1.mp4";
+// import mask3 from "/imgs/filip/videocontent/alpha/mask3.mp4";
 
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 //11.614873
-import inkvideo from "/imgs/filip/videocontent/alpha/inkblot_looped.webm";
+// import inkvideo from "/imgs/filip/videocontent/alpha/inkblot_looped.webm";
 import inkvideo_hevc from "/imgs/filip/videocontent/alpha/Inkblot_looped_hvec.mp4";
 import { Depth, LayerMaterial, Gradient } from "lamina";
 import { degToRad } from "three/src/math/MathUtils";
@@ -129,9 +129,9 @@ const Inkb = () => {
 // VideoPortfolio
 
 import collection from "/imgs/filip/videocontent/collection.mp4";
-import halls from "/imgs/filip/videocontent/halls.mp4";
+// import halls from "/imgs/filip/videocontent/halls.mp4";
 
-import content2 from "/imgs/filip/videocontent/halls.mp4";
+// import content2 from "/imgs/filip/videocontent/halls.mp4";
 
 //Mask
 

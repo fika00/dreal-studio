@@ -8,7 +8,7 @@ import {
   MeshBasicMaterial,
   DoubleSide,
 } from "three";
-import PlaneVideoMasked from "./planeVideoMasked";
+import PlaneVideoMasked from "./PlaneVideoMasked";
 import { gsap } from "gsap";
 import "./SectionFilip.css";
 import frontFragmentShaderInk from "./shaders/fragmentShaderAlpha.glsl";

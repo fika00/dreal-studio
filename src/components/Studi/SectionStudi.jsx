@@ -8,6 +8,7 @@ import {
   Stars,
   Sparkles,
   Stats,
+  Float,
 } from "@react-three/drei";
 import * as THREE from "three";
 import { Water } from "three-stdlib";
@@ -16,6 +17,7 @@ import { useThree } from "@react-three/fiber/dist/react-three-fiber.cjs";
 import { useLoader } from "@react-three/fiber/dist/react-three-fiber.cjs";
 import { BlendFunction } from "postprocessing";
 import { Fog } from "three";
+import { useTexture } from "@react-three/drei";
 import { useMemo } from "react";
 // PostProcessing
 
@@ -32,6 +34,7 @@ import { useControls } from "leva";
 import { TextureLoader } from "three";
 import { Depth, Gradient, LayerMaterial } from "lamina";
 import Reel from "./components/Reel";
+import Cloud from "./components/Cloud";
 
 extend({ Water, Fog: THREE.Fog });
 
@@ -90,7 +93,7 @@ const Scene = () => {
 
   return (
     <>
-      <fog attach="fog" args={["#3c61bc", 20, 1000]} />
+      <fog attach="fog" args={["#3c61bc", 20, 500]} />
 
       <PerspectiveCamera
         makeDefault
@@ -124,23 +127,14 @@ const SectionStudi = () => {
   //   intensity: { value: 5, min: 0, max: 10, step: 0.01 },
   //   radius: { value: 0.1, min: 0, max: 1, step: 0.01 },
   // });
+  const cloudTextureRose = loader.load("/imgs/studi/cloud_r.png");
+  const cloudTextureBlue = loader.load("/imgs/studi/cloud_b.png");
 
   return (
     <>
       <Canvas>
         <ScrollControls pages={5}>
-          {/* <Stars
-            radius={700}
-            depth={50}
-            count={2000}
-            factor={4}
-            saturation={0}
-            fade
-            speed={1}
-          /> */}
           <Scene />
-          {/* <ambientLight intensity={0.5} />
-          <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} /> */}
           <pointLight position={[-10, -10, -10]} />
           <Selection>
             <EffectComposer>
@@ -152,17 +146,6 @@ const SectionStudi = () => {
               />
             </EffectComposer>
             <DoorWay />
-            {/* <mesh rotation={[0, 0, degToRad(90)]} scale={600}>
-              <sphereGeometry />
-              <LayerMaterial side={THREE.DoubleSide}>
-                <Gradient
-                  colorA="#225cbd" //
-                  colorB="#f2c5f6"
-                  start={1}
-                  end={-1}
-                />
-              </LayerMaterial>
-            </mesh> */}
             <Sparkles
               noise={6}
               speed={6}
@@ -179,7 +162,16 @@ const SectionStudi = () => {
           </Selection>
         </ScrollControls>
 
-        {/* <Reel /> */}
+        <Reel />
+        {/* <group scale={25} position={[-100, 140, -170]}>
+          <Cloud color={cloudTextureRose} />
+        </group>
+        <group scale={25} position={[-400, 160, -130]}>
+          <Cloud color={cloudTextureBlue} />
+        </group>
+        <group scale={[-25, 25, 25]} position={[300, 160, -110]}>
+          <Cloud color={cloudTextureBlue} />
+        </group> */}
         <OrbitControls />
         <Stats />
       </Canvas>

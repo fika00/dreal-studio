@@ -12,6 +12,8 @@ vec2 mirrorRepeat(vec2 v) {
 void main() {
 
     // vec2 scaledUv = vec2(vUv.x * 2.0, vUv.y * 2.0 * 1.32 -.25);
+        vec2 scaledUv = vec2(vUv.x, vUv.y * 1.32 -.15);
+
     // vec2 mirroredUv = mirrorRepeat(scaledUv);
     // vec4 textureColor = texture2D(noise, mirroredUv);
 
@@ -21,7 +23,7 @@ void main() {
     //Wave
 
     vec2 squish = vec2(6.);
-    float dist = distance(vec2(.5,.5)* squish ,vUv * squish);
+    float dist = distance(vec2(.5,.5)* squish ,scaledUv * squish);
     float smoothDist = smoothstep(.2,.5, dist);
 
     float radial = fract(dist - uTime);

@@ -18,17 +18,16 @@ void main() {
     // vec4 textureColor = texture2D(noise, mirroredUv);
 
     vec4 textureColor = texture2D(noise, vUv);
-    textureColor = smoothstep(.2,1., textureColor);
+    textureColor = smoothstep(.25,1., textureColor);
 
     //Wave
 
     vec2 squish = vec2(6.);
-    float dist = distance(vec2(.5,.5)* squish ,scaledUv * squish);
-    float smoothDist = smoothstep(.2,.5, dist);
+    float dist = distance(vec2(.5,.5) ,scaledUv );
 
-    float radial = fract(dist - uTime);
+    float radial = fract(dist - uTime/1.5);
 
-    radial = smoothstep(.5,.0,1.- radial);
+    radial = smoothstep(.2,.0,1.- radial);
 
     float mask = 1.- step(uTime, dist );
     float mask2 = step(uTime, dist + .7);

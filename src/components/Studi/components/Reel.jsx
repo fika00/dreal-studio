@@ -4,6 +4,7 @@ import studiVertex from "./shaders/studiVertex.glsl";
 import { Html } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
+import { Select } from "@react-three/postprocessing";
 
 const Reel = () => {
   const loader = new TextureLoader();
@@ -21,18 +22,20 @@ const Reel = () => {
   };
   return (
     <>
-      <mesh ref={planeRef} scale={28} position={[0, 17, 0]}>
-        <planeGeometry args={[1, 1.32]} />
-        <shaderMaterial
-          uniforms={{
-            noise: { value: noise },
-            uTime: { value: 0 },
-          }}
-          transparent={true}
-          vertexShader={studiVertex}
-          fragmentShader={studiFragment}
-        />
-      </mesh>
+      <Select enabled={true}>
+        <mesh ref={planeRef} scale={28} position={[0, 17, 0]}>
+          <planeGeometry args={[1, 1.32]} />
+          <shaderMaterial
+            uniforms={{
+              noise: { value: noise },
+              uTime: { value: 0 },
+            }}
+            transparent={true}
+            vertexShader={studiVertex}
+            fragmentShader={studiFragment}
+          />
+        </mesh>
+      </Select>
       <Html scale={15} transform position={[30, 40, 0]}>
         <button onClick={handleWaveReset}>Reset Wave</button>
       </Html>

@@ -146,23 +146,23 @@ const SectionStudi = () => {
               />
             </EffectComposer>
             <DoorWay />
-            <Sparkles
-              noise={6}
-              speed={6}
-              color={"cyan"}
-              position={[0, 10, 0]}
-              count={600}
-              size={10}
-              scale={100}
-            />
-            <mesh position={[0, 350, -200]} scale={750}>
-              <planeGeometry args={[2.22, 1]} />
-              <meshBasicMaterial map={skyTexture} />
-            </mesh>
+            <Reel />
           </Selection>
+          <Sparkles
+            noise={6}
+            speed={6}
+            color={"cyan"}
+            position={[0, 10, 0]}
+            count={600}
+            size={10}
+            scale={100}
+          />
+          <mesh position={[0, 350, -200]} scale={750}>
+            <planeGeometry args={[2.22, 1]} />
+            <meshBasicMaterial map={skyTexture} />
+          </mesh>
         </ScrollControls>
 
-        <Reel />
         {/* <group scale={25} position={[-100, 140, -170]}>
           <Cloud color={cloudTextureRose} />
         </group>

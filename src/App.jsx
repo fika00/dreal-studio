@@ -6,7 +6,7 @@ import SectionStudi from "./components/Studi/SectionStudi";
 
 function App() {
   const [count, setCount] = useState(0);
-
+  // ALo
   function getCurrentDimension() {
     return {
       width: window.innerWidth,

@@ -4,6 +4,8 @@ varying vec3 vNormal;
 varying vec2 vUv;
 
 uniform float uTime;
+uniform float uWaveStart;
+
 uniform float xCord;
 uniform float yCord;
 
@@ -46,29 +48,37 @@ void main() {
     vPosition = position;
     vNormal = normal;
 
-    //WAVE
+    //RIPPLE EFFECT
 
-    float dist = distance(vec2(.5,.5) ,vUv );
-    dist = smoothstep(.5,.0,dist);
-    float radial = fract(dist - uTime * .06);
-
-
-    float wave = smoothstep(.1,1.,abs(sin(vUv.y* 6. + uTime/9.)))*2.;
-
-    //
     float xCordScaled = (xCord/100. + 1.) / 2.;
     float yCordScaled = (yCord/100. + 1.) / 2.;
 
+    float wavePhase = 0.;
 
-    float hotSpot = distance(vec2(xCordScaled , 1. -yCordScaled),vUv);
+    if (uWaveStart > 0.) {
+        wavePhase = uWaveStart / 40.;
+    } else {
+        wavePhase = 0.;
+    };
 
-    hotSpot = fract(smoothstep(.2,.0, hotSpot ) - uTime / 5.);
+    float radial = distance(vec2(xCordScaled , 1. -yCordScaled),vUv);
+    float radial2 = distance(vec2(xCordScaled , 1. -yCordScaled),vUv);
+    radial = 1. - smoothstep(wavePhase,wavePhase + .02, radial);
+    radial2 = smoothstep(wavePhase - .02,wavePhase, radial2);
+
+
+    float waveCombined = radial * radial2;
+
     //
+
+    float wave = smoothstep(.1,1.,abs(sin(vUv.y* 6. + uTime/9.)))*2.;
+
+
 
     float noiseMult =  1.0 - vPosition.z;
     float noise = pnoise(vPosition / 15. + uTime/19.);
     float perlinDis = noise * (noiseMult);
-    float displacement =  wave * .75 + perlinDis * 3.;
+    float displacement =  wave * .75 + perlinDis * 3. + waveCombined;
     // float displacement =  perlinDis;
 
     vec3 newPosition = vPosition + vNormal * displacement ; 

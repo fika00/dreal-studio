@@ -1,5 +1,11 @@
-import { Canvas, extend } from "@react-three/fiber";
-import { Cloud, OrbitControls, Sparkles, Stats } from "@react-three/drei";
+import { Canvas, extend, useFrame } from "@react-three/fiber";
+import {
+  Trail,
+  Cloud,
+  OrbitControls,
+  Sparkles,
+  Stats,
+} from "@react-three/drei";
 import WireframeWave from "./components/WireframeWave";
 import { DoubleSide } from "three";
 import Triangle from "./components/Triangle";
@@ -33,8 +39,10 @@ const SectionBalsa = () => {
   const particleRef = useRef();
 
   const generateRandomXY = () => {
-    const xCord = Math.floor(Math.random() * 200 - 100);
-    const yCord = Math.floor(Math.random() * 200 - 100);
+    waveRef.current.resetWave();
+
+    const xCord = Math.floor((Math.random() * 200 - 100) / 2);
+    const yCord = Math.floor((Math.random() * 200 - 200) / 2);
     particleRef.current.position.x = xCord;
     particleRef.current.position.z = yCord;
     waveRef.current.updateCords(xCord, yCord);
@@ -45,15 +53,21 @@ const SectionBalsa = () => {
   };
   const handleParticleMovement = () => {
     gsap.to(particleRef.current.position, {
-      y: 6,
-      duration: 2,
-      ease: "power1.inOut",
+      y: 10,
+      duration: 5,
+      ease: "power2.inOut",
+      onUpdate: () => {
+        if (particleRef.current.position.y >= 5.5) {
+          waveRef.current.startWave();
+        }
+      },
       onComplete: () => {
-        generateRandomXY();
+        setTimeout(() => {
+          generateRandomXY();
+        }, 3000);
       },
     });
   };
-
   useEffect(() => {
     setTimeout(() => {
       generateRandomXY();
@@ -91,11 +105,16 @@ const SectionBalsa = () => {
         <WireframeWave ref={waveRef} />
 
         {/* PARTICLE */}
-
-        <mesh scale={2.52} position={[0, -9, 0]} ref={particleRef}>
-          <sphereGeometry />
-          <meshBasicMaterial color={"hotpink"} />
-        </mesh>
+        <Trail
+          width={1} // Width of the line
+          color={"black"} // Color of the line
+          attenuation={(width) => width} // A function to define the width in each point along it.
+        >
+          <mesh scale={0.1} position={[0, -9, 0]} ref={particleRef}>
+            <sphereGeometry />
+            <meshBasicMaterial color={"black"} />
+          </mesh>
+        </Trail>
 
         {/* // */}
 

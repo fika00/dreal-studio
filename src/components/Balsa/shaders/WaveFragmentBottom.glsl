@@ -5,8 +5,6 @@ varying vec3 vPattern;
 
 uniform vec2 uResolution;
 uniform float uTime;
-uniform float uWaveStart;
-
 uniform float uDisplace;
 uniform float uSpread;
 uniform float uNoise;
@@ -49,26 +47,13 @@ float pnoise(vec3 p) {
 
 void main() {
 
-
-   
-
     float xCordScaled = (xCord/100. + 1.) / 2.;
     float yCordScaled = (yCord/100. + 1.) / 2.;
 
-    float wavePhase = 0.;
-
-    if (uWaveStart > 0.) {
-        wavePhase = uWaveStart / 15.;
-    } else {
-        wavePhase = 0.;
-    };
 
     float radial = distance(vec2(xCordScaled , 1. -yCordScaled),vUv);
-    float radial2 = distance(vec2(xCordScaled , 1. -yCordScaled),vUv);
-    radial = 1. - smoothstep(wavePhase,wavePhase + .1, radial);
-    radial2 = smoothstep(wavePhase - .1,wavePhase, radial2);
 
-
+    radial = smoothstep(.2,.0, radial);
     float wave = smoothstep(.6,.0,(abs(sin(vUv.y* 6. + uTime/4.))));
     // gl_FragColor = vec4(vec3(radial + vec3(.4,.5,.3) * radial2),1.0);
 
@@ -78,9 +63,6 @@ void main() {
     gl_FragColor = vec4(vec3(0.) , 1. - dist);
     
     // gl_FragColor = vec4(vec3(0.) + vec3(.4,.2,.8) * radial, 1. - dist);
-    // gl_FragColor = vec4(vec3(0.), 1. - dist);
-    // gl_FragColor = vec4(vec3(.2,.1,.5) * radial + vec3(.6,.2,.5) * radial2, 1.) ;
-
-    // gl_FragColor = vec4(radial * radial2);
-
+    gl_FragColor = vec4(vec3(0.), 1. - dist);
+    // gl_FragColor = vec4(radial) ;
 }

@@ -5,7 +5,7 @@ varying vec3 vPattern;
 
 uniform sampler2D balsaTexture;
 
-
+//
 
 void main() {
     vec4 textureColor = texture2D(balsaTexture, vUv);

@@ -3,10 +3,11 @@ import LandingPage from "./components/LandingPage";
 import SectionFilip from "./components/SectionFilip";
 import LoadingAnimation from "./components/LoadingAnimation/LoadingAnimation";
 import SectionStudi from "./components/Studi/SectionStudi";
+import SectionBalsa from "./components/Balsa/SectionBalsa";
 
 function App() {
   const [count, setCount] = useState(0);
-  // ALo
+
   function getCurrentDimension() {
     return {
       width: window.innerWidth,
@@ -33,7 +34,8 @@ function App() {
     >
       {/* <LandingPage isPhone={false} /> */}
       {/* <SectionFilip /> */}
-      <SectionStudi />
+      {/* <SectionStudi /> */}
+      <SectionBalsa />
       {/* <LoadingAnimation /> */}
     </div>
   );

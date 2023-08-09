@@ -19,7 +19,7 @@ import {
   DepthOfField,
   EffectComposer,
 } from "@react-three/postprocessing";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useEffect } from "react";
 
 const SectionBalsa = () => {
@@ -45,6 +45,7 @@ const SectionBalsa = () => {
     const yCord = Math.floor((Math.random() * 200 - 200) / 2);
     particleRef.current.position.x = xCord;
     particleRef.current.position.z = yCord;
+
     waveRef.current.updateCords(xCord, yCord);
 
     particleRef.current.position.y = -9;
@@ -53,18 +54,26 @@ const SectionBalsa = () => {
   };
   const handleParticleMovement = () => {
     gsap.to(particleRef.current.position, {
-      y: 10,
+      y: 5.5,
       duration: 5,
-      ease: "power2.inOut",
+      ease: "power2.in",
       onUpdate: () => {
         if (particleRef.current.position.y >= 5.5) {
           waveRef.current.startWave();
         }
       },
       onComplete: () => {
-        setTimeout(() => {
-          generateRandomXY();
-        }, 3000);
+        gsap.to(particleRef.current.position, {
+          y: 10,
+          duration: 4,
+          ease: "power2.Out",
+
+          onComplete: () => {
+            setTimeout(() => {
+              generateRandomXY();
+            }, 3000);
+          },
+        });
       },
     });
   };
@@ -110,7 +119,7 @@ const SectionBalsa = () => {
           color={"black"} // Color of the line
           attenuation={(width) => width} // A function to define the width in each point along it.
         >
-          <mesh scale={0.1} position={[0, -9, 0]} ref={particleRef}>
+          <mesh scale={0.01} position={[0, -9, 0]} ref={particleRef}>
             <sphereGeometry />
             <meshBasicMaterial color={"black"} />
           </mesh>

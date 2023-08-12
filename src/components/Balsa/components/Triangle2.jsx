@@ -35,18 +35,10 @@ export function Triangle2(props) {
     // }
   });
 
-  const scroll = useScroll();
-
-  useEffect(() => {
-    setInterval(() => {
-      console.log(scroll.offset);
-    }, 300);
-  }, []);
-
   return (
     <group {...props} dispose={null}>
       <mesh
-        scale={3}
+        scale={props.triangleScale}
         ref={triangleRef}
         position={[0, 0, -5]}
         rotation={[degToRad(90), 0, 0]}

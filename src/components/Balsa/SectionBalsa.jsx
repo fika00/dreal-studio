@@ -6,10 +6,7 @@ import {
   Sparkles,
   Stats,
 } from "@react-three/drei";
-import WireframeWave from "./components/WireframeWave";
 import { DoubleSide } from "three";
-import Triangle from "./components/Triangle";
-import BalsaOutline from "./components/BalsaOutline";
 import { gsap } from "gsap";
 import "./SectionBalsa.css";
 import { useControls } from "leva";
@@ -19,15 +16,29 @@ import {
   DepthOfField,
   EffectComposer,
 } from "@react-three/postprocessing";
-import { useEffect, useRef, useState } from "react";
-import { Triangle2 } from "./components/Triangle2";
-import { ScrollControls } from "@react-three/drei";
+import { Suspense, useEffect, useRef, useState, lazy } from "react";
 import { useScroll } from "@react-three/drei";
+import { ScrollControls } from "@react-three/drei";
+import { Outline } from "@react-three/postprocessing";
+
+//! COMPONENTS
+
+import WireframeWave from "./components/WireframeWave";
+import BalsaOutline from "./components/BalsaOutline";
+import Triangle from "./components/Triangle";
+import Loading from "../Loading/Loading";
+import { Triangle2 } from "./components/Triangle2";
+
+// const WireframeWave = lazy(() => import("./components/WireframeWave"));
+// const Triangle = lazy(() => import("./components/Triangle"));
+// const BalsaOutline = lazy(() => import("./components/BalsaOutline"));
+// const Triangle2 = lazy(() => import("./components/Triangle2"));
 
 const SectionBalsa = ({ isPhone }) => {
   const waveRef = useRef();
   const particleRef = useRef();
   const [dist, setDist] = useState(0.45);
+  const contentTriangle = useRef();
 
   const degToRad = (deg) => {
     return deg * 0.0174533;
@@ -121,65 +132,55 @@ const SectionBalsa = ({ isPhone }) => {
 
   return (
     <>
-      <Canvas>
-        <ScrollControls
-          style={{
-            opacity: 0,
-          }}
-        >
-          {/* <fog attach="fog" color="gray" near={10} far={50} /> */}
-          <WireframeWave ref={waveRef} />
+      <Suspense fallback={<Loading name={"Balsa Ratkovic"} />}>
+        {/* <fog attach="fog" color="gray" near={10} far={50} /> */}
+        <WireframeWave ref={waveRef} />
 
-          {/* PARTICLE */}
-          <Trail
-            width={0.5} // Width of the line
-            color={"black"} // Color of the line
-            attenuation={(width) => width} // A function to define the width in each point along it.
-            target={particleRef}
-          />
-          <mesh scale={0.01} position={[0, -9, 0]} ref={particleRef}>
-            <sphereGeometry />
-            <meshBasicMaterial color={"black"} />
-          </mesh>
+        {/* PARTICLE */}
+        <Trail
+          width={0.5} // Width of the line
+          color={"black"} // Color of the line
+          attenuation={(width) => width} // A function to define the width in each point along it.
+          target={particleRef}
+        />
+        <mesh scale={0.01} position={[0, -9, 0]} ref={particleRef}>
+          <sphereGeometry />
+          <meshBasicMaterial color={"black"} />
+        </mesh>
 
-          <mesh scale={150}>
-            <sphereGeometry />
-            <meshBasicMaterial side={DoubleSide} color={"white"} />
-          </mesh>
+        <mesh scale={150}>
+          <sphereGeometry />
+          <meshBasicMaterial side={DoubleSide} color={"white"} />
+        </mesh>
 
-          {triangleElements}
-          <group scale={0.3} position={[0, 0, 4.85]}>
-            <group scale={[-1, 1, 1]} position={[dist, 0, 0]}>
-              <BalsaOutline />
-            </group>
-            <group position={[-dist, 0, 0]}>
-              <BalsaOutline />
-            </group>
+        {triangleElements}
+        <group scale={0.3} position={[0, 0, 4.85]}>
+          <group scale={[-1, 1, 1]} position={[dist, 0, 0]}>
+            <BalsaOutline />
           </group>
-          <Sparkles
-            position={[0, 0, 3]}
-            speed={0.05}
-            count={300}
-            scale={3}
-            size={0.8}
-            color={"black"}
-            opacity={0.4}
+          <group position={[-dist, 0, 0]}>
+            <BalsaOutline />
+          </group>
+        </group>
+        <Sparkles
+          position={[0, 0, 3]}
+          speed={0.05}
+          count={300}
+          scale={3}
+          size={0.8}
+          color={"black"}
+          opacity={0.4}
+        />
+
+        <Triangle2 triangleScale={isPhone ? 1.5 : 3} />
+        <EffectComposer>
+          <ChromaticAberration
+            offset={[0.001, 0.0]} // color offset
           />
-          <EffectComposer>
-            {/* <DepthOfField
-            focusDistance={0.01} // where to focus
-            focalLength={0.08} // focal length
-            bokehScale={0.5} // bokeh size
-          /> */}
-            <ChromaticAberration
-              offset={[0.001, 0.0]} // color offset
-            />
-          </EffectComposer>
-          {/* <OrbitControls /> */}
-          <Triangle2 />
-          <Stats />
-        </ScrollControls>
-      </Canvas>
+        </EffectComposer>
+        {/* <OrbitControls /> */}
+        <Stats />
+      </Suspense>
     </>
   );
 };

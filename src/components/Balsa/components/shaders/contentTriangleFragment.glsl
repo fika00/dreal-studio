@@ -17,7 +17,7 @@ void main() {
     float dist = distance(vec2(.5, .65), vUv);
     // float radial = smoothstep(.0 + uTimePattern,.1 + uTimePattern, dist);
     float radial = step(1., dist);
-    float radial2 = smoothstep(-.3 + (sin(uTimePattern *3.) + 10.) / 16.,0. + (sin(uTimePattern) + 10.) / 16., dist);
+    float radial2 = smoothstep(-.2 + (sin(uTimePattern *10.) + 8.) / 18.,0. + (sin(uTimePattern) + 10.) / 16., dist);
     vec2 fractedUv = vec2(vAdjustedUV.x, vAdjustedUV.y - uTimePattern / 5.);
     fractedUv = fract(fractedUv - .1);
     
@@ -27,7 +27,7 @@ void main() {
 
 
     vec4 textureColor = texture2D(image, vec2(vAdjustedUV.x, vAdjustedUV.y * .8));
-    gl_FragColor = vec4((textureColor.rgb  ), textureColor.a *(1. - waveMask * 2.));
+    gl_FragColor = vec4((textureColor.rgb * (1. - waveMask * 3.)), textureColor.a);
     // gl_FragColor = vec4(vec3((1. - radial) * radial2) * (1. -  triPattern.r), 1.);
 
 }

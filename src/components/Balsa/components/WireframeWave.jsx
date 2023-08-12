@@ -3,7 +3,7 @@ import WaveFragment from "./shaders/WaveFragment.glsl";
 import WaveVertexBottom from "./shaders/WaveVertexBottom.glsl";
 import WaveFragmentBottom from "./shaders/WaveFragmentBottom.glsl";
 import { useFrame } from "@react-three/fiber";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { DoubleSide, TextureLoader } from "three";
 import { useImperativeHandle, forwardRef } from "react";
 
@@ -25,7 +25,6 @@ const WireframeWave = (props, ref) => {
   const degToRad = (deg) => {
     return deg * 0.0174533;
   };
-
   const startWave = () => {
     waveSpeedRef.current = 0.05;
   };

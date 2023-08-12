@@ -1,6 +1,6 @@
 import { Html } from "@react-three/drei";
-import fragmentShader from "./shaders/BalsaOutlineFragment.glsl";
-import vertexShader from "./shaders/BalsaOutlineVertex.glsl";
+import fragmentShader from "./shaders/balsaOutlineFragment.glsl";
+import vertexShader from "./shaders/balsaOutlineVertex.glsl";
 import balsaOutline from "/imgs/balsa/balsa2.jpg";
 import { TextureLoader } from "three";
 

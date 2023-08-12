@@ -6,10 +6,11 @@ varying vec3 vPattern;
 uniform vec2 uResolution;
 uniform float uTime;
 uniform float uWaveStart;
+uniform sampler2D uNoise;
 
 uniform float uDisplace;
 uniform float uSpread;
-uniform float uNoise;
+// uniform float uNoise;
 uniform float xCord;
 uniform float yCord;
 
@@ -50,7 +51,7 @@ float pnoise(vec3 p) {
 void main() {
 
 
-   
+   // Particle Wave
 
     float xCordScaled = (xCord/100. + 1.) / 2.;
     float yCordScaled = (yCord/100. + 1.) / 2.;
@@ -58,29 +59,35 @@ void main() {
     float wavePhase = 0.;
 
     if (uWaveStart > 0.) {
-        wavePhase = uWaveStart / 15.;
+        wavePhase = uWaveStart / 40.;
     } else {
         wavePhase = 0.;
     };
 
     float radial = distance(vec2(xCordScaled , 1. -yCordScaled),vUv);
     float radial2 = distance(vec2(xCordScaled , 1. -yCordScaled),vUv);
-    radial = 1. - smoothstep(wavePhase,wavePhase + .1, radial);
-    radial2 = smoothstep(wavePhase - .1,wavePhase, radial2);
+    radial = 1. - smoothstep(wavePhase,wavePhase + .02, radial);
+    radial2 = smoothstep(wavePhase - .035,wavePhase, radial2);
 
 
-    float wave = smoothstep(.6,.0,(abs(sin(vUv.y* 6. + uTime/4.))));
-    // gl_FragColor = vec4(vec3(radial + vec3(.4,.5,.3) * radial2),1.0);
+    float waveCombined = radial * radial2;
 
-    // gl_FragColor = vec4(vec3(radial - radial2) * 2.,1.0);
+    vec2 fractedUv = fract(vUv * 15.);
+    vec4 noise = texture2D(uNoise,fractedUv);
+   
+    vec3 waveMaskCombined = vec3((1.-noise) * waveCombined);
+   //
+
+
     float dist = distance(vec2(.5,.5) ,vUv );
     dist = 1. - smoothstep(.5,.0,dist);
-    gl_FragColor = vec4(vec3(0.) , 1. - dist);
+    gl_FragColor = vec4(vec3(0.)  + vec3(1.) * (waveMaskCombined / 6.) , 1. - dist);
     
     // gl_FragColor = vec4(vec3(0.) + vec3(.4,.2,.8) * radial, 1. - dist);
     // gl_FragColor = vec4(vec3(0.), 1. - dist);
     // gl_FragColor = vec4(vec3(.2,.1,.5) * radial + vec3(.6,.2,.5) * radial2, 1.) ;
 
     // gl_FragColor = vec4(radial * radial2);
+    // gl_FragColor = vec4(waveMaskCombined, 1.);
 
 }

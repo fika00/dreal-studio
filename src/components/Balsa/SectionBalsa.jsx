@@ -19,10 +19,15 @@ import {
   DepthOfField,
   EffectComposer,
 } from "@react-three/postprocessing";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useEffect } from "react";
+import { Triangle2 } from "./components/Triangle2";
+import { ScrollControls, useScroll } from "@react-three/drei";
 
 const SectionBalsa = () => {
+  const waveRef = useRef();
+  const particleRef = useRef();
+
   const degToRad = (deg) => {
     return deg * 0.0174533;
   };
@@ -35,14 +40,11 @@ const SectionBalsa = () => {
   //   },
   // });
 
-  const waveRef = useRef();
-  const particleRef = useRef();
-
   const generateRandomXY = () => {
     waveRef.current.resetWave();
 
-    const xCord = Math.floor((Math.random() * 200 - 100) / 2);
-    const yCord = Math.floor((Math.random() * 200 - 200) / 2);
+    const xCord = Math.floor((Math.random() * 200 - 100) / 10);
+    const yCord = Math.floor((Math.random() * 200 - 200) / 4);
     particleRef.current.position.x = xCord;
     particleRef.current.position.z = yCord;
     waveRef.current.updateCords(xCord, yCord);
@@ -98,61 +100,72 @@ const SectionBalsa = () => {
       </group>
     );
   }
+
+  const scroll = useScroll();
+  useEffect(() => {
+    setTimeout(() => {
+      console.log(scroll);
+    }, 500); // Adjust the delay as needed
+  }, [scroll]);
+
   return (
     <>
       <Canvas>
-        {/* <fog attach="fog" color="gray" near={10} far={50} /> */}
-        <WireframeWave ref={waveRef} />
+        <ScrollControls pages={3} damping={0.1}>
+          {/* <fog attach="fog" color="gray" near={10} far={50} /> */}
+          <WireframeWave ref={waveRef} />
 
-        {/* PARTICLE */}
-        <Trail
-          width={1} // Width of the line
-          color={"black"} // Color of the line
-          attenuation={(width) => width} // A function to define the width in each point along it.
-        >
-          <mesh scale={0.1} position={[0, -9, 0]} ref={particleRef}>
+          {/* PARTICLE */}
+          <Trail
+            width={0.5} // Width of the line
+            color={"black"} // Color of the line
+            attenuation={(width) => width} // A function to define the width in each point along it.
+            target={particleRef}
+          />
+          <mesh scale={0.01} position={[0, -9, 0]} ref={particleRef}>
             <sphereGeometry />
             <meshBasicMaterial color={"black"} />
           </mesh>
-        </Trail>
 
-        {/* // */}
+          {/* // */}
 
-        <mesh scale={150}>
-          <sphereGeometry />
-          <meshBasicMaterial side={DoubleSide} color={"white"} />
-        </mesh>
+          <mesh scale={150}>
+            <sphereGeometry />
+            <meshBasicMaterial side={DoubleSide} color={"white"} />
+          </mesh>
 
-        {triangleElements}
-        <group scale={0.3} position={[0, 0, 4.85]}>
-          <group scale={[-1, 1, 1]} position={[0.45, 0, 0]}>
-            <BalsaOutline />
+          {triangleElements}
+          <group scale={0.3} position={[0, 0, 4.85]}>
+            <group scale={[-1, 1, 1]} position={[0.45, 0, 0]}>
+              <BalsaOutline />
+            </group>
+            <group position={[-0.45, 0, 0]}>
+              <BalsaOutline />
+            </group>
           </group>
-          <group position={[-0.45, 0, 0]}>
-            <BalsaOutline />
-          </group>
-        </group>
-        <Sparkles
-          position={[0, 0, 3]}
-          speed={0.05}
-          count={300}
-          scale={3}
-          size={0.8}
-          color={"black"}
-          opacity={0.4}
-        />
-        <EffectComposer>
-          {/* <DepthOfField
+          <Sparkles
+            position={[0, 0, 3]}
+            speed={0.05}
+            count={300}
+            scale={3}
+            size={0.8}
+            color={"black"}
+            opacity={0.4}
+          />
+          <EffectComposer>
+            {/* <DepthOfField
             focusDistance={0.01} // where to focus
             focalLength={0.08} // focal length
             bokehScale={0.5} // bokeh size
           /> */}
-          <ChromaticAberration
-            offset={[0.001, 0.0]} // color offset
-          />
-        </EffectComposer>
-        <OrbitControls />
-        <Stats />
+            <ChromaticAberration
+              offset={[0.001, 0.0]} // color offset
+            />
+          </EffectComposer>
+          {/* <OrbitControls /> */}
+          <Triangle2 />
+          <Stats />
+        </ScrollControls>
       </Canvas>
     </>
   );

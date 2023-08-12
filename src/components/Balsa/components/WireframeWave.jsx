@@ -1,10 +1,10 @@
-import WaveVertex from "../shaders/WaveVertex.glsl";
-import WaveFragment from "../shaders/WaveFragment.glsl";
-import WaveVertexBottom from "../shaders/WaveVertexBottom.glsl";
-import WaveFragmentBottom from "../shaders/WaveFragmentBottom.glsl";
+import WaveVertex from "./shaders/WaveVertex.glsl";
+import WaveFragment from "./shaders/WaveFragment.glsl";
+import WaveVertexBottom from "./shaders/WaveVertexBottom.glsl";
+import WaveFragmentBottom from "./shaders/WaveFragmentBottom.glsl";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
-import { DoubleSide } from "three";
+import { DoubleSide, TextureLoader } from "three";
 import { useImperativeHandle, forwardRef } from "react";
 
 const WireframeWave = (props, ref) => {
@@ -13,11 +13,19 @@ const WireframeWave = (props, ref) => {
     startWave,
     resetWave,
   }));
+  const waveSpeedRef = useRef(0);
+  const waveRef = useRef();
+  const waveRef2 = useRef();
+  const uTime = 0.05;
+  const loader = new TextureLoader();
+
+  // const noiseTexture = loader.load("imgs/balsa/noise.jpg");
+  const noiseTexture = loader.load("imgs/balsa/triangle_pattern2.jpg");
+
   const degToRad = (deg) => {
     return deg * 0.0174533;
   };
 
-  const waveSpeedRef = useRef(0);
   const startWave = () => {
     waveSpeedRef.current = 0.05;
   };
@@ -30,11 +38,6 @@ const WireframeWave = (props, ref) => {
     waveRef2.current.material.uniforms.xCord.value = xCord;
     waveRef2.current.material.uniforms.yCord.value = yCord;
   };
-
-  const waveRef = useRef();
-  const waveRef2 = useRef();
-
-  const uTime = 0.05;
 
   useFrame(() => {
     waveRef.current.material.uniforms.uTime.value;
@@ -53,7 +56,7 @@ const WireframeWave = (props, ref) => {
         position={[0, 5.5, 0]}
         ref={waveRef2}
       >
-        <planeGeometry args={[200, 200, 150 * 2, 50 * 2]} />
+        <planeGeometry args={[200, 200, 150 * 2, 100 * 2]} />
         <shaderMaterial
           side={DoubleSide}
           depthWrite={false}
@@ -63,6 +66,7 @@ const WireframeWave = (props, ref) => {
           transparent
           // linewidth={10}
           uniforms={{
+            uNoise: { value: noiseTexture },
             uTime: { value: 0 },
             uWaveStart: { value: 0 },
             xCord: { value: 0 },

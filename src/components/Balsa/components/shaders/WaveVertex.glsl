@@ -67,7 +67,7 @@ void main() {
     radial2 = smoothstep(wavePhase - .02,wavePhase, radial2);
 
 
-    float waveCombined = radial * radial2;
+    float waveCombined = 1. - (radial * radial2);
 
     //
 

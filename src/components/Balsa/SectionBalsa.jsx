@@ -11,7 +11,7 @@ import { DoubleSide } from "three";
 import Triangle from "./components/Triangle";
 import BalsaOutline from "./components/BalsaOutline";
 import { gsap } from "gsap";
-
+import "./SectionBalsa.css";
 import { useControls } from "leva";
 import {
   ChromaticAberration,
@@ -19,14 +19,15 @@ import {
   DepthOfField,
   EffectComposer,
 } from "@react-three/postprocessing";
-import { useRef, useState } from "react";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Triangle2 } from "./components/Triangle2";
-import { ScrollControls, useScroll } from "@react-three/drei";
+import { ScrollControls } from "@react-three/drei";
+import { useScroll } from "@react-three/drei";
 
-const SectionBalsa = () => {
+const SectionBalsa = ({ isPhone }) => {
   const waveRef = useRef();
   const particleRef = useRef();
+  const [dist, setDist] = useState(0.45);
 
   const degToRad = (deg) => {
     return deg * 0.0174533;
@@ -109,18 +110,23 @@ const SectionBalsa = () => {
       </group>
     );
   }
-
-  const scroll = useScroll();
   useEffect(() => {
-    setTimeout(() => {
-      console.log(scroll);
-    }, 500); // Adjust the delay as needed
-  }, [scroll]);
+    console.log(isPhone);
+    if (!isPhone) {
+      setDist(0.45);
+    } else {
+      setDist(0.25);
+    }
+  }, []);
 
   return (
     <>
       <Canvas>
-        <ScrollControls pages={3} damping={0.1}>
+        <ScrollControls
+          style={{
+            opacity: 0,
+          }}
+        >
           {/* <fog attach="fog" color="gray" near={10} far={50} /> */}
           <WireframeWave ref={waveRef} />
 
@@ -136,8 +142,6 @@ const SectionBalsa = () => {
             <meshBasicMaterial color={"black"} />
           </mesh>
 
-          {/* // */}
-
           <mesh scale={150}>
             <sphereGeometry />
             <meshBasicMaterial side={DoubleSide} color={"white"} />
@@ -145,10 +149,10 @@ const SectionBalsa = () => {
 
           {triangleElements}
           <group scale={0.3} position={[0, 0, 4.85]}>
-            <group scale={[-1, 1, 1]} position={[0.45, 0, 0]}>
+            <group scale={[-1, 1, 1]} position={[dist, 0, 0]}>
               <BalsaOutline />
             </group>
-            <group position={[-0.45, 0, 0]}>
+            <group position={[-dist, 0, 0]}>
               <BalsaOutline />
             </group>
           </group>

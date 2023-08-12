@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import { useGLTF } from "@react-three/drei";
+import { ScrollControls, useGLTF, useScroll } from "@react-three/drei";
 import { TextureLoader } from "three";
 
 import contentTriangleFragment from "./shaders/contentTriangleFragment.glsl";
@@ -34,6 +34,14 @@ export function Triangle2(props) {
     //   triangleRef.current.material.uniforms.uTimePattern.value = 0.0;
     // }
   });
+
+  const scroll = useScroll();
+
+  useEffect(() => {
+    setInterval(() => {
+      console.log(scroll.offset);
+    }, 300);
+  }, []);
 
   return (
     <group {...props} dispose={null}>

@@ -35,7 +35,7 @@ function App() {
       {/* <LandingPage isPhone={false} /> */}
       {/* <SectionFilip /> */}
       {/* <SectionStudi /> */}
-      <SectionBalsa />
+      <SectionBalsa isPhone={isPhone()} />
       {/* <LoadingAnimation /> */}
     </div>
   );

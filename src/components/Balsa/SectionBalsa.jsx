@@ -47,6 +47,7 @@ const SectionBalsa = () => {
     const yCord = Math.floor((Math.random() * 200 - 200) / 4);
     particleRef.current.position.x = xCord;
     particleRef.current.position.z = yCord;
+
     waveRef.current.updateCords(xCord, yCord);
 
     particleRef.current.position.y = -9;
@@ -55,18 +56,26 @@ const SectionBalsa = () => {
   };
   const handleParticleMovement = () => {
     gsap.to(particleRef.current.position, {
-      y: 10,
+      y: 5.5,
       duration: 5,
-      ease: "power2.inOut",
+      ease: "power2.in",
       onUpdate: () => {
         if (particleRef.current.position.y >= 5.5) {
           waveRef.current.startWave();
         }
       },
       onComplete: () => {
-        setTimeout(() => {
-          generateRandomXY();
-        }, 3000);
+        gsap.to(particleRef.current.position, {
+          y: 10,
+          duration: 4,
+          ease: "power2.Out",
+
+          onComplete: () => {
+            setTimeout(() => {
+              generateRandomXY();
+            }, 3000);
+          },
+        });
       },
     });
   };

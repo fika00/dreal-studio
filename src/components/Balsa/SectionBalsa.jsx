@@ -28,7 +28,7 @@ import WireframeWave from "./components/WireframeWave";
 import BalsaOutline from "./components/BalsaOutline";
 import Triangle from "./components/Triangle";
 import Loading from "../Loading/Loading";
-import { Triangle2 } from "./components/Triangle2";
+import Triangle2 from "./components/Triangle2";
 
 // const WireframeWave = lazy(() => import("./components/WireframeWave"));
 // const Triangle = lazy(() => import("./components/Triangle"));
@@ -42,6 +42,8 @@ const SectionBalsa = ({ isPhone }) => {
   const bgColorRef = useRef();
   const [dist, setDist] = useState(0.45);
   const contentTriangle = useRef();
+  const content1Ref = useRef();
+  const content2Ref = useRef();
 
   const degToRad = (deg) => {
     return deg * 0.0174533;
@@ -94,6 +96,13 @@ const SectionBalsa = ({ isPhone }) => {
       },
     });
   };
+  const handleAnimStart = () => {
+    gsap.to(camRef.current.position, {
+      z: 5.5,
+      duration: 5,
+      ease: "power3.inOut",
+    });
+  };
   useEffect(() => {
     setTimeout(() => {
       generateRandomXY();
@@ -143,6 +152,10 @@ const SectionBalsa = ({ isPhone }) => {
     } else {
       bgColorRef.current.material.color = new Color("white");
     }
+    if (camRef.current.position.z <= 0) {
+      content1Ref.current.handleAppear();
+      content2Ref.current.handleAppear();
+    }
   });
 
   return (
@@ -187,7 +200,28 @@ const SectionBalsa = ({ isPhone }) => {
           opacity={0.4}
         />
 
-        <Triangle2 triangleScale={isPhone ? 1 : 2} />
+        <Triangle2
+          isMain={true}
+          img={"image0.jpg"}
+          triangleScale={isPhone ? 1 : 2}
+        />
+
+        <group position={[1, 0, -4]} rotation={[0, degToRad(-30), 0]}>
+          <Triangle2
+            ref={content1Ref}
+            isMain={false}
+            img={"image1.jpg"}
+            triangleScale={0.8}
+          />
+        </group>
+        <group position={[-1, 0, -4]} rotation={[0, degToRad(30), 0]}>
+          <Triangle2
+            ref={content2Ref}
+            isMain={false}
+            img={"image2.jpg"}
+            triangleScale={0.8}
+          />
+        </group>
 
         <PerspectiveCamera
           ref={camRef}

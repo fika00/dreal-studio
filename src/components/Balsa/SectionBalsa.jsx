@@ -7,7 +7,7 @@ import {
   Stats,
   PerspectiveCamera,
 } from "@react-three/drei";
-import { DoubleSide } from "three";
+import { Color, DoubleSide } from "three";
 import { gsap } from "gsap";
 import "./SectionBalsa.css";
 import { useControls } from "leva";
@@ -39,6 +39,7 @@ const SectionBalsa = ({ isPhone }) => {
   const waveRef = useRef();
   const particleRef = useRef();
   const camRef = useRef();
+  const bgColorRef = useRef();
   const [dist, setDist] = useState(0.45);
   const contentTriangle = useRef();
 
@@ -134,7 +135,14 @@ const SectionBalsa = ({ isPhone }) => {
 
   const scroll = useScroll();
   useFrame(() => {
-    camRef.current.position.z = -scroll.offset * 4.75 + 5;
+    // camRef.current.position.z = -scroll.offset * 4.75 + 5;
+    camRef.current.position.z = -scroll.offset * 5 + 5;
+    console.log(camRef.current.position.z);
+    if (camRef.current.position.z < 0.3) {
+      bgColorRef.current.material.color = new Color("black");
+    } else {
+      bgColorRef.current.material.color = new Color("white");
+    }
   });
 
   return (
@@ -155,7 +163,7 @@ const SectionBalsa = ({ isPhone }) => {
           <meshBasicMaterial color={"black"} />
         </mesh>
 
-        <mesh scale={150}>
+        <mesh scale={150} ref={bgColorRef}>
           <sphereGeometry />
           <meshBasicMaterial side={DoubleSide} color={"white"} />
         </mesh>

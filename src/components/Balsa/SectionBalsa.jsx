@@ -5,6 +5,7 @@ import {
   OrbitControls,
   Sparkles,
   Stats,
+  PerspectiveCamera,
 } from "@react-three/drei";
 import { DoubleSide } from "three";
 import { gsap } from "gsap";
@@ -37,6 +38,7 @@ import { Triangle2 } from "./components/Triangle2";
 const SectionBalsa = ({ isPhone }) => {
   const waveRef = useRef();
   const particleRef = useRef();
+  const camRef = useRef();
   const [dist, setDist] = useState(0.45);
   const contentTriangle = useRef();
 
@@ -130,6 +132,11 @@ const SectionBalsa = ({ isPhone }) => {
     }
   }, []);
 
+  const scroll = useScroll();
+  useFrame(() => {
+    camRef.current.position.z = -scroll.offset * 4.75 + 5;
+  });
+
   return (
     <>
       <Suspense fallback={<Loading name={"Balsa Ratkovic"} />}>
@@ -172,10 +179,19 @@ const SectionBalsa = ({ isPhone }) => {
           opacity={0.4}
         />
 
-        <Triangle2 triangleScale={isPhone ? 1.5 : 3} />
+        <Triangle2 triangleScale={isPhone ? 1 : 2} />
+
+        <PerspectiveCamera
+          ref={camRef}
+          makeDefault
+          position={[0, 0, 5]}
+          fov={75}
+          near={0.01}
+        />
+
         <EffectComposer>
           <ChromaticAberration
-            offset={[0.001, 0.0]} // color offset
+            offset={[0.0005, 0.0]} // color offset
           />
         </EffectComposer>
         {/* <OrbitControls /> */}

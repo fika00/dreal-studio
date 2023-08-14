@@ -16,6 +16,8 @@ export function Triangle2(props) {
 
   const triangleRef = useRef();
 
+  const scroll = useScroll();
+
   const degToRad = (deg) => {
     return deg * 0.0174533;
   };
@@ -33,6 +35,8 @@ export function Triangle2(props) {
     // if (triangleRef.current.material.uniforms.uTimePattern.value >= 1) {
     //   triangleRef.current.material.uniforms.uTimePattern.value = 0.0;
     // }
+
+    triangleRef.current.material.uniforms.uScroll.value = scroll.offset * 0.75;
   });
 
   return (
@@ -40,20 +44,21 @@ export function Triangle2(props) {
       <mesh
         scale={props.triangleScale}
         ref={triangleRef}
-        position={[0, 0, -5]}
+        position={[0, 0, 0]}
         rotation={[degToRad(90), 0, 0]}
         castShadow
         receiveShadow
         geometry={nodes.Cylinder.geometry}
-        // depthWrite={false}
+        depthWrite={true}
       >
         <shaderMaterial
           fragmentShader={contentTriangleFragment}
           vertexShader={contentTriangleVertex}
-          transparent
+          // transparent
           uniforms={{
             uTime: { value: 0 },
             image: { value: content1Image },
+            uScroll: { value: 0 },
             uTimePattern: { value: 0 },
             trianglePattern: { value: triangle_pattern_texture },
           }}

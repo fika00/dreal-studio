@@ -37,9 +37,10 @@ function App() {
     >
       <Canvas>
         <ScrollControls
-          style={{
-            opacity: 0,
-          }}
+          pages={2}
+          // style={{
+          //   opacity: 0,
+          // }}
         >
           {/* <LandingPage isPhone={false} /> */}
           {/* <SectionFilip /> */}

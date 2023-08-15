@@ -6,6 +6,8 @@ import {
   Sparkles,
   Stats,
   PerspectiveCamera,
+  MeshReflectorMaterial,
+  Environment,
 } from "@react-three/drei";
 import { Color, DoubleSide } from "three";
 import { gsap } from "gsap";
@@ -29,6 +31,7 @@ import BalsaOutline from "./components/BalsaOutline";
 import Triangle from "./components/Triangle";
 import Loading from "../Loading/Loading";
 import Triangle2 from "./components/Triangle2";
+import ReflectiveFloor from "./components/ReflectiveFloor";
 
 // const WireframeWave = lazy(() => import("./components/WireframeWave"));
 // const Triangle = lazy(() => import("./components/Triangle"));
@@ -44,6 +47,8 @@ const SectionBalsa = ({ isPhone }) => {
   const contentTriangle = useRef();
   const content1Ref = useRef();
   const content2Ref = useRef();
+  const hasAppeared = useRef(false);
+  const floorRef = useRef();
 
   const degToRad = (deg) => {
     return deg * 0.0174533;
@@ -152,9 +157,18 @@ const SectionBalsa = ({ isPhone }) => {
     } else {
       bgColorRef.current.material.color = new Color("white");
     }
-    if (camRef.current.position.z <= 0) {
-      content1Ref.current.handleAppear();
-      content2Ref.current.handleAppear();
+    if (camRef.current.position.z <= 0.1) {
+      if (!hasAppeared.current) {
+        content1Ref.current.handleAppear();
+        content2Ref.current.handleAppear();
+        floorRef.current.handleShow();
+        hasAppeared.current = true;
+      }
+    } else {
+      hasAppeared.current = false;
+      content1Ref.current.handleHide();
+      content2Ref.current.handleHide();
+      floorRef.current.handleHide();
     }
   });
 
@@ -204,6 +218,7 @@ const SectionBalsa = ({ isPhone }) => {
           isMain={true}
           img={"image0.jpg"}
           triangleScale={isPhone ? 1 : 2}
+          opacity={1.0}
         />
 
         <group position={[1, 0, -4]} rotation={[0, degToRad(-30), 0]}>
@@ -212,6 +227,7 @@ const SectionBalsa = ({ isPhone }) => {
             isMain={false}
             img={"image1.jpg"}
             triangleScale={0.8}
+            opacity={0.0}
           />
         </group>
         <group position={[-1, 0, -4]} rotation={[0, degToRad(30), 0]}>
@@ -220,8 +236,13 @@ const SectionBalsa = ({ isPhone }) => {
             isMain={false}
             img={"image2.jpg"}
             triangleScale={0.8}
+            opacity={0.0}
           />
         </group>
+
+        <ambientLight />
+
+        <ReflectiveFloor ref={floorRef} />
 
         <PerspectiveCamera
           ref={camRef}
@@ -230,6 +251,7 @@ const SectionBalsa = ({ isPhone }) => {
           fov={75}
           near={0.01}
         />
+        {/* <Environment preset="dawn" /> */}
 
         <EffectComposer>
           <ChromaticAberration

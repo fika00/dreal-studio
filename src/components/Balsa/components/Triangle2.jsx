@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import { ScrollControls, useGLTF, useScroll } from "@react-three/drei";
 import { TextureLoader } from "three";
@@ -14,12 +14,12 @@ import triangle_pattern from "/imgs/balsa/triangle_pattern2.jpg";
 const Triangle2 = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => ({
     handleAppear,
+    handleHide,
   }));
 
   const { nodes, materials } = useGLTF("/models/Triangle2.glb");
 
   const triangleRef = useRef();
-
   const scroll = useScroll();
 
   const degToRad = (deg) => {
@@ -47,14 +47,20 @@ const Triangle2 = forwardRef((props, ref) => {
 
   const handleAppear = () => {
     const interval = setInterval(() => {
-      triangleRef.current.scale = 1;
+      triangleRef.current.material.uniforms.uOpacity.value = 1.0;
       setTimeout(() => {
-        triangleRef.current.scale = 0;
-      }, Math.random() * 20);
-      if (Math.random() <= 0.1) {
+        triangleRef.current.material.uniforms.uOpacity.value = 0.0;
+      }, Math.random() * 50 + 50);
+      if (Math.random() <= 0.4) {
         clearInterval(interval);
+        setTimeout(() => {
+          triangleRef.current.material.uniforms.uOpacity.value = 1.0;
+        }, 100);
       }
-    }, Math.random() * 500);
+    }, Math.random() * 500 + 250);
+  };
+  const handleHide = () => {
+    triangleRef.current.material.uniforms.uOpacity.value = 0.0;
   };
 
   return (
@@ -80,7 +86,7 @@ const Triangle2 = forwardRef((props, ref) => {
             uScroll: { value: 0 },
             uTimePattern: { value: 0 },
             trianglePattern: { value: triangle_pattern_texture },
-            uOpacity: { value: 1.0 },
+            uOpacity: { value: props.opacity },
           }}
         />
       </mesh>

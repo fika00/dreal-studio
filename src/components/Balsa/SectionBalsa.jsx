@@ -60,8 +60,8 @@ const SectionBalsa = ({ isPhone }) => {
   const content2Ref = useRef();
   const hasAppeared = useRef(false);
   const floorRef = useRef();
-  const images = [img0, img1, img2, img3, img4, img5, img6];
-  // const images = [img0];
+  // const images = [img0, img1, img2, img3, img4, img5, img6];
+  const images = [img0, img1, img2];
   const meshRefs = useRef([]);
   const testRef = useRef();
 

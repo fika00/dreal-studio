@@ -3,7 +3,7 @@ import WaveFragment from "./shaders/WaveFragment.glsl";
 import WaveVertexBottom from "./shaders/WaveVertexBottom.glsl";
 import WaveFragmentBottom from "./shaders/WaveFragmentBottom.glsl";
 import { useFrame } from "@react-three/fiber";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { DoubleSide, TextureLoader } from "three";
 import { useImperativeHandle, forwardRef } from "react";
 
@@ -18,6 +18,7 @@ const WireframeWave = (props, ref) => {
   const waveRef2 = useRef();
   const uTime = 0.05;
   const loader = new TextureLoader();
+  const [isVisible, setIsVisible] = useState(true);
 
   // const noiseTexture = loader.load("imgs/balsa/noise.jpg");
   const noiseTexture = loader.load("imgs/balsa/triangle_pattern2.jpg");
@@ -50,46 +51,48 @@ const WireframeWave = (props, ref) => {
 
   return (
     <>
-      <mesh
-        rotation={[degToRad(-90), 0, 0]}
-        position={[0, 5.5, 0]}
-        ref={waveRef2}
-      >
-        <planeGeometry args={[200, 200, 150 * 2, 100 * 2]} />
-        <shaderMaterial
-          side={DoubleSide}
-          depthWrite={false}
-          fragmentShader={WaveFragment}
-          vertexShader={WaveVertex}
-          // wireframe
-          transparent
-          // linewidth={10}
-          uniforms={{
-            uNoise: { value: noiseTexture },
-            uTime: { value: 0 },
-            uWaveStart: { value: 0 },
-            xCord: { value: 0 },
-            yCord: { value: 0 },
-          }}
-        />
-      </mesh>
-      <points
-        rotation={[degToRad(-90), 0, 0]}
-        position={[0, -10, 0]}
-        ref={waveRef}
-      >
-        <planeGeometry args={[200, 200, 150 * 2, 50 * 2]} />
-        <shaderMaterial
-          fragmentShader={WaveFragmentBottom}
-          vertexShader={WaveVertexBottom}
-          // wireframe
-          transparent
-          // linewidth={10}
-          uniforms={{
-            uTime: { value: 0 },
-          }}
-        />
-      </points>
+      <>
+        <mesh
+          rotation={[degToRad(-90), 0, 0]}
+          position={[0, 5.5, 0]}
+          ref={waveRef2}
+        >
+          <planeGeometry args={[200, 200, 150 * 2, 100 * 2]} />
+          <shaderMaterial
+            side={DoubleSide}
+            depthWrite={false}
+            fragmentShader={WaveFragment}
+            vertexShader={WaveVertex}
+            // wireframe
+            transparent
+            // linewidth={10}
+            uniforms={{
+              uNoise: { value: noiseTexture },
+              uTime: { value: 0 },
+              uWaveStart: { value: 0 },
+              xCord: { value: 0 },
+              yCord: { value: 0 },
+            }}
+          />
+        </mesh>
+        <points
+          rotation={[degToRad(-90), 0, 0]}
+          position={[0, -10, 0]}
+          ref={waveRef}
+        >
+          <planeGeometry args={[200, 200, 150 * 2, 50 * 2]} />
+          <shaderMaterial
+            fragmentShader={WaveFragmentBottom}
+            vertexShader={WaveVertexBottom}
+            // wireframe
+            transparent
+            // linewidth={10}
+            uniforms={{
+              uTime: { value: 0 },
+            }}
+          />
+        </points>
+      </>
     </>
   );
 };

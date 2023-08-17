@@ -32,6 +32,17 @@ import Triangle from "./components/Triangle";
 import Loading from "../Loading/Loading";
 import Triangle2 from "./components/Triangle2";
 import ReflectiveFloor from "./components/ReflectiveFloor";
+import ContentPlane from "./components/ContentPlane";
+
+//? CONTENT
+
+import img0 from "/imgs/balsa/content/image0.jpg";
+import img1 from "/imgs/balsa/content/image1.jpg";
+import img2 from "/imgs/balsa/content/image2.jpg";
+import img3 from "/imgs/balsa/content/image3.jpg";
+import img4 from "/imgs/balsa/content/image4.jpg";
+import img5 from "/imgs/balsa/content/image5.jpg";
+import img6 from "/imgs/balsa/content/image6.jpg";
 
 // const WireframeWave = lazy(() => import("./components/WireframeWave"));
 // const Triangle = lazy(() => import("./components/Triangle"));
@@ -49,6 +60,14 @@ const SectionBalsa = ({ isPhone }) => {
   const content2Ref = useRef();
   const hasAppeared = useRef(false);
   const floorRef = useRef();
+  const images = [img0, img1, img2, img3, img4, img5, img6];
+  // const images = [img0];
+  const meshRefs = useRef([]);
+  const testRef = useRef();
+
+  useEffect(() => {
+    meshRefs.current = meshRefs.current.slice(0, images.length); // Ensure the array length matches the number of images
+  }, [images]);
 
   const degToRad = (deg) => {
     return deg * 0.0174533;
@@ -111,6 +130,7 @@ const SectionBalsa = ({ isPhone }) => {
   useEffect(() => {
     setTimeout(() => {
       generateRandomXY();
+      console.log(meshRefs);
     }, 1000);
   }, []);
 
@@ -139,7 +159,7 @@ const SectionBalsa = ({ isPhone }) => {
     );
   }
   useEffect(() => {
-    console.log(isPhone);
+    // console.log(isPhone);
     if (!isPhone) {
       setDist(0.45);
     } else {
@@ -149,26 +169,33 @@ const SectionBalsa = ({ isPhone }) => {
 
   const scroll = useScroll();
   useFrame(() => {
-    // camRef.current.position.z = -scroll.offset * 4.75 + 5;
-    camRef.current.position.z = -scroll.offset * 5 + 5;
-    console.log(camRef.current.position.z);
-    if (camRef.current.position.z < 0.3) {
-      bgColorRef.current.material.color = new Color("black");
-    } else {
-      bgColorRef.current.material.color = new Color("white");
-    }
-    if (camRef.current.position.z <= 0.1) {
-      if (!hasAppeared.current) {
-        content1Ref.current.handleAppear();
-        content2Ref.current.handleAppear();
-        floorRef.current.handleShow();
-        hasAppeared.current = true;
+    if (camRef?.current?.position?.z != null) {
+      camRef.current.position.z = -scroll.offset * 5 + 5;
+      // console.log(camRef.current.position.z);
+      if (camRef.current.position.z < 0.3) {
+        bgColorRef.current.material.color = new Color("black");
+      } else {
+        bgColorRef.current.material.color = new Color("white");
       }
-    } else {
-      hasAppeared.current = false;
-      content1Ref.current.handleHide();
-      content2Ref.current.handleHide();
-      floorRef.current.handleHide();
+      if (camRef.current.position.z <= 0.1) {
+        if (!hasAppeared.current) {
+          // content1Ref.current.handleAppear();
+          // content2Ref.current.handleAppear();
+          floorRef.current.handleShow();
+          hasAppeared.current = true;
+          meshRefs.current.forEach((el) => {
+            el.ref.handleAppear();
+          });
+        }
+      } else {
+        hasAppeared.current = false;
+        // content1Ref.current.handleHide();
+        // content2Ref.current.handleHide();
+        meshRefs.current.forEach((el) => {
+          el.ref.handleHide();
+        });
+        floorRef.current.handleHide();
+      }
     }
   });
   // DA DA
@@ -221,8 +248,24 @@ const SectionBalsa = ({ isPhone }) => {
           triangleScale={isPhone ? 1 : 2}
           opacity={1.0}
         />
+        {images.map((element, index) => {
+          meshRefs.current[index] = meshRefs.current[index] || {}; // Initialize the ref if it doesn't exist
 
-        <group position={[1, 0, -4]} rotation={[0, degToRad(-30), 0]}>
+          return (
+            <group
+              // ref={(mesh) => (meshRefs.current[index].ref = mesh)}
+              key={`slide-${index} `}
+            >
+              <ContentPlane
+                pos={[-2 + index * 1.5, 0, Math.random() * 2 - 4]}
+                ind={index}
+                ref={(mesh) => (meshRefs.current[index].ref = mesh)}
+                image={element}
+              />
+            </group>
+          );
+        })}
+        {/* <group position={[1, 0, -4]} rotation={[0, degToRad(-30), 0]}>
           <Triangle2
             ref={content1Ref}
             isMain={false}
@@ -239,11 +282,13 @@ const SectionBalsa = ({ isPhone }) => {
             triangleScale={0.8}
             opacity={0.0}
           />
-        </group>
+        </group> */}
 
         <ambientLight />
 
-        <ReflectiveFloor ref={floorRef} />
+        <group position={[0, 0.5, 0]}>
+          <ReflectiveFloor ref={floorRef} />
+        </group>
 
         <PerspectiveCamera
           ref={camRef}
@@ -254,11 +299,11 @@ const SectionBalsa = ({ isPhone }) => {
         />
         {/* <Environment preset="dawn" /> */}
 
-        <EffectComposer>
+        {/* <EffectComposer>
           <ChromaticAberration
             offset={[0.0005, 0.0]} // color offset
           />
-        </EffectComposer>
+        </EffectComposer> */}
         {/* <OrbitControls /> */}
         <Stats />
       </Suspense>

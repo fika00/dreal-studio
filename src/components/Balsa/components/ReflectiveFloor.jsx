@@ -21,21 +21,22 @@ const ReflectiveFloor = (props, ref) => {
   };
   return (
     <>
-      {isVisible && (
-        <mesh scale={15} position={[0, -1, 0]} rotation={[degToRad(-90), 0, 0]}>
-          <planeGeometry />
-          <MeshReflectorMaterial
-            color="white"
-            blur={[500, 250]}
-            resolution={2024}
-            mixBlur={1}
-            mixStrength={155}
-            metalness={0.999}
-            roughness={0.9}
-            mirror={0}
-          />
-        </mesh>
-      )}
+      <mesh scale={15} position={[0, -1, 0]} rotation={[degToRad(-90), 0, 0]}>
+        <planeGeometry />
+        <MeshReflectorMaterial
+          color="white"
+          blur={[500, 250]}
+          resolution={2024}
+          mixBlur={1}
+          mixStrength={155}
+          metalness={0.999}
+          roughness={0.9}
+          mirror={0}
+          opacity={isVisible ? 1 : 0}
+          depthWrite={false}
+          transparent
+        />
+      </mesh>
     </>
   );
 };

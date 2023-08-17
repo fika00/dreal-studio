@@ -41,20 +41,6 @@ const ContentPlane = (props, ref) => {
 
   const handleAppear = () => {
     console.log(flickerDur);
-    // const interval = setInterval(() => {
-    //   planeRef.current.material.opacity = 1;
-    //   setTimeout(() => {
-    //     planeRef.current.material.opacity = 0;
-    //   }, Math.random() * 50 + 50);
-    // }, Math.random() * 20 + 50);
-    // setTimeout(() => {
-    //   clearInterval(interval);
-    //   setTimeout(() => {
-    //     planeRef.current.material.opacity = 1;
-    //     planeRef.current.material.depthWrite = true;
-    //     setIsHidden(false);
-    //   }, 100);
-    // }, Math.random() * 250 + 300);
     const animation = gsap.to(planeRef.current.material, {
       duration: flickerDur,
       opacity: 1,

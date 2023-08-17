@@ -60,8 +60,8 @@ const SectionBalsa = ({ isPhone }) => {
   const content2Ref = useRef();
   const hasAppeared = useRef(false);
   const floorRef = useRef();
-  // const images = [img0, img1, img2, img3, img4, img5, img6];
-  const images = [img0, img1, img2];
+  const images = [img0, img1, img2, img3, img4, img5, img6];
+  // const images = [img0, img1, img2];
   const meshRefs = useRef([]);
   const testRef = useRef();
 
@@ -257,7 +257,7 @@ const SectionBalsa = ({ isPhone }) => {
               key={`slide-${index} `}
             >
               <ContentPlane
-                pos={[-2 + index * 1.5, 0, Math.random() * 2 - 4]}
+                pos={[-2 + index * 1.5, 0, Math.random() * 1.5 - 3]}
                 ind={index}
                 ref={(mesh) => (meshRefs.current[index].ref = mesh)}
                 image={element}

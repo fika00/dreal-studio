@@ -8,6 +8,7 @@ import {
   PerspectiveCamera,
   MeshReflectorMaterial,
   Environment,
+  Html,
 } from "@react-three/drei";
 import { Color, DoubleSide } from "three";
 import { gsap } from "gsap";
@@ -19,7 +20,14 @@ import {
   DepthOfField,
   EffectComposer,
 } from "@react-three/postprocessing";
-import { Suspense, useEffect, useRef, useState, lazy } from "react";
+import {
+  Suspense,
+  useEffect,
+  useRef,
+  useState,
+  lazy,
+  useLayoutEffect,
+} from "react";
 import { useScroll } from "@react-three/drei";
 import { ScrollControls } from "@react-three/drei";
 import { Outline } from "@react-three/postprocessing";
@@ -134,6 +142,10 @@ const SectionBalsa = ({ isPhone }) => {
     }, 1000);
   }, []);
 
+  useLayoutEffect(() => {
+    console.log("Ajmo");
+  });
+
   const triangleElements = [];
 
   for (let i = 1; i < 6; i++) {
@@ -202,111 +214,91 @@ const SectionBalsa = ({ isPhone }) => {
 
   return (
     <>
-      <Suspense fallback={<Loading name={"Balsa Ratkovic"} />}>
-        {/* <fog attach="fog" color="gray" near={10} far={50} /> */}
-        <WireframeWave ref={waveRef} />
+      {/* <fog attach="fog" color="gray" near={10} far={50} /> */}
+      <WireframeWave ref={waveRef} />
 
-        {/* PARTICLE */}
-        <Trail
-          width={0.5} // Width of the line
-          color={"black"} // Color of the line
-          attenuation={(width) => width} // A function to define the width in each point along it.
-          target={particleRef}
-        />
-        <mesh scale={0.01} position={[0, -9, 0]} ref={particleRef}>
-          <sphereGeometry />
-          <meshBasicMaterial color={"black"} />
-        </mesh>
+      {/* PARTICLE */}
+      <Trail
+        width={0.5} // Width of the line
+        color={"black"} // Color of the line
+        attenuation={(width) => width} // A function to define the width in each point along it.
+        target={particleRef}
+      />
+      <mesh scale={0.01} position={[0, -9, 0]} ref={particleRef}>
+        <sphereGeometry />
+        <meshBasicMaterial color={"black"} />
+      </mesh>
 
-        <mesh scale={150} ref={bgColorRef}>
-          <sphereGeometry />
-          <meshBasicMaterial side={DoubleSide} color={"white"} />
-        </mesh>
+      <mesh scale={150} ref={bgColorRef}>
+        <sphereGeometry />
+        <meshBasicMaterial side={DoubleSide} color={"white"} />
+      </mesh>
 
-        {triangleElements}
-        <group scale={0.3} position={[0, 0, 4.85]}>
-          <group scale={[-1, 1, 1]} position={[dist, 0, 0]}>
-            <BalsaOutline />
+      {triangleElements}
+      <group scale={0.3} position={[0, 0, 4.85]}>
+        <group scale={[-1, 1, 1]} position={[dist, 0, 0]}>
+          <BalsaOutline />
+        </group>
+        <group position={[-dist, 0, 0]}>
+          <BalsaOutline />
+        </group>
+      </group>
+      <Sparkles
+        position={[0, 0, 3]}
+        speed={0.05}
+        count={300}
+        scale={3}
+        size={0.8}
+        color={"black"}
+        opacity={0.4}
+      />
+
+      <Triangle2
+        isMain={true}
+        img={"image0.jpg"}
+        triangleScale={isPhone ? 1 : 2}
+        opacity={1.0}
+      />
+      {images.map((element, index) => {
+        meshRefs.current[index] = meshRefs.current[index] || {}; // Initialize the ref if it doesn't exist
+
+        return (
+          <group
+            // ref={(mesh) => (meshRefs.current[index].ref = mesh)}
+            key={`slide-${index} `}
+          >
+            <ContentPlane
+              pos={[-2 + index * 1.5, 0, Math.random() * 1.5 - 3]}
+              ind={index}
+              ref={(mesh) => (meshRefs.current[index].ref = mesh)}
+              image={element}
+            />
           </group>
-          <group position={[-dist, 0, 0]}>
-            <BalsaOutline />
-          </group>
-        </group>
-        <Sparkles
-          position={[0, 0, 3]}
-          speed={0.05}
-          count={300}
-          scale={3}
-          size={0.8}
-          color={"black"}
-          opacity={0.4}
-        />
+        );
+      })}
 
-        <Triangle2
-          isMain={true}
-          img={"image0.jpg"}
-          triangleScale={isPhone ? 1 : 2}
-          opacity={1.0}
-        />
-        {images.map((element, index) => {
-          meshRefs.current[index] = meshRefs.current[index] || {}; // Initialize the ref if it doesn't exist
+      <ambientLight />
 
-          return (
-            <group
-              // ref={(mesh) => (meshRefs.current[index].ref = mesh)}
-              key={`slide-${index} `}
-            >
-              <ContentPlane
-                pos={[-2 + index * 1.5, 0, Math.random() * 1.5 - 3]}
-                ind={index}
-                ref={(mesh) => (meshRefs.current[index].ref = mesh)}
-                image={element}
-              />
-            </group>
-          );
-        })}
-        {/* <group position={[1, 0, -4]} rotation={[0, degToRad(-30), 0]}>
-          <Triangle2
-            ref={content1Ref}
-            isMain={false}
-            img={"image1.jpg"}
-            triangleScale={0.8}
-            opacity={0.0}
-          />
-        </group>
-        <group position={[-1, 0, -4]} rotation={[0, degToRad(30), 0]}>
-          <Triangle2
-            ref={content2Ref}
-            isMain={false}
-            img={"image2.jpg"}
-            triangleScale={0.8}
-            opacity={0.0}
-          />
-        </group> */}
+      <group position={[0, 0.5, 0]}>
+        <ReflectiveFloor ref={floorRef} />
+      </group>
 
-        <ambientLight />
+      <PerspectiveCamera
+        ref={camRef}
+        makeDefault
+        position={[0, 0, 5]}
+        fov={75}
+        near={0.01}
+      />
+      {/* <Environment preset="dawn" /> */}
 
-        <group position={[0, 0.5, 0]}>
-          <ReflectiveFloor ref={floorRef} />
-        </group>
-
-        <PerspectiveCamera
-          ref={camRef}
-          makeDefault
-          position={[0, 0, 5]}
-          fov={75}
-          near={0.01}
-        />
-        {/* <Environment preset="dawn" /> */}
-
-        {/* <EffectComposer>
+      {/* <EffectComposer>
           <ChromaticAberration
             offset={[0.0005, 0.0]} // color offset
           />
         </EffectComposer> */}
-        {/* <OrbitControls /> */}
-        <Stats />
-      </Suspense>
+      {/* <OrbitControls /> */}
+      <Stats />
     </>
   );
 };

@@ -1,22 +1,45 @@
 import { Html, useProgress } from "@react-three/drei";
+import { useEffect, useRef, useState } from "react";
 import "./Loading.css";
 const Loading = ({ name }) => {
-  //   const { active, progress, errors, item, loaded, total } = useProgress();
+  const { active, progress, errors, item, loaded, total } = useProgress();
+
+  const realProgress = useRef(0);
+  const fadeOut = () => {
+    const container = cont.style;
+    container.opacity = 0;
+    setTimeout(() => {
+      container.zIndex = -1;
+    }, 750);
+  };
+
+  useEffect(() => {
+    if (realProgress.current <= progress) {
+      realProgress.current = progress;
+    }
+    if (realProgress.current != 0 && progress == 0) {
+      realProgress.current = 100;
+    }
+    if (progress.toFixed(0) == 100) {
+      setTimeout(() => {
+        fadeOut();
+      }, 1500);
+    }
+    console.log(progress);
+  }, [progress]);
 
   return (
-    <Html center>
-      <div className="loading-container">
-        <div className="loading-info">
-          <div className="loading-info-prog">
-            <p className="text">Loading...</p>
-            <p className="text"></p>
-          </div>
-          <div className="text small">
-            <p className="text small">{name}</p>
-          </div>
+    <div id="cont" className="loading-container">
+      <div className="loading-info">
+        <div className="loading-info-prog">
+          <p className="text">Loading...</p>
+          <p className="text">{realProgress.current.toFixed(0)}%</p>
+        </div>
+        <div className="text small">
+          <p className="text small">{name}</p>
         </div>
       </div>
-    </Html>
+    </div>
   );
 };
 

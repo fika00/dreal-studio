@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { Suspense, useState } from "react";
 // import LandingPage from "./components/LandingPage";
 // import SectionFilip from "./components/SectionFilip";
 // import LoadingAnimation from "./components/LoadingAnimation/LoadingAnimation";
-// import SectionStudi from "./components/Studi/SectionStudi";
+import SectionStudi from "./components/Studi/SectionStudi";
 import SectionBalsa from "./components/Balsa/SectionBalsa";
 import { Canvas, extend, useFrame } from "@react-three/fiber";
 import { ScrollControls } from "@react-three/drei";
@@ -36,19 +36,23 @@ function App() {
       }}
     >
       <Canvas>
-        <ScrollControls
-          pages={2}
-          style={{
-            opacity: 0,
-          }}
-        >
+        <Suspense fallback={null}>
           {/* <LandingPage isPhone={false} /> */}
           {/* <SectionFilip /> */}
           {/* <SectionStudi /> */}
-          <SectionBalsa isPhone={isPhone()} />
+          <ScrollControls
+            pages={2}
+            style={{
+              opacity: 0,
+            }}
+          >
+            <SectionBalsa isPhone={isPhone()} />
+          </ScrollControls>
+
           {/* <LoadingAnimation /> */}
-        </ScrollControls>
+        </Suspense>
       </Canvas>
+      <Loading name={"Balsa Ratkovic"} />
     </div>
   );
 }

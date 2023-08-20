@@ -29,6 +29,7 @@ const Reel = () => {
         <mesh ref={planeRef} scale={28} position={[0, 17, 0]}>
           <planeGeometry args={[1, 1.3]} />
           <shaderMaterial
+            toneMapped={false}
             uniforms={{
               noise: { value: noise },
               uTime: { value: 0 },
@@ -41,9 +42,9 @@ const Reel = () => {
           />
         </mesh>
       </Select>
-      <Html scale={15} transform position={[30, 40, 0]}>
+      {/* <Html scale={15} transform position={[30, 40, 0]}>
         <button onClick={handleWaveReset}>Reset Wave</button>
-      </Html>
+      </Html> */}
     </>
   );
 };

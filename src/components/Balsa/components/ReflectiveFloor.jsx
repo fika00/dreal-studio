@@ -24,13 +24,13 @@ const ReflectiveFloor = (props, ref) => {
       <mesh scale={15} position={[0, -1, 0]} rotation={[degToRad(-90), 0, 0]}>
         <planeGeometry />
         <MeshReflectorMaterial
-          color="white"
+          color="gray"
           blur={[500, 250]}
           resolution={2024}
-          mixBlur={1}
-          mixStrength={155}
+          mixBlur={10}
+          mixStrength={200}
           metalness={0.999}
-          roughness={0.9}
+          roughness={0.05}
           mirror={0}
           opacity={isVisible ? 1 : 0}
           depthWrite={false}

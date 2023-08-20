@@ -6,7 +6,7 @@ const Cloud = ({ color }) => {
     <>
       <mesh scale={15} position={[0, 0, 0]}>
         <planeGeometry args={[1.78, 1]} />
-        <meshBasicMaterial map={color} transparent={true} />
+        <meshBasicMaterial map={color} transparent={true} depthWrite={false} />
       </mesh>
     </>
   );

@@ -133,14 +133,16 @@ function Items({ w = 0.7, gap = 0.15 }) {
   const { urls } = useSnapshot(state);
   const { width } = useThree((state) => state.viewport);
   const xW = w + gap;
+  console.log("WIDTH: ", (width - xW + urls.length * xW) / width);
+
   return (
     <ScrollControls
       horizontal
-      damping={0.8}
+      damping={0.1}
       pages={(width - xW + urls.length * xW) / width}
-      //   pages={11}
+      //   pages={4.3}
     >
-      {/* <Minimap /> */}
+      <Minimap />
       <Scroll>
         {
           urls.map((url, i) => <Item key={i} index={i} position={[i * xW, 0, 0]} scale={[w, 4, 1]} url={url} />) /* prettier-ignore */
@@ -150,10 +152,19 @@ function Items({ w = 0.7, gap = 0.15 }) {
   );
 }
 
-export const ContentSlide = () => (
-  <>
-    <group scale={10} position={[0, 25, 10]}>
-      <Items />
-    </group>
-  </>
-);
+export const ContentSlide = () => {
+  function getCurrentDimension() {
+    return {
+      width: window.innerWidth,
+      height: window.innerHeight,
+    };
+  }
+  const [screenSize, setScreenSize] = useState(getCurrentDimension());
+  return (
+    <>
+      <group scale={4} position={[0, 10, 60]}>
+        <Items screenSize={screenSize.width} />
+      </group>
+    </>
+  );
+};

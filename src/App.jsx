@@ -39,15 +39,15 @@ function App() {
         <Suspense fallback={null}>
           {/* <LandingPage isPhone={false} /> */}
           {/* <SectionFilip /> */}
-          {/* <SectionStudi /> */}
-          <ScrollControls
+          <SectionStudi />
+          {/* <ScrollControls
             pages={2}
             style={{
               opacity: 0,
             }}
           >
             <SectionBalsa isPhone={isPhone()} />
-          </ScrollControls>
+          </ScrollControls> */}
 
           {/* <LoadingAnimation /> */}
         </Suspense>

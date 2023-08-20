@@ -35,12 +35,12 @@ const ReflectiveFloor = (props, ref) => {
         <planeGeometry />
         <MeshReflectorMaterial
           // color="white"
-          blur={[500, 250]}
-          resolution={2048}
-          mixBlur={10}
-          mixStrength={55}
-          metalness={0.99}
-          roughness={0.01}
+          blur={[500, 150]}
+          resolution={512}
+          mixBlur={20}
+          mixStrength={555}
+          metalness={0.999}
+          roughness={0.04}
           mirror={0}
           // normalMap={displacementMap}
           // normalScale={60}

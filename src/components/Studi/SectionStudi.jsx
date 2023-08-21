@@ -27,9 +27,17 @@ const SectionStudi = (props, ref) => {
       ease: "power2.in",
 
       onComplete: () => {
-        camRef.current.rotation.z = degToRad(180);
         setIsAbove(!isAbove);
         emerge();
+      },
+    });
+    gsap.to(camRef.current.rotation, {
+      z: degToRad(90),
+      duration: 2.5,
+      ease: "power2.in",
+
+      onComplete: () => {
+        camRef.current.rotation.z = degToRad(-90);
       },
     });
   };
@@ -37,13 +45,13 @@ const SectionStudi = (props, ref) => {
   const emerge = () => {
     gsap.to(camRef.current.position, {
       y: 10,
-      duration: 5,
+      duration: 2.5,
       ease: "power2.Out",
     });
     gsap.to(camRef.current.rotation, {
       z: 0,
-      duration: 5,
-      ease: "power2.inOut",
+      duration: 2.5,
+      ease: "power2.Out",
     });
   };
 

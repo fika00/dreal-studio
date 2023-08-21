@@ -56,7 +56,7 @@ function Ocean() {
       textureHeight: 512,
       waterNormals,
       sunDirection: new THREE.Vector3(),
-      sunColor: 0x001e0f,
+      // sunColor: 0x001e0f,
       waterColor: 0x001e0f,
       distortionScale: 2,
       // fog: true,
@@ -69,22 +69,24 @@ function Ocean() {
 
 const DoorWay = () => {
   return (
-    <Select enabled={true}>
-      <group scale={7}>
-        <mesh position={[0, 5, 0]}>
-          <boxGeometry args={[4.1, 0.1, 0.1]} />
-          <meshStandardMaterial color={"cyan"} />
-        </mesh>
-        <mesh position={[2, 2.5, 0]}>
-          <boxGeometry args={[0.1, 5, 0.1]} />
-          <meshStandardMaterial color={"cyan"} />
-        </mesh>
-        <mesh position={[-2, 2.5, 0]}>
-          <boxGeometry args={[0.1, 5, 0.1]} />
-          <meshStandardMaterial color={"cyan"} />
-        </mesh>
-      </group>
-    </Select>
+    <group scale={7}>
+      {/* <mesh position={[0, 5, 0]}>
+        <boxGeometry args={[4.1, 0.1, 0.1]} />
+        <meshStandardMaterial color={"cyan"} />
+      </mesh>
+      <mesh position={[2, 2.5, 0]}>
+        <boxGeometry args={[0.1, 5, 0.1]} />
+        <meshStandardMaterial color={"cyan"} />
+      </mesh>
+      <mesh position={[-2, 2.5, 0]}>
+        <boxGeometry args={[0.1, 5, 0.1]} />
+        <meshStandardMaterial color={"cyan"} />
+      </mesh> */}
+      <mesh scale={2} position={[0, 2, 0]}>
+        <planeGeometry args={[1, 2.5]} />
+        <meshStandardMaterial color={"cyan"} />
+      </mesh>
+    </group>
   );
 };
 
@@ -120,8 +122,6 @@ const Scene = () => {
 const AboveWater = () => {
   const meshTestKurac = useRef();
 
-  const lightRef = useRef();
-
   const loader = new TextureLoader();
   const skyTexture = loader.load("/imgs/studi/sky2.jpg");
 
@@ -132,16 +132,15 @@ const AboveWater = () => {
   //   intensity: { value: 5, min: 0, max: 10, step: 0.01 },
   //   radius: { value: 0.1, min: 0, max: 1, step: 0.01 },
   // });
-  const cloudTextureRose = loader.load("/imgs/studi/cloud_r.png");
-  const cloudTextureBlue = loader.load("/imgs/studi/cloud_b.png");
+  // const cloudTextureRose = loader.load("/imgs/studi/cloud_r.png");
+  // const cloudTextureBlue = loader.load("/imgs/studi/cloud_b.png");
 
   return (
     <>
       <Scene />
-      <pointLight position={[-10, -10, -10]} />
 
       <DoorWay />
-      <Reel />
+      {/* <Reel />
       <Sparkles
         noise={6}
         speed={2}
@@ -150,14 +149,14 @@ const AboveWater = () => {
         count={600}
         size={10}
         scale={200}
-      />
-      <mesh position={[0, 350, -200]} scale={750}>
+      /> */}
+      {/* <mesh position={[0, 350, -200]} scale={750}>
         <planeGeometry args={[2.22, 1]} />
         <meshBasicMaterial map={skyTexture} />
-      </mesh>
+      </mesh> */}
       <ambientLight />
 
-      <group scale={25} position={[-100, 140, -170]}>
+      {/* <group scale={25} position={[-100, 140, -170]}>
         <Cloud color={cloudTextureRose} />
       </group>
       <group scale={25} position={[-400, 160, -130]}>
@@ -165,7 +164,7 @@ const AboveWater = () => {
       </group>
       <group scale={[-25, 25, 25]} position={[300, 160, -110]}>
         <Cloud color={cloudTextureBlue} />
-      </group>
+      </group> */}
 
       <EffectComposer>
         <Bloom mipmapBlur radius={0.8} luminanceThreshold={0.6} intensity={6} />

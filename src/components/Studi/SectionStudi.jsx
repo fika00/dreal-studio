@@ -5,11 +5,16 @@ import BelowWater from "./components/BelowWater";
 import { gsap } from "gsap";
 import { Suspense, useEffect, useRef, useState } from "react";
 import Bridge from "./components/Bridge";
+import { useImperativeHandle, forwardRef } from "react";
 
-const SectionStudi = () => {
+const SectionStudi = (props, ref) => {
   const camRef = useRef();
   const [hasChanged, setHasChanged] = useState(false);
   const [isAbove, setIsAbove] = useState(false);
+
+  useImperativeHandle(ref, () => ({
+    dive,
+  }));
 
   const degToRad = (deg) => {
     return deg * 0.0174533;
@@ -17,7 +22,7 @@ const SectionStudi = () => {
 
   const dive = () => {
     gsap.to(camRef.current.position, {
-      y: 0,
+      y: -1,
       duration: 2.5,
       ease: "power2.in",
 
@@ -32,7 +37,7 @@ const SectionStudi = () => {
   const emerge = () => {
     gsap.to(camRef.current.position, {
       y: 10,
-      duration: 2.5,
+      duration: 5,
       ease: "power2.Out",
     });
     gsap.to(camRef.current.rotation, {
@@ -48,36 +53,35 @@ const SectionStudi = () => {
 
   return (
     <>
-      <Html
+      {/* <Html
         style={{
           opacity: 1,
         }}
-        center
+        fullscreen
       >
         <div
           style={{
             position: "fixed",
           }}
         >
-          {/* <button onClick={() => setIsAbove(!isAbove)}>Dive</button> */}
           <button onClick={dive}>Dive</button>
 
           <button onClick={emerge}>Emerge</button>
         </div>
-      </Html>
+      </Html> */}
       {/* <AboveWater /> */}
 
       {isAbove ? (
         <Suspense fallback={null}>
-          <AboveWater />
+          <BelowWater />
         </Suspense>
       ) : (
         <Suspense fallback={null}>
-          <BelowWater />
+          <AboveWater />
         </Suspense>
       )}
 
-      <Bridge callBackFunc={show} />
+      {/* <Bridge callBackFunc={show} /> */}
 
       <PerspectiveCamera
         makeDefault
@@ -91,4 +95,4 @@ const SectionStudi = () => {
   );
 };
 
-export default SectionStudi;
+export default forwardRef(SectionStudi);

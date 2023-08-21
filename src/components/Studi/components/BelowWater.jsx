@@ -5,7 +5,7 @@ const BelowWater = () => {
   return (
     <>
       <ContentSlide />
-      <group position={[0, 0, 20]} scale={100}>
+      <group position={[0, 0, 0]} scale={100}>
         <ReflectiveFloor />
       </group>
       <ambientLight />

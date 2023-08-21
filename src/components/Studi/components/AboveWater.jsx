@@ -23,6 +23,7 @@ import { useMemo } from "react";
 // PostProcessing
 
 import {
+  Bloom,
   EffectComposer,
   Select,
   Selection,
@@ -72,15 +73,15 @@ const DoorWay = () => {
       <group scale={7}>
         <mesh position={[0, 5, 0]}>
           <boxGeometry args={[4.1, 0.1, 0.1]} />
-          <meshStandardMaterial emissive={"cyan"} emissiveIntensity={1} />
+          <meshStandardMaterial color={"cyan"} />
         </mesh>
         <mesh position={[2, 2.5, 0]}>
           <boxGeometry args={[0.1, 5, 0.1]} />
-          <meshStandardMaterial emissive={"cyan"} emissiveIntensity={1} />
+          <meshStandardMaterial color={"cyan"} />
         </mesh>
         <mesh position={[-2, 2.5, 0]}>
           <boxGeometry args={[0.1, 5, 0.1]} />
-          <meshStandardMaterial emissive={"cyan"} emissiveIntensity={1} />
+          <meshStandardMaterial color={"cyan"} />
         </mesh>
       </group>
     </Select>
@@ -138,26 +139,17 @@ const AboveWater = () => {
     <>
       <Scene />
       <pointLight position={[-10, -10, -10]} />
-      <Selection>
-        {/* <EffectComposer>
-          <SelectiveBloom
-            mipmapBlur
-            radius={0.75}
-            luminanceThreshold={0.5}
-            intensity={5}
-          />
-        </EffectComposer> */}
-        <DoorWay />
-        <Reel />
-      </Selection>
+
+      <DoorWay />
+      <Reel />
       <Sparkles
         noise={6}
-        speed={6}
+        speed={2}
         color={"cyan"}
         position={[0, 10, 0]}
         count={600}
         size={10}
-        scale={100}
+        scale={200}
       />
       <mesh position={[0, 350, -200]} scale={750}>
         <planeGeometry args={[2.22, 1]} />
@@ -165,7 +157,7 @@ const AboveWater = () => {
       </mesh>
       <ambientLight />
 
-      {/* <group scale={25} position={[-100, 140, -170]}>
+      <group scale={25} position={[-100, 140, -170]}>
         <Cloud color={cloudTextureRose} />
       </group>
       <group scale={25} position={[-400, 160, -130]}>
@@ -173,10 +165,11 @@ const AboveWater = () => {
       </group>
       <group scale={[-25, 25, 25]} position={[300, 160, -110]}>
         <Cloud color={cloudTextureBlue} />
-      </group> */}
-      {/* <OrbitControls /> */}
-      <Stats />
-      {/* <ContentSlide /> */}
+      </group>
+
+      <EffectComposer>
+        <Bloom mipmapBlur radius={0.8} luminanceThreshold={0.6} intensity={6} />
+      </EffectComposer>
     </>
   );
 };

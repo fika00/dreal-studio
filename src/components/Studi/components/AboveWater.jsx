@@ -10,81 +10,94 @@ import {
   Stats,
   Float,
   Image,
+  MeshReflectorMaterial,
 } from "@react-three/drei";
 import * as THREE from "three";
-import { Water } from "three-stdlib";
-import { useRef, useState } from "react";
+// import { Water, Water2 } from "three-stdlib";
+import { useEffect, useRef, useState } from "react";
 import { useThree } from "@react-three/fiber/dist/react-three-fiber.cjs";
 import { useLoader } from "@react-three/fiber/dist/react-three-fiber.cjs";
 import { BlendFunction } from "postprocessing";
 import { Fog } from "three";
 import { useTexture } from "@react-three/drei";
 import { useMemo } from "react";
-// PostProcessing
 
+//* PostProcessing
 import {
   Bloom,
   EffectComposer,
   Select,
   Selection,
   SelectiveBloom,
+  Vignette,
 } from "@react-three/postprocessing";
 
 //
-
+import { gsap } from "gsap";
 import { useControls } from "leva";
 import { TextureLoader } from "three";
-import { Depth, Gradient, LayerMaterial } from "lamina";
+import { Color, Depth, Gradient, LayerMaterial } from "lamina";
 import Reel from "./Reel";
 import Cloud from "./Cloud";
 import { ContentSlide } from "./ContentSlide";
-import ReflectiveFloor from "./ReflectiveFloor";
+import { degToRad } from "three/src/math/MathUtils";
+import { Water } from "./Water2";
+import { MeshBasicMaterial } from "three";
 
 extend({ Water, Fog: THREE.Fog });
 
 function Ocean() {
-  const ref = useRef();
-  const waterNormals = useLoader(
-    THREE.TextureLoader,
-    "/imgs/studi/Water_1_M_Normal.jpg"
+  const nm = new TextureLoader().load("/imgs/studi/Water_1_M_Normal.jpg");
+  let waterGeometry = new THREE.PlaneGeometry(20, 20);
+  let waterMat = {
+    scale: 20,
+    textureWidth: 512,
+    textureHeight: 512,
+    flowSpeed: 0.02,
+    reflectivity: 0.25,
+  };
+  return (
+    <group scale={30} rotation={[degToRad(-90), 0, 0]}>
+      <water args={[waterGeometry, waterMat]} />
+    </group>
   );
-  waterNormals.wrapS = waterNormals.wrapT = THREE.RepeatWrapping;
-  const geom = useMemo(() => new THREE.PlaneGeometry(10000, 10000), []);
-  const config = useMemo(
-    () => ({
-      textureWidth: 512,
-      textureHeight: 512,
-      waterNormals,
-      sunDirection: new THREE.Vector3(),
-      // sunColor: 0x001e0f,
-      waterColor: 0x001e0f,
-      distortionScale: 2,
-      // fog: true,
-    }),
-    [waterNormals]
-  );
-  useFrame((state) => (ref.current.material.uniforms.time.value += 0.005));
-  return <water ref={ref} args={[geom, config]} rotation-x={-Math.PI / 2} />;
 }
 
 const DoorWay = () => {
+  const doorRef = useRef();
+  useEffect(() => {
+    console.log(doorRef.current.material.color);
+    const animateLoop = () => {
+      const dur = Math.random() / 2;
+      gsap.to(doorRef.current.material.color, {
+        g: 0.9,
+        b: 0.9,
+        duration: dur,
+        ease: "power2.inOut",
+
+        onComplete: () => {
+          console.log(doorRef.current.material.color);
+          gsap.to(doorRef.current.material.color, {
+            g: 1,
+            b: 1,
+            duration: dur,
+            ease: "power2.inOut",
+
+            onComplete: () => {
+              animateLoop();
+            },
+          });
+        },
+      });
+    };
+    animateLoop();
+  }, []);
   return (
     <group scale={7}>
-      {/* <mesh position={[0, 5, 0]}>
-        <boxGeometry args={[4.1, 0.1, 0.1]} />
-        <meshStandardMaterial color={"cyan"} />
-      </mesh>
-      <mesh position={[2, 2.5, 0]}>
-        <boxGeometry args={[0.1, 5, 0.1]} />
-        <meshStandardMaterial color={"cyan"} />
-      </mesh>
-      <mesh position={[-2, 2.5, 0]}>
-        <boxGeometry args={[0.1, 5, 0.1]} />
-        <meshStandardMaterial color={"cyan"} />
-      </mesh> */}
-      <mesh scale={2} position={[0, 2, 0]}>
+      <mesh ref={doorRef} scale={2} position={[0, 2, 5]}>
         <planeGeometry args={[1, 2.5]} />
         <meshStandardMaterial color={"cyan"} />
+        {/* <meshStandardMaterial color={"#b5e1ff"} /> */}
       </mesh>
     </group>
   );
@@ -99,8 +112,6 @@ const Scene = () => {
 
   return (
     <>
-      {/* <fog attach="fog" args={["#3c61bc", 20, 500]} /> */}
-
       {/* <PerspectiveCamera
         makeDefault
         position={[0, 10, 55]}
@@ -108,13 +119,17 @@ const Scene = () => {
         near={0.1}
       /> */}
       <Ocean />
-      <mesh position={[0, -1, 0]} scale={7020} rotation={[degToRad(-90), 0, 0]}>
+      <mesh
+        scale={550}
+        rotation={[degToRad(-90), 0, 0]}
+        position={[0, -0.1, 0]}
+      >
         <planeGeometry />
-        <meshBasicMaterial color={"black"} />
+        <meshStandardMaterial color={"black"} />
       </mesh>
-      {/* <group position={[0, 0, 20]} scale={100}>
-        <ReflectiveFloor />
-      </group> */}
+
+      {/* <pointLight position={[-10, 0, 90]} /> */}
+      <ambientLight />
     </>
   );
 };
@@ -128,47 +143,39 @@ const AboveWater = () => {
   const degToRad = (deg) => {
     return deg * 0.0174533;
   };
-  // const { intensity, radius } = useControls({
-  //   intensity: { value: 5, min: 0, max: 10, step: 0.01 },
-  //   radius: { value: 0.1, min: 0, max: 1, step: 0.01 },
-  // });
-  // const cloudTextureRose = loader.load("/imgs/studi/cloud_r.png");
-  // const cloudTextureBlue = loader.load("/imgs/studi/cloud_b.png");
 
   return (
     <>
       <Scene />
 
       <DoorWay />
-      {/* <Reel />
-      <Sparkles
-        noise={6}
-        speed={2}
-        color={"cyan"}
-        position={[0, 10, 0]}
-        count={600}
-        size={10}
-        scale={200}
-      /> */}
-      {/* <mesh position={[0, 350, -200]} scale={750}>
-        <planeGeometry args={[2.22, 1]} />
-        <meshBasicMaterial map={skyTexture} />
-      </mesh> */}
-      <ambientLight />
-
-      {/* <group scale={25} position={[-100, 140, -170]}>
-        <Cloud color={cloudTextureRose} />
-      </group>
-      <group scale={25} position={[-400, 160, -130]}>
-        <Cloud color={cloudTextureBlue} />
-      </group>
-      <group scale={[-25, 25, 25]} position={[300, 160, -110]}>
-        <Cloud color={cloudTextureBlue} />
-      </group> */}
 
       <EffectComposer>
-        <Bloom mipmapBlur radius={0.8} luminanceThreshold={0.6} intensity={6} />
+        <Bloom
+          mipmapBlur
+          radius={0.75}
+          luminanceThreshold={0.3}
+          intensity={2.5}
+        />
       </EffectComposer>
+
+      {/* <OrbitControls /> */}
+
+      <mesh position={[0, -60, 0]} scale={[150, 100, 150]}>
+        <sphereGeometry />
+        <LayerMaterial toneMapped={false} side={THREE.DoubleSide}>
+          <Color color={"black"} />
+        </LayerMaterial>
+      </mesh>
+
+      <Image
+        scale={[10, 20, 1]}
+        transparent
+        position={[0, 8, 50]}
+        url={"/imgs/studi/studi.png"}
+      />
+
+      <fog attach="fog" args={["#8ec3ef", 90, 500]} />
     </>
   );
 };

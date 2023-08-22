@@ -42,6 +42,7 @@ const ReflectiveFloor = (props, ref) => {
           metalness={0.999}
           roughness={0.04}
           mirror={0}
+          // fog={false}
           // normalMap={displacementMap}
           // normalScale={60}
 

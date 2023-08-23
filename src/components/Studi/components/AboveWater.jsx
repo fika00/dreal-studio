@@ -25,7 +25,9 @@ import { useMemo } from "react";
 //* PostProcessing
 import {
   Bloom,
+  ChromaticAberration,
   EffectComposer,
+  Noise,
   Select,
   Selection,
   SelectiveBloom,
@@ -65,38 +67,35 @@ function Ocean() {
 
 const DoorWay = () => {
   const doorRef = useRef();
+  const dur = useRef(2);
+
   useEffect(() => {
-    console.log(doorRef.current.material.color);
-    const animateLoop = () => {
-      const dur = Math.random() / 2;
-      gsap.to(doorRef.current.material.color, {
-        g: 0.9,
-        b: 0.9,
-        duration: dur,
+    const animateLoop = () =>
+      gsap.to(doorRef.current.material, {
+        opacity: 0.6,
+        duration: dur.current,
         ease: "power2.inOut",
 
         onComplete: () => {
-          console.log(doorRef.current.material.color);
-          gsap.to(doorRef.current.material.color, {
-            g: 1,
-            b: 1,
-            duration: dur,
+          gsap.to(doorRef.current.material, {
+            opacity: 1,
+            duration: dur.current,
             ease: "power2.inOut",
 
             onComplete: () => {
+              console.log("alo");
               animateLoop();
             },
           });
         },
       });
-    };
     animateLoop();
   }, []);
   return (
     <group scale={7}>
       <mesh ref={doorRef} scale={2} position={[0, 2, 5]}>
         <planeGeometry args={[1, 2.5]} />
-        <meshStandardMaterial color={"cyan"} />
+        <meshStandardMaterial color={"cyan"} transparent />
         {/* <meshStandardMaterial color={"#b5e1ff"} /> */}
       </mesh>
     </group>
@@ -134,7 +133,7 @@ const Scene = () => {
   );
 };
 
-const AboveWater = () => {
+const AboveWater = ({ isTransitioning }) => {
   const meshTestKurac = useRef();
 
   const loader = new TextureLoader();
@@ -148,7 +147,7 @@ const AboveWater = () => {
     <>
       <Scene />
 
-      <DoorWay />
+      <DoorWay isTransitioning={isTransitioning} />
 
       <EffectComposer>
         <Bloom
@@ -157,6 +156,8 @@ const AboveWater = () => {
           luminanceThreshold={0.3}
           intensity={2.5}
         />
+        <ChromaticAberration offset={[0.0015, 0.0]} />
+        <Noise opacity={0.45} premultiply blendFunction={BlendFunction.ADD} />
       </EffectComposer>
 
       {/* <OrbitControls /> */}
@@ -171,9 +172,11 @@ const AboveWater = () => {
       <Image
         scale={[10, 20, 1]}
         transparent
-        position={[0, 8, 50]}
+        position={[0, 7, 50]}
         url={"/imgs/studi/studi.png"}
       />
+
+      <Stats />
 
       <fog attach="fog" args={["#8ec3ef", 90, 500]} />
     </>

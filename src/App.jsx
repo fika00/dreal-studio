@@ -61,6 +61,7 @@ function App() {
         </Suspense>
         <SectionStevo />
       </Canvas>
+      <Loading name={"Balsa Stevovic"} />
 
       {/* <div
         style={{
@@ -80,8 +81,6 @@ function App() {
           }}
         />
       </div> */}
-
-      {/* <Loading name={"Balsa Ratkovic"} /> */}
     </div>
   );
 }

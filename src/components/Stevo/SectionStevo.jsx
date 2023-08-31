@@ -14,7 +14,10 @@ import {
   Bloom,
   ChromaticAberration,
   EffectComposer,
+  Noise,
+  ToneMapping,
 } from "@react-three/postprocessing";
+import { BlendFunction } from "postprocessing";
 
 const SectionStevo = () => {
   const camRef = useRef();
@@ -33,14 +36,16 @@ const SectionStevo = () => {
         ref={camRef}
       />
       {/* <Environment preset="forest" background={true} /> */}
-      <ambientLight intensity={0.2} />
+      {/* <ambientLight intensity={0.2} /> */}
       {/* <OrbitControls ref={camRef} /> */}
       {/* <mesh position={[0, 1.75]}>
         <planeGeometry />
         <MeshTransmissionMaterial transmission={1} />
       </mesh> */}
       <EffectComposer>
-        <ChromaticAberration />
+        <ToneMapping middleGrey={0.8} />
+
+        <ChromaticAberration offset={[0.001, 0]} />
         <Bloom mipmapBlur luminanceThreshold={0.2} />
       </EffectComposer>
     </>

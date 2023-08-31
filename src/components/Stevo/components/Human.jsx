@@ -6,10 +6,15 @@ import {
   Gltf,
 } from "@react-three/drei";
 import { useLoader, useThree, useFrame } from "@react-three/fiber";
-import { TextureLoader, PMREMGenerator, MeshStandardMaterial } from "three";
+import {
+  TextureLoader,
+  PMREMGenerator,
+  MeshStandardMaterial,
+  MeshBasicMaterial,
+  MeshPhysicalMaterial,
+  FrontSide,
+} from "three";
 import { useEffect } from "react";
-import { MeshBasicMaterial } from "three";
-import { MeshPhysicalMaterial } from "three";
 export function Human(props) {
   const texture = useLoader(TextureLoader, "./models/textures/standard.png");
   const { gl, scene } = useThree();
@@ -20,14 +25,19 @@ export function Human(props) {
   const modelRef = useRef();
   const movingMaterial = new MeshStandardMaterial({
     envMap: envMap,
-    roughness: 0.4,
+    roughness: 0.35,
     metalness: 0.95,
-    envMapIntensity: 1.1,
+    envMapIntensity: 1.75,
     wireframe: true,
+    wireframeLinewidth: 2, // Adjust the line width as needed
+    wireframeLinejoin: "round", // You can also use "miter" or "bevel"
+
+    // side: FrontSide,
     flatShading: false,
 
     onBeforeCompile: (shader) => {
       shader.uniforms.uTime = { value: 0 };
+
       shader.fragmentShader =
         `
           uniform float uTime;
@@ -42,17 +52,22 @@ export function Human(props) {
                         oc * axis.z * axis.x - axis.y * s,  oc * axis.y * axis.z + axis.x * s,  oc * axis.z * axis.z + c,           0.0,
                         0.0,                                0.0,                                0.0,                                1.0);
             }
+
+
         
         vec3 rotate(vec3 v, vec3 axis, float angle) {
           mat4 m = rotationMatrix(axis, angle);
           return (m * vec4(v, 1.0)).xyz;
         }
+
           ` + shader.fragmentShader;
 
       shader.fragmentShader = shader.fragmentShader.replace(
         `#include <envmap_physical_pars_fragment>`,
         `
+       
             #ifdef USE_ENVMAP
+            
     
         vec3 getIBLIrradiance( const in vec3 normal ) {
     
@@ -121,7 +136,14 @@ export function Human(props) {
         #endif
     
     #endif
+
             `
+      );
+
+      shader.fragmentShader = shader.fragmentShader.replace(
+        `void main() {`,
+        `void main() {
+        if (gl_FrontFacing == false) discard;`
       );
 
       movingMaterial.userData.shader = shader;
@@ -135,6 +157,7 @@ export function Human(props) {
   useEffect(() => {
     actions.rigAction.setDuration(20);
     actions.rigAction.play();
+    console.log(modelRef.current.material);
   }, []);
   useFrame(() => {
     try {

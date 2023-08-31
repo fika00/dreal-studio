@@ -14,34 +14,49 @@ import {
   Bloom,
   ChromaticAberration,
   EffectComposer,
+  HueSaturation,
   Noise,
   ToneMapping,
 } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
+import { useFrame, useThree } from "@react-three/fiber";
 
 const SectionStevo = () => {
   const camRef = useRef();
+  const camPivotRef = useRef();
+  const { viewport } = useThree();
 
-  // Pos [-0.1392253293947678, 1.7273744574056682, 0.8768709132966818]
-  // Rot [-0.06951343677661365, -0.20374088233570883, -0.014086715337174295]
+  // useEffect(()=>{
+
+  // })
+  useFrame(({ mouse }) => {
+    // Define the rotation speed (adjust this value as needed)
+    const rotationSpeed = 0.5;
+
+    // Calculate the target rotation based on the mouse input
+    const targetRotationY = (mouse.x / 4) * rotationSpeed;
+    const targetRotationX = (mouse.y / 4) * rotationSpeed * -1;
+
+    // Smoothly interpolate the current rotation towards the target rotation
+    camPivotRef.current.rotation.y +=
+      (targetRotationY - camPivotRef.current.rotation.y) * 0.01;
+    camPivotRef.current.rotation.x +=
+      (targetRotationX - camPivotRef.current.rotation.x) * 0.01;
+  });
 
   return (
     <>
       <Human />
-      <PerspectiveCamera
-        position={[-0.14, 1.73, 0.88]}
-        rotation={[-0.07, -0.204, -0.014]}
-        fov={50}
-        makeDefault
-        ref={camRef}
-      />
-      {/* <Environment preset="forest" background={true} /> */}
-      {/* <ambientLight intensity={0.2} /> */}
-      {/* <OrbitControls ref={camRef} /> */}
-      {/* <mesh position={[0, 1.75]}>
-        <planeGeometry />
-        <MeshTransmissionMaterial transmission={1} />
-      </mesh> */}
+      <group ref={camPivotRef} position={[0, 1.73, 0]}>
+        <PerspectiveCamera
+          position={[-0.14, 0, 0.88]}
+          rotation={[-0.07, -0.204, -0.014]}
+          fov={50}
+          makeDefault
+          ref={camRef}
+        />
+      </group>
+
       <EffectComposer>
         <ToneMapping middleGrey={0.8} />
 

@@ -10,6 +10,7 @@ import Loading from "./components/Loading/Loading";
 import Bridge from "./components/Studi/components/Bridge";
 import DiveIcon from "/icons/chevron-down-sharp.svg";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
+import SectionStevo from "./components/Stevo/SectionStevo";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -44,7 +45,7 @@ function App() {
           {/* <LandingPage isPhone={false} /> */}
           {/* <SectionFilip /> */}
 
-          <SectionStudi ref={studiRef} />
+          {/* <SectionStudi ref={studiRef} /> */}
 
           {/* <Bridge callBackFunc={handleDone()}/> */}
           {/* <ScrollControls
@@ -58,9 +59,10 @@ function App() {
 
           {/* <LoadingAnimation /> */}
         </Suspense>
+        <SectionStevo />
       </Canvas>
 
-      <div
+      {/* <div
         style={{
           position: "absolute",
           bottom: 0,
@@ -77,7 +79,7 @@ function App() {
             color: "white",
           }}
         />
-      </div>
+      </div> */}
 
       {/* <Loading name={"Balsa Ratkovic"} /> */}
     </div>

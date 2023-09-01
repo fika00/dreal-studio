@@ -181,7 +181,7 @@ const Eye = (props, ref) => {
     envMap: envMap,
     roughness: 0.2,
     metalness: 0.65,
-    envMapIntensity: 0.5,
+    envMapIntensity: 0.75,
 
     flatShading: false,
     // wireframe: true,

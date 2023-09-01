@@ -31,17 +31,19 @@ const Triangle2 = forwardRef((props, ref) => {
   const triangle_pattern_texture = loader.load(triangle_pattern);
 
   useFrame(() => {
-    triangleRef.current.rotation.y += 0.005;
+    if (triangleRef.current != null) {
+      triangleRef.current.rotation.y += 0.005;
 
-    triangleRef.current.material.uniforms.uTime.value += 0.005;
-    triangleRef.current.material.uniforms.uTimePattern.value += 0.005;
+      triangleRef.current.material.uniforms.uTime.value += 0.005;
+      triangleRef.current.material.uniforms.uTimePattern.value += 0.005;
 
-    // if (triangleRef.current.material.uniforms.uTimePattern.value >= 1) {
-    //   triangleRef.current.material.uniforms.uTimePattern.value = 0.0;
-    // }
-    if (props.isMain) {
-      triangleRef.current.material.uniforms.uScroll.value =
-        scroll.offset * 0.75;
+      // if (triangleRef.current.material.uniforms.uTimePattern.value >= 1) {
+      //   triangleRef.current.material.uniforms.uTimePattern.value = 0.0;
+      // }
+      if (props.isMain) {
+        triangleRef.current.material.uniforms.uScroll.value =
+          scroll.offset * 0.75;
+      }
     }
   });
 

@@ -26,6 +26,7 @@ import { MeshBasicMaterial } from "three";
 import logo from "/imgs/logo.svg";
 import { gsap } from "gsap";
 import ShootingStar from "./ShootingStar";
+import Loading from "./Loading/Loading";
 
 const LandingPage = ({ isPhone }) => {
   const EyeRef = useRef();
@@ -110,8 +111,9 @@ const LandingPage = ({ isPhone }) => {
           <ToneMapping middleGrey={0.6} />
           <Noise premultiply blendFunction={BlendFunction.ADD} />
           <Bloom
+            // mipmapBlur
             intensity={0.9}
-            luminanceThreshold={0.2}
+            luminanceThreshold={0.4}
             kernelSize={KernelSize.VERY_LARGE}
           />
         </EffectComposer>
@@ -128,6 +130,7 @@ const LandingPage = ({ isPhone }) => {
       <div className="navbar">
         <img src={logo} alt="" className="logo" />
       </div>
+      <Loading name={"Dreal Studio"} />
     </div>
   );
 };

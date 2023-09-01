@@ -1,5 +1,5 @@
 import { Suspense, useRef, useState } from "react";
-// import LandingPage from "./components/LandingPage";
+import LandingPage from "./components/LandingPage";
 // import SectionFilip from "./components/SectionFilip";
 // import LoadingAnimation from "./components/LoadingAnimation/LoadingAnimation";
 import SectionStudi from "./components/Studi/SectionStudi";
@@ -9,8 +9,10 @@ import { Html, ScrollControls } from "@react-three/drei";
 import Loading from "./components/Loading/Loading";
 import Bridge from "./components/Studi/components/Bridge";
 import DiveIcon from "/icons/chevron-down-sharp.svg";
-import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import SectionStevo from "./components/Stevo/SectionStevo";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import MenuDropDown from "./components/MenuDropDown/MenuDropDown";
+import "./App.css";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -40,47 +42,28 @@ function App() {
         backgroundColor: "black",
       }}
     >
-      <Canvas>
-        <Suspense fallback={null}>
-          {/* <LandingPage isPhone={false} /> */}
-          {/* <SectionFilip /> */}
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<LandingPage isPhone={false} />} />
+          <Route path="/studi" element={<SectionStudi />} />
+          <Route path="/stevo" element={<SectionStevo />} />
+          <Route path="/baki" element={<SectionBalsa />} />
 
-          {/* <SectionStudi ref={studiRef} /> */}
+          {/* <Route path="/contact" component={Contact} /> */}
+        </Routes>
+      </Router>
+      <div className="dropdown">
+        <MenuDropDown />
+      </div>
 
-          {/* <Bridge callBackFunc={handleDone()}/> */}
-          {/* <ScrollControls
-            pages={2}
-            style={{
-              opacity: 0,
-            }}
-          >
-            <SectionBalsa isPhone={isPhone()} />
-          </ScrollControls> */}
+      {/* <SectionFilip /> */}
 
-          {/* <LoadingAnimation /> */}
-        </Suspense>
-        <SectionStevo />
-      </Canvas>
-      <Loading name={"Balsa Stevovic"} />
+      {/* <Bridge callBackFunc={handleDone()}/> */}
 
-      {/* <div
-        style={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          // backgroundColor: "wheat",
-          padding: "10px",
-          cursor: "pointer",
-        }}
-        onClick={() => studiRef.current.dive()}
-      >
-        <ChevronDownIcon
-          width={40}
-          style={{
-            color: "white",
-          }}
-        />
-      </div> */}
+      {/* <LoadingAnimation /> */}
+      {/* </Suspense> */}
+      {/* <SectionStevo /> */}
+      {/* </Canvas> */}
     </div>
   );
 }

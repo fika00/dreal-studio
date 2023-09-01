@@ -5,6 +5,7 @@ import {
   MeshTransmissionMaterial,
   OrbitControls,
   PerspectiveCamera,
+  Stats,
 } from "@react-three/drei";
 import Human from "./components/Human";
 import { useRef } from "react";
@@ -16,8 +17,11 @@ import {
   EffectComposer,
   Noise,
   ToneMapping,
+  HueSaturation,
 } from "@react-three/postprocessing";
+import { Canvas } from "@react-three/fiber";
 import { BlendFunction } from "postprocessing";
+import Loading from "../Loading/Loading";
 
 const SectionStevo = () => {
   const camRef = useRef();
@@ -27,27 +31,24 @@ const SectionStevo = () => {
 
   return (
     <>
-      <Human />
-      <PerspectiveCamera
-        position={[-0.14, 1.73, 0.88]}
-        rotation={[-0.07, -0.204, -0.014]}
-        fov={50}
-        makeDefault
-        ref={camRef}
-      />
-      {/* <Environment preset="forest" background={true} /> */}
-      {/* <ambientLight intensity={0.2} /> */}
-      {/* <OrbitControls ref={camRef} /> */}
-      {/* <mesh position={[0, 1.75]}>
-        <planeGeometry />
-        <MeshTransmissionMaterial transmission={1} />
-      </mesh> */}
-      <EffectComposer>
-        <ToneMapping middleGrey={0.8} />
+      <Canvas>
+        <Human />
+        <PerspectiveCamera
+          position={[-0.14, 1.73, 0.88]}
+          rotation={[-0.07, -0.204, -0.014]}
+          fov={50}
+          makeDefault
+          ref={camRef}
+        />
 
-        <ChromaticAberration offset={[0.001, 0]} />
-        <Bloom mipmapBlur luminanceThreshold={0.2} />
-      </EffectComposer>
+        <EffectComposer>
+          <ToneMapping middleGrey={0.8} />
+          <ChromaticAberration offset={[0.001, 0]} />
+          <Bloom mipmapBlur intensity={3.5} luminanceThreshold={0.5} />
+        </EffectComposer>
+        <Stats />
+      </Canvas>
+      <Loading name={"Balsa Stevovic"} />
     </>
   );
 };

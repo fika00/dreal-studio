@@ -1,0 +1,35 @@
+@keyframes appear {
+  0% {
+    transform: translateY(-50%);
+    filter: blur(4px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    filter: blur(0px);
+    opacity: 1;
+  }
+}
+
+.menu-item {
+  font-family: "Montserrat", sans-serif;
+  text-decoration: none;
+  color: white;
+  text-align: center;
+
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+.menu-list-cont {
+  position: absolute;
+  width: 300px;
+  top: 30px;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+
+  animation: appear 0.75s ease-out;
+}
+.in-progress {
+  color: rgb(150, 150, 150);
+}

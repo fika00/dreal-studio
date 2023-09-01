@@ -2,10 +2,13 @@ import { Html, PerspectiveCamera } from "@react-three/drei";
 // import { PerspectiveCamera } from "@react-three/fiber";
 import AboveWater from "./components/AboveWater";
 import BelowWater from "./components/BelowWater";
+import { Canvas } from "@react-three/fiber";
 import { gsap } from "gsap";
 import { Suspense, useEffect, useRef, useState } from "react";
 import Bridge from "./components/Bridge";
 import { useImperativeHandle, forwardRef } from "react";
+import Loading from "../Loading/Loading";
+import { ChevronDownIcon } from "@heroicons/react/24/solid";
 
 const SectionStudi = (props, ref) => {
   const camRef = useRef();
@@ -61,7 +64,8 @@ const SectionStudi = (props, ref) => {
 
   return (
     <>
-      {/* <Html
+      <Canvas>
+        {/* <Html
         style={{
           opacity: 1,
         }}
@@ -77,28 +81,47 @@ const SectionStudi = (props, ref) => {
           <button onClick={emerge}>Emerge</button>
         </div>
       </Html> */}
-      {/* <AboveWater /> */}
+        {/* <AboveWater /> */}
 
-      {isAbove ? (
-        <Suspense fallback={null}>
-          <BelowWater />
-        </Suspense>
-      ) : (
-        <Suspense fallback={null}>
-          <AboveWater />
-        </Suspense>
-      )}
+        {isAbove ? (
+          <Suspense fallback={null}>
+            <BelowWater />
+          </Suspense>
+        ) : (
+          <Suspense fallback={null}>
+            <AboveWater />
+          </Suspense>
+        )}
 
-      {/* <Bridge callBackFunc={show} /> */}
+        {/* <Bridge callBackFunc={show} /> */}
 
-      <PerspectiveCamera
-        makeDefault
-        position={[0, 10, 75]}
-        fov={90}
-        near={0.1}
-        ref={camRef}
-        exposure={2}
-      />
+        <PerspectiveCamera
+          makeDefault
+          position={[0, 10, 75]}
+          fov={90}
+          near={0.1}
+          ref={camRef}
+          exposure={2}
+        />
+      </Canvas>
+      <div
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          padding: "10px",
+          cursor: "pointer",
+        }}
+        onClick={() => dive()}
+      >
+        <ChevronDownIcon
+          width={40}
+          style={{
+            color: "white",
+          }}
+        />
+      </div>
+      <Loading name={"Nemanja Studovic"} />
     </>
   );
 };

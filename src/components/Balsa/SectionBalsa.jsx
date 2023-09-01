@@ -80,14 +80,6 @@ const SectionBalsa = ({ isPhone }) => {
   const degToRad = (deg) => {
     return deg * 0.0174533;
   };
-  // const { focusDistance } = useControls({
-  //   focusDistance: {
-  //     min: 0,
-  //     max: 0.1,
-  //     value: 2,
-  //     step: 0.0001,
-  //   },
-  // });
 
   const generateRandomXY = () => {
     waveRef.current.resetWave();
@@ -180,125 +172,124 @@ const SectionBalsa = ({ isPhone }) => {
   }, []);
 
   const scroll = useScroll();
-  useFrame(() => {
-    if (camRef?.current?.position?.z != null) {
-      camRef.current.position.z = -scroll.offset * 5 + 5;
-      // console.log(camRef.current.position.z);
-      if (camRef.current.position.z < 0.3) {
-        bgColorRef.current.material.color = new Color("black");
-      } else {
-        bgColorRef.current.material.color = new Color("white");
-      }
-      if (camRef.current.position.z <= 0.1) {
-        if (!hasAppeared.current) {
-          // content1Ref.current.handleAppear();
-          // content2Ref.current.handleAppear();
-          floorRef.current.handleShow();
-          hasAppeared.current = true;
-          meshRefs.current.forEach((el) => {
-            el.ref.handleAppear();
-          });
-        }
-      } else {
-        hasAppeared.current = false;
-        // content1Ref.current.handleHide();
-        // content2Ref.current.handleHide();
-        meshRefs.current.forEach((el) => {
-          el.ref.handleHide();
-        });
-        floorRef.current.handleHide();
-      }
-    }
-  });
+
+  // useFrame(() => {
+  //   if (camRef?.current?.position?.z != null) {
+  //     camRef.current.position.z = -scroll.offset * 5 + 5;
+  //     // console.log(camRef.current.position.z);
+  //     if (camRef.current.position.z < 0.3) {
+  //       bgColorRef.current.material.color = new Color("black");
+  //     } else {
+  //       bgColorRef.current.material.color = new Color("white");
+  //     }
+  //     if (camRef.current.position.z <= 0.1) {
+  //       if (!hasAppeared.current) {
+  //         floorRef.current.handleShow();
+  //         hasAppeared.current = true;
+  //         meshRefs.current.forEach((el) => {
+  //           el.ref.handleAppear();
+  //         });
+  //       }
+  //     } else {
+  //       hasAppeared.current = false;
+
+  //       meshRefs.current.forEach((el) => {
+  //         el.ref.handleHide();
+  //       });
+  //       floorRef.current.handleHide();
+  //     }
+  //   }
+  // });
+
   // DA DA
 
   return (
     <>
-      {/* <fog attach="fog" color="gray" near={10} far={50} /> */}
-      <WireframeWave ref={waveRef} />
-
-      {/* PARTICLE */}
-      <Trail
-        width={0.5} // Width of the line
-        color={"black"} // Color of the line
-        attenuation={(width) => width} // A function to define the width in each point along it.
-        target={particleRef}
-      />
-      <mesh scale={0.01} position={[0, -9, 0]} ref={particleRef}>
-        <sphereGeometry />
-        <meshBasicMaterial color={"black"} />
-      </mesh>
-
-      <mesh scale={150} ref={bgColorRef}>
-        <sphereGeometry />
-        <meshBasicMaterial side={DoubleSide} color={"white"} />
-      </mesh>
-
-      {triangleElements}
-      <group scale={0.3} position={[0, 0, 4.85]}>
-        <group scale={[-1, 1, 1]} position={[dist, 0, 0]}>
-          <BalsaOutline />
-        </group>
-        <group position={[-dist, 0, 0]}>
-          <BalsaOutline />
-        </group>
-      </group>
-      <Sparkles
-        position={[0, 0, 3]}
-        speed={0.05}
-        count={300}
-        scale={3}
-        size={0.8}
-        color={"black"}
-        opacity={0.4}
-      />
-
-      <Triangle2
-        isMain={true}
-        img={"image0.jpg"}
-        triangleScale={isPhone ? 1 : 2}
-        opacity={1.0}
-      />
-      {images.map((element, index) => {
-        meshRefs.current[index] = meshRefs.current[index] || {}; // Initialize the ref if it doesn't exist
-
-        return (
-          <group
-            // ref={(mesh) => (meshRefs.current[index].ref = mesh)}
-            key={`slide-${index} `}
-          >
-            <ContentPlane
-              pos={[-2 + index * 1.5, 0, Math.random() * 1.5 - 3]}
-              ind={index}
-              ref={(mesh) => (meshRefs.current[index].ref = mesh)}
-              image={element}
-            />
-          </group>
-        );
-      })}
-
-      <ambientLight />
-
-      <group position={[0, 0.5, 0]}>
-        <ReflectiveFloor ref={floorRef} />
-      </group>
-
-      <PerspectiveCamera
-        ref={camRef}
-        makeDefault
-        position={[0, 0, 5]}
-        fov={75}
-        near={0.01}
-      />
-      {/* <Environment preset="dawn" /> */}
-
-      {/* <EffectComposer>
-          <ChromaticAberration
-            offset={[0.0005, 0.0]} // color offset
+      <Canvas>
+        <ScrollControls
+          pages={2}
+          style={{
+            opacity: 0,
+          }}
+        >
+          <WireframeWave ref={waveRef} />
+          <PerspectiveCamera
+            ref={camRef}
+            makeDefault
+            position={[0, 0, 5]}
+            fov={75}
+            near={0.01}
           />
-        </EffectComposer> */}
-      {/* <OrbitControls /> */}
-      <Stats />
+          {/* PARTICLE */}
+          <Trail
+            width={0.5} // Width of the line
+            color={"black"} // Color of the line
+            attenuation={(width) => width} // A function to define the width in each point along it.
+            target={particleRef}
+          />
+          <mesh scale={0.01} position={[0, -9, 0]} ref={particleRef}>
+            <sphereGeometry />
+            <meshBasicMaterial color={"black"} />
+          </mesh>
+
+          <mesh scale={150} ref={bgColorRef}>
+            <sphereGeometry />
+            <meshBasicMaterial side={DoubleSide} color={"white"} />
+          </mesh>
+
+          {triangleElements}
+          <group scale={0.3} position={[0, 0, 4.85]}>
+            <group scale={[-1, 1, 1]} position={[dist, 0, 0]}>
+              <BalsaOutline />
+            </group>
+            <group position={[-dist, 0, 0]}>
+              <BalsaOutline />
+            </group>
+          </group>
+          <Sparkles
+            position={[0, 0, 3]}
+            speed={0.05}
+            count={300}
+            scale={3}
+            size={0.8}
+            color={"black"}
+            opacity={0.4}
+          />
+
+          <Triangle2
+            isMain={true}
+            img={"image0.jpg"}
+            triangleScale={isPhone ? 1 : 2}
+            opacity={1.0}
+          />
+          {images.map((element, index) => {
+            meshRefs.current[index] = meshRefs.current[index] || {}; // Initialize the ref if it doesn't exist
+
+            return (
+              <group
+                // ref={(mesh) => (meshRefs.current[index].ref = mesh)}
+                key={`slide-${index} `}
+              >
+                <ContentPlane
+                  pos={[-2 + index * 1.5, 0, Math.random() * 1.5 - 3]}
+                  ind={index}
+                  ref={(mesh) => (meshRefs.current[index].ref = mesh)}
+                  image={element}
+                />
+              </group>
+            );
+          })}
+
+          <ambientLight />
+
+          <group position={[0, 0.5, 0]}>
+            <ReflectiveFloor ref={floorRef} />
+          </group>
+
+          <Stats />
+        </ScrollControls>
+      </Canvas>
+      <Loading name={"Balsa Ratkovic"} />
     </>
   );
 };

@@ -58,6 +58,25 @@ import img6 from "/imgs/balsa/content/image6.jpg";
 // const Triangle2 = lazy(() => import("./components/Triangle2"));
 
 const SectionBalsa = ({ isPhone }) => {
+  return (
+    <>
+      <Canvas>
+        <ScrollControls
+          pages={3}
+          style={{
+            opacity: 0,
+          }}
+          damping={0.4}
+        >
+          <Scene />
+        </ScrollControls>
+      </Canvas>
+      <Loading name={"Balsa Ratkovic"} />
+    </>
+  );
+};
+
+const Scene = (isPhone) => {
   const waveRef = useRef();
   const particleRef = useRef();
   const camRef = useRef();
@@ -173,123 +192,112 @@ const SectionBalsa = ({ isPhone }) => {
 
   const scroll = useScroll();
 
-  // useFrame(() => {
-  //   if (camRef?.current?.position?.z != null) {
-  //     camRef.current.position.z = -scroll.offset * 5 + 5;
-  //     // console.log(camRef.current.position.z);
-  //     if (camRef.current.position.z < 0.3) {
-  //       bgColorRef.current.material.color = new Color("black");
-  //     } else {
-  //       bgColorRef.current.material.color = new Color("white");
-  //     }
-  //     if (camRef.current.position.z <= 0.1) {
-  //       if (!hasAppeared.current) {
-  //         floorRef.current.handleShow();
-  //         hasAppeared.current = true;
-  //         meshRefs.current.forEach((el) => {
-  //           el.ref.handleAppear();
-  //         });
-  //       }
-  //     } else {
-  //       hasAppeared.current = false;
+  useFrame(() => {
+    if (camRef?.current?.position?.z != null) {
+      camRef.current.position.z = -scroll.offset * 5 + 5;
+      if (camRef.current.position.z < 0.3) {
+        bgColorRef.current.material.color = new Color("black");
+      } else {
+        bgColorRef.current.material.color = new Color("white");
+      }
+      if (camRef.current.position.z <= 0.1) {
+        if (!hasAppeared.current) {
+          floorRef.current.handleShow();
+          hasAppeared.current = true;
+          meshRefs.current.forEach((el) => {
+            el.ref.handleAppear();
+          });
+        }
+      } else {
+        hasAppeared.current = false;
 
-  //       meshRefs.current.forEach((el) => {
-  //         el.ref.handleHide();
-  //       });
-  //       floorRef.current.handleHide();
-  //     }
-  //   }
-  // });
+        meshRefs.current.forEach((el) => {
+          el.ref.handleHide();
+        });
+        floorRef.current.handleHide();
+      }
+    }
+  });
 
   // DA DA
 
   return (
     <>
-      <Canvas>
-        <ScrollControls
-          pages={2}
-          style={{
-            opacity: 0,
-          }}
-        >
-          <WireframeWave ref={waveRef} />
-          <PerspectiveCamera
-            ref={camRef}
-            makeDefault
-            position={[0, 0, 5]}
-            fov={75}
-            near={0.01}
-          />
-          {/* PARTICLE */}
-          <Trail
-            width={0.5} // Width of the line
-            color={"black"} // Color of the line
-            attenuation={(width) => width} // A function to define the width in each point along it.
-            target={particleRef}
-          />
-          <mesh scale={0.01} position={[0, -9, 0]} ref={particleRef}>
-            <sphereGeometry />
-            <meshBasicMaterial color={"black"} />
-          </mesh>
+      <WireframeWave ref={waveRef} />
+      <PerspectiveCamera
+        ref={camRef}
+        makeDefault
+        position={[0, 0, 5]}
+        fov={75}
+        near={0.01}
+      />
+      {/* PARTICLE */}
+      <Trail
+        width={0.5} // Width of the line
+        color={"black"} // Color of the line
+        attenuation={(width) => width} // A function to define the width in each point along it.
+        target={particleRef}
+      />
+      <mesh scale={0.01} position={[0, -9, 0]} ref={particleRef}>
+        <sphereGeometry />
+        <meshBasicMaterial color={"black"} />
+      </mesh>
 
-          <mesh scale={150} ref={bgColorRef}>
-            <sphereGeometry />
-            <meshBasicMaterial side={DoubleSide} color={"white"} />
-          </mesh>
+      <mesh scale={150} ref={bgColorRef}>
+        <sphereGeometry />
+        <meshBasicMaterial side={DoubleSide} color={"white"} />
+      </mesh>
 
-          {triangleElements}
-          <group scale={0.3} position={[0, 0, 4.85]}>
-            <group scale={[-1, 1, 1]} position={[dist, 0, 0]}>
-              <BalsaOutline />
-            </group>
-            <group position={[-dist, 0, 0]}>
-              <BalsaOutline />
-            </group>
+      {triangleElements}
+      <group scale={0.3} position={[0, 0, 4.85]}>
+        <group scale={[-1, 1, 1]} position={[dist, 0, 0]}>
+          <BalsaOutline />
+        </group>
+        <group position={[-dist, 0, 0]}>
+          <BalsaOutline />
+        </group>
+      </group>
+      <Sparkles
+        position={[0, 0, 3]}
+        speed={0.05}
+        count={300}
+        scale={3}
+        size={0.8}
+        color={"black"}
+        opacity={0.4}
+      />
+
+      <Triangle2
+        isMain={true}
+        img={"image0.jpg"}
+        triangleScale={isPhone ? 1 : 2}
+        opacity={1.0}
+      />
+      {images.map((element, index) => {
+        meshRefs.current[index] = meshRefs.current[index] || {}; // Initialize the ref if it doesn't exist
+
+        return (
+          <group
+            // ref={(mesh) => (meshRefs.current[index].ref = mesh)}
+            key={`slide-${index} `}
+          >
+            <ContentPlane
+              pos={[-2 + index * 1.5, 0, Math.random() * 1.5 - 3]}
+              ind={index}
+              ref={(mesh) => (meshRefs.current[index].ref = mesh)}
+              image={element}
+            />
           </group>
-          <Sparkles
-            position={[0, 0, 3]}
-            speed={0.05}
-            count={300}
-            scale={3}
-            size={0.8}
-            color={"black"}
-            opacity={0.4}
-          />
+        );
+      })}
 
-          <Triangle2
-            isMain={true}
-            img={"image0.jpg"}
-            triangleScale={isPhone ? 1 : 2}
-            opacity={1.0}
-          />
-          {images.map((element, index) => {
-            meshRefs.current[index] = meshRefs.current[index] || {}; // Initialize the ref if it doesn't exist
+      <ambientLight />
 
-            return (
-              <group
-                // ref={(mesh) => (meshRefs.current[index].ref = mesh)}
-                key={`slide-${index} `}
-              >
-                <ContentPlane
-                  pos={[-2 + index * 1.5, 0, Math.random() * 1.5 - 3]}
-                  ind={index}
-                  ref={(mesh) => (meshRefs.current[index].ref = mesh)}
-                  image={element}
-                />
-              </group>
-            );
-          })}
+      <group position={[0, 0.5, 0]}>
+        <ReflectiveFloor ref={floorRef} />
+      </group>
 
-          <ambientLight />
-
-          <group position={[0, 0.5, 0]}>
-            <ReflectiveFloor ref={floorRef} />
-          </group>
-
-          <Stats />
-        </ScrollControls>
-      </Canvas>
-      <Loading name={"Balsa Ratkovic"} />
+      {/* <Stats /> */}
     </>
   );
 };

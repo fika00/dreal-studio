@@ -176,7 +176,7 @@ const AboveWater = ({ isTransitioning }) => {
         url={"/imgs/studi/studi.png"}
       />
 
-      <Stats />
+      {/* <Stats /> */}
 
       <fog attach="fog" args={["#8ec3ef", 90, 500]} />
     </>

@@ -18,20 +18,16 @@ import {
   HueSaturation,
   Noise,
   ToneMapping,
-  HueSaturation,
 } from "@react-three/postprocessing";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import { BlendFunction } from "postprocessing";
 import Loading from "../Loading/Loading";
 
-const SectionStevo = () => {
+const Scene = () => {
   const camRef = useRef();
   const camPivotRef = useRef();
   const { viewport } = useThree();
 
-  // useEffect(()=>{
-
-  // })
   useFrame(({ mouse }) => {
     // Define the rotation speed (adjust this value as needed)
     const rotationSpeed = 0.5;
@@ -50,26 +46,30 @@ const SectionStevo = () => {
   return (
     <>
       <Human />
-      <PerspectiveCamera
-        position={[-0.14, 1.73, 0.88]}
-        rotation={[-0.07, -0.204, -0.014]}
-        fov={50}
-        makeDefault
-        ref={camRef}
-      />
-      {/* <Environment preset="forest" background={true} /> */}
-      {/* <ambientLight intensity={0.2} /> */}
-      {/* <OrbitControls ref={camRef} /> */}
-      {/* <mesh position={[0, 1.75]}>
-        <planeGeometry />
-        <MeshTransmissionMaterial transmission={1} />
-      </mesh> */}
-      <EffectComposer>
-        <ToneMapping middleGrey={0.8} />
+      <group ref={camPivotRef} position={[0, 1.73, 0]}>
+        <PerspectiveCamera
+          position={[-0.14, 0, 0.88]}
+          rotation={[-0.07, -0.204, -0.014]}
+          fov={50}
+          makeDefault
+          ref={camRef}
+        />
+      </group>
+    </>
+  );
+};
+const SectionStevo = () => {
+  return (
+    <>
+      <Canvas>
+        <Scene />
+        <EffectComposer>
+          <ToneMapping middleGrey={0.8} />
 
-        <ChromaticAberration offset={[0.001, 0]} />
-        <Bloom mipmapBlur luminanceThreshold={0.2} />
-      </EffectComposer>
+          <ChromaticAberration offset={[0.001, 0]} />
+          <Bloom mipmapBlur luminanceThreshold={0.2} />
+        </EffectComposer>
+      </Canvas>
     </>
   );
 };

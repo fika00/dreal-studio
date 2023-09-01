@@ -70,6 +70,7 @@ const SectionStevo = () => {
           <Bloom mipmapBlur luminanceThreshold={0.2} />
         </EffectComposer>
       </Canvas>
+      <Loading name={"Balsa Stevovic"} />
     </>
   );
 };

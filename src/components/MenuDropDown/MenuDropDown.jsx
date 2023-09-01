@@ -1,5 +1,6 @@
 import { Menu } from "@headlessui/react";
 import "./MenuDropDown.css";
+import { Link, Router } from "react-router-dom";
 const MenuDropDown = () => {
   return (
     <Menu>
@@ -7,42 +8,42 @@ const MenuDropDown = () => {
       <Menu.Items className={"menu-list-cont"}>
         <Menu.Item>
           {({ active }) => (
-            <a
+            <Link
+              to="/"
               className={`${active ? "menu-item active-item" : "menu-item"}`}
-              href="/"
             >
               Landing
-            </a>
+            </Link>
           )}
         </Menu.Item>
         <Menu.Item>
           {({ active }) => (
-            <a
+            <Link
+              to="/studi"
               className={`${active ? "menu-item active-item" : "menu-item"}`}
-              href="/studi"
             >
               Nemanja Studovic
-            </a>
+            </Link>
           )}
         </Menu.Item>
         <Menu.Item>
           {({ active }) => (
-            <a
+            <Link
+              to="/stevo"
               className={`${active ? "menu-item active-item" : "menu-item"}`}
-              href="/stevo"
             >
               Balsa Stevovic
-            </a>
+            </Link>
           )}
         </Menu.Item>
         <Menu.Item>
           {({ active }) => (
-            <a
+            <Link
+              to="/baki"
               className={`${active ? "menu-item active-item" : "menu-item"}`}
-              href="/baki"
             >
               Balsa Ratkovic
-            </a>
+            </Link>
           )}
         </Menu.Item>
         <Menu.Item disabled>

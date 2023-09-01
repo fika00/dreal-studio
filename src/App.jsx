@@ -10,7 +10,7 @@ import Loading from "./components/Loading/Loading";
 import Bridge from "./components/Studi/components/Bridge";
 import DiveIcon from "/icons/chevron-down-sharp.svg";
 import SectionStevo from "./components/Stevo/SectionStevo";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import MenuDropDown from "./components/MenuDropDown/MenuDropDown";
 import "./App.css";
 
@@ -34,15 +34,15 @@ function App() {
   };
   const isPhoneProp = isPhone();
   return (
-    <div
-      className="wholepage"
-      style={{
-        width: screenSize.width,
-        height: screenSize.height,
-        backgroundColor: "black",
-      }}
-    >
-      <Router>
+    <Router>
+      <div
+        className="wholepage"
+        style={{
+          width: screenSize.width,
+          height: screenSize.height,
+          backgroundColor: "black",
+        }}
+      >
         <Routes>
           <Route exact path="/" element={<LandingPage isPhone={false} />} />
           <Route path="/studi" element={<SectionStudi />} />
@@ -51,20 +51,20 @@ function App() {
 
           {/* <Route path="/contact" component={Contact} /> */}
         </Routes>
-      </Router>
-      <div className="dropdown">
-        <MenuDropDown />
+        <div className="dropdown">
+          <MenuDropDown />
+        </div>
+
+        {/* <SectionFilip /> */}
+
+        {/* <Bridge callBackFunc={handleDone()}/> */}
+
+        {/* <LoadingAnimation /> */}
+        {/* </Suspense> */}
+        {/* <SectionStevo /> */}
+        {/* </Canvas> */}
       </div>
-
-      {/* <SectionFilip /> */}
-
-      {/* <Bridge callBackFunc={handleDone()}/> */}
-
-      {/* <LoadingAnimation /> */}
-      {/* </Suspense> */}
-      {/* <SectionStevo /> */}
-      {/* </Canvas> */}
-    </div>
+    </Router>
   );
 }
 

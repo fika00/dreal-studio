@@ -30,11 +30,11 @@ const Scene = () => {
 
   useFrame(({ mouse }) => {
     // Define the rotation speed (adjust this value as needed)
-    const rotationSpeed = 0.5;
+    const rotationSpeed = 0.4;
 
     // Calculate the target rotation based on the mouse input
-    const targetRotationY = (mouse.x / 4) * rotationSpeed;
-    const targetRotationX = (mouse.y / 4) * rotationSpeed * -1;
+    const targetRotationY = (mouse.x / 3) * rotationSpeed;
+    const targetRotationX = (mouse.y / 3) * rotationSpeed * -1;
 
     // Smoothly interpolate the current rotation towards the target rotation
     camPivotRef.current.rotation.y +=

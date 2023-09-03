@@ -23,7 +23,7 @@ import Background from "./Background";
 import TextTransitionSlide from "./TextTransitionSlide";
 import { BlendFunction, KernelSize } from "postprocessing";
 import { MeshBasicMaterial } from "three";
-import logo from "/imgs/logo.svg";
+import logo from "/imgs/logo_fresh.svg";
 import { gsap } from "gsap";
 import ShootingStar from "./ShootingStar";
 import Loading from "./Loading/Loading";

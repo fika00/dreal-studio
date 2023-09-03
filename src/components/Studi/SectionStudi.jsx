@@ -47,7 +47,14 @@ const SectionStudi = () => {
       },
     });
   };
-
+  const initiateEmerge = () => {
+    if (
+      camRef?.current?.position != null &&
+      camRef?.current?.position != undefined
+    ) {
+      emerge();
+    }
+  };
   const emerge = () => {
     gsap.to(camRef.current.position, {
       y: 10,
@@ -140,7 +147,7 @@ const SectionStudi = () => {
           onClick={() => dive()}
         />
       </div>
-      <Loading name={"Nemanja Studovic"} onReady={emerge} />
+      <Loading name={"Nemanja Studovic"} onReady={initiateEmerge} />
     </>
   );
 };

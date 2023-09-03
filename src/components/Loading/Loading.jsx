@@ -27,7 +27,9 @@ const Loading = ({ name, onReady }) => {
       setTimeout(() => {
         fadeOut();
       }, 1500);
-      onReady();
+      if (typeof onReady === "function") {
+        onReady();
+      }
     }
     console.log(progress);
   }, [progress]);

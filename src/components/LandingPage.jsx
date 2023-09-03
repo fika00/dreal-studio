@@ -24,6 +24,8 @@ import TextTransitionSlide from "./TextTransitionSlide";
 import { BlendFunction, KernelSize } from "postprocessing";
 import { MeshBasicMaterial } from "three";
 import logo from "/imgs/logo_fresh.svg";
+import logoOld from "/imgs/logo.svg";
+
 import { gsap } from "gsap";
 import ShootingStar from "./ShootingStar";
 import Loading from "./Loading/Loading";
@@ -34,6 +36,8 @@ const LandingPage = ({ isPhone }) => {
   const envRef = useRef();
   const headerRef = useRef();
   const [isTrailEnabled, setTrailEnabled] = useState(true);
+
+  const [old, setOld] = useState(false);
 
   let eyeRot = [degToRad(6), degToRad(10), degToRad(90)];
   let eyePos = [-0.5, 0.3, -1];
@@ -122,7 +126,16 @@ const LandingPage = ({ isPhone }) => {
         </p>
       </div>
       <div className="navbar">
-        <img src={logo} alt="" className="logo" />
+        <img
+          onClick={() => setOld(!old)}
+          src={old ? logo : logoOld}
+          alt=""
+          className="logo"
+          style={{
+            cursor: "pointer",
+          }}
+        />
+        {/* <img src={logoOld} alt="" className="logo" /> */}
       </div>
       <Loading name={"Dreal Studio"} />
     </div>

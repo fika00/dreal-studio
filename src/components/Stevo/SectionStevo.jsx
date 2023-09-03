@@ -47,26 +47,26 @@ const Scene = () => {
     camPivotRef.current.rotation.x +=
       (targetRotationX - camPivotRef.current.rotation.x) * 0.01;
   });
-  useEffect(() => {
-    console.log(textRef.current);
-    const blinking = () => {
-      const dur = Math.random() / 2;
-      console.log(dur);
-      gsap.to(textRef.current, {
-        fillOpacity: 0,
-        duration: dur,
-        // ease: "power3.inOut",
-        onComplete: () =>
-          gsap.to(textRef.current, {
-            fillOpacity: 1,
-            duration: dur,
-            // ease: "power3.inOut",
-            onComplete: () => blinking(),
-          }),
-      });
-    };
-    blinking();
-  }, []);
+  // useEffect(() => {
+  //   console.log(textRef.current);
+  //   const blinking = () => {
+  //     const dur = Math.random() / 2;
+  //     console.log(dur);
+  //     gsap.to(textRef.current, {
+  //       fillOpacity: 0,
+  //       duration: dur,
+  //       // ease: "power3.inOut",
+  //       onComplete: () =>
+  //         gsap.to(textRef.current, {
+  //           fillOpacity: 1,
+  //           duration: dur,
+  //           // ease: "power3.inOut",
+  //           onComplete: () => blinking(),
+  //         }),
+  //     });
+  //   };
+  //   blinking();
+  // }, []);
 
   return (
     <>
@@ -80,7 +80,7 @@ const Scene = () => {
           ref={camRef}
         />
       </group>
-      <Text
+      {/* <Text
         strokeWidth={0.01}
         strokeColor={"white"}
         ref={textRef}
@@ -92,7 +92,7 @@ const Scene = () => {
         position={[0, 1.55, 0]}
       >
         steev
-      </Text>
+      </Text> */}
     </>
   );
 };

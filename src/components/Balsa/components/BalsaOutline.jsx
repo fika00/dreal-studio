@@ -1,7 +1,7 @@
-import { Html } from "@react-three/drei";
+import { Html, Image } from "@react-three/drei";
 import fragmentShader from "./shaders/balsaOutlineFragment.glsl";
 import vertexShader from "./shaders/balsaOutlineVertex.glsl";
-import balsaOutline from "/imgs/balsa/balsa2.jpg";
+import balsaOutline from "/imgs/balsa/Balsa_outline.png";
 import { TextureLoader } from "three";
 
 const BalsaOutline = () => {
@@ -12,7 +12,7 @@ const BalsaOutline = () => {
   const balsaTexture = loader.load(balsaOutline);
   return (
     <>
-      <mesh>
+      {/* <mesh>
         <planeGeometry args={[0.551, 1]} />
         <shaderMaterial
           depthWrite={false}
@@ -23,7 +23,15 @@ const BalsaOutline = () => {
             balsaTexture: { value: balsaTexture },
           }}
         />
-      </mesh>
+      </mesh> */}
+      <group scale={0.6}>
+        <Image
+          position={[0, -0.15, 0]}
+          scale={[0.7, 2 / 2, 1 / 2]}
+          url={balsaOutline}
+          transparent
+        />
+      </group>
     </>
   );
 };

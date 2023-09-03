@@ -9,6 +9,7 @@
   transform: translate(-50%, -50%);
   width: 100%;
   flex-direction: column;
+  gap: 7px;
   overflow: hidden;
 }
 .landingh {
@@ -70,7 +71,8 @@
   white-space: pre;
 }
 .eachword {
-  display: inline;
+  display: flex;
+  gap: 7px;
 }
 .transitionslidewrapper {
   display: flex;
@@ -80,11 +82,17 @@
 }
 @media only screen and (max-width: 600px) {
   .transitionslidewrapper {
-    flex-direction: column;
     flex-wrap: wrap;
+    /* line-height: 60px; */
+  }
+  .landingh {
+    font-size: 3rem;
   }
   .slogan {
-    font-size: 1rem;
+    font-size: 0.95rem;
     margin-top: 0;
+  }
+  .eachword {
+    justify-content: center;
   }
 }

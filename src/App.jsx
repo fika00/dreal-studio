@@ -31,6 +31,7 @@ function App() {
     } else {
       return false;
     }
+    console.log(screenSize);
   };
   const isPhoneProp = isPhone();
   return (
@@ -44,7 +45,7 @@ function App() {
         }}
       >
         <Routes>
-          <Route exact path="/" element={<LandingPage isPhone={false} />} />
+          <Route exact path="/" element={<LandingPage isPhone={isPhone} />} />
           <Route path="/studi" element={<SectionStudi />} />
           <Route path="/stevo" element={<SectionStevo />} />
           <Route path="/baki" element={<SectionBalsa />} />

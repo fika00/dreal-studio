@@ -82,6 +82,7 @@ const Triangle2 = forwardRef((props, ref) => {
           vertexShader={contentTriangleVertex}
           transparent
           opacity={0.2}
+          depthWrite={false}
           uniforms={{
             uTime: { value: 0 },
             image: { value: image },

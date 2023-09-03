@@ -29,7 +29,7 @@ import ShootingStar from "./ShootingStar";
 import Loading from "./Loading/Loading";
 
 const LandingPage = ({ isPhone }) => {
-  const EyeRef = useRef();
+  const eyeRef = useRef();
   const CamRef = useRef();
   const envRef = useRef();
   const headerRef = useRef();
@@ -41,14 +41,13 @@ const LandingPage = ({ isPhone }) => {
   let eyeRot = [degToRad(6), degToRad(10), degToRad(90)];
   let eyePos = [-0.5, 0.3, -1];
 
-  console.log(isPhone);
-  if (isPhone) {
-    eyePos = [-0.5, 0.3, -1];
-    eyeRot = [degToRad(6), degToRad(10), degToRad(90)];
-  } else {
-    eyePos = [0, 0, 0];
-    eyeRot = [0, 0, 0];
-  }
+  const [isPhoneScenario, setIsPhoneScen] = useState();
+  useEffect(() => {
+    // if (isPhone) {
+    //   eyeRef.current.position.y = -1.45;
+    // } else {
+    // }
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {
@@ -57,37 +56,35 @@ const LandingPage = ({ isPhone }) => {
     }, 500);
 
     setTimeout(() => {
-      EyeRef.current.triggerUVEffect();
+      eyeRef.current.triggerUVEffect();
       headerRef.current.bringIn();
       gsap.to(CamRef.current.rotation, {
         x: 0,
-
-        duration: 5, // Duration of the animation in seconds
+        duration: 5,
         ease: "power3.inOut",
       });
     }, 4500);
   }, []);
+
   return (
     <div className="landingpage_wrapper">
       <Canvas>
-        <PerspectiveCamera
-          ref={CamRef}
-          makeDefault
-          fov={40}
-          position={[0, 0, 3.5]}
+        <group
           rotation={[degToRad(18), 0, 0]}
-        />
+          ref={CamRef}
+          position={[0, 0, 3.5]}
+        >
+          <PerspectiveCamera makeDefault fov={40} />
+        </group>
         <Background />
         <ShootingStar />
-        <group position={eyePos} rotation={eyeRot}>
-          <Eye
-            ref={EyeRef}
-            rotation={[degToRad(-80), 0, 0]}
-            position={[0, -1.15, 2.5]}
-            scale={1.3}
-          />
-        </group>
-        <Sparkles size={0.5} scale={5} speed={0.2} count={300} opacity={0.1} />
+        <Eye
+          ref={eyeRef}
+          rotation={[degToRad(-80), 0, 0]}
+          position={[0, -1.15, 2.5]}
+          scale={1.3}
+        />
+        <Sparkles size={0.6} scale={5} speed={0.05} count={300} opacity={0.5} />
         <Cloud
           scale={0.3}
           speed={0.7}
@@ -112,15 +109,15 @@ const LandingPage = ({ isPhone }) => {
           <Noise premultiply blendFunction={BlendFunction.ADD} />
           <Bloom
             // mipmapBlur
-            intensity={0.9}
-            luminanceThreshold={0.4}
+            intensity={0.75}
+            luminanceThreshold={0.35}
             kernelSize={KernelSize.VERY_LARGE}
           />
         </EffectComposer>
       </Canvas>
       <div className="landingtext">
         <div className="landingh">
-          <TextTransitionSlide ref={headerRef} text={"Dreal Studio"} />
+          <TextTransitionSlide ref={headerRef} inputText={"Dreal Studio"} />
         </div>
         <div className="pcont"></div>
         <p id="slogan" className="slogan">

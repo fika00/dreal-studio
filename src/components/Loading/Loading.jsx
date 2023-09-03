@@ -1,6 +1,8 @@
 import { Html, useProgress } from "@react-three/drei";
 import { useEffect, useRef, useState } from "react";
 import "./Loading.css";
+import loadingVideo from "/loader/loading.mp4";
+
 const Loading = ({ name }) => {
   const { active, progress, errors, item, loaded, total } = useProgress();
 
@@ -30,7 +32,7 @@ const Loading = ({ name }) => {
 
   return (
     <div id="cont" className="loading-container">
-      <div className="loading-info">
+      {/* <div className="loading-info">
         <div className="loading-info-prog">
           <p className="text">Loading...</p>
           <p className="text">{realProgress.current.toFixed(0)}%</p>
@@ -38,6 +40,18 @@ const Loading = ({ name }) => {
         <div className="text small">
           <p className="text small">{name}</p>
         </div>
+      </div> */}
+      <div className="videoContainter">
+        <video
+          style={{
+            width: "100%",
+          }}
+          src={loadingVideo}
+          muted
+          autoPlay
+          loop
+          playsInline
+        />
       </div>
     </div>
   );

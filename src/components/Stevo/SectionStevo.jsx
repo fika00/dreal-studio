@@ -6,6 +6,7 @@ import {
   OrbitControls,
   PerspectiveCamera,
   Stats,
+  Text,
 } from "@react-three/drei";
 import Human from "./components/Human";
 import { useRef } from "react";
@@ -22,11 +23,15 @@ import {
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import { BlendFunction } from "postprocessing";
 import Loading from "../Loading/Loading";
+import TextTransitionSlide from "../TextTransitionSlide";
+import "./SectionStevo.css";
+import { gsap } from "gsap";
 
 const Scene = () => {
   const camRef = useRef();
   const camPivotRef = useRef();
   const { viewport } = useThree();
+  const textRef = useRef();
 
   useFrame(({ mouse }) => {
     // Define the rotation speed (adjust this value as needed)
@@ -42,6 +47,26 @@ const Scene = () => {
     camPivotRef.current.rotation.x +=
       (targetRotationX - camPivotRef.current.rotation.x) * 0.01;
   });
+  useEffect(() => {
+    console.log(textRef.current);
+    const blinking = () => {
+      const dur = Math.random() / 2;
+      console.log(dur);
+      gsap.to(textRef.current, {
+        fillOpacity: 0,
+        duration: dur,
+        // ease: "power3.inOut",
+        onComplete: () =>
+          gsap.to(textRef.current, {
+            fillOpacity: 1,
+            duration: dur,
+            // ease: "power3.inOut",
+            onComplete: () => blinking(),
+          }),
+      });
+    };
+    blinking();
+  }, []);
 
   return (
     <>
@@ -55,6 +80,19 @@ const Scene = () => {
           ref={camRef}
         />
       </group>
+      <Text
+        strokeWidth={0.01}
+        strokeColor={"white"}
+        ref={textRef}
+        font={"/LEMONMILK.otf"}
+        scale={0.1}
+        color={"cyan"}
+        fillOpacity={1}
+        letterSpacing={0.2}
+        position={[0, 1.55, 0]}
+      >
+        steev
+      </Text>
     </>
   );
 };
@@ -63,6 +101,7 @@ const SectionStevo = () => {
     <>
       <Canvas>
         <Scene />
+
         <EffectComposer>
           <ToneMapping middleGrey={0.8} />
 
@@ -70,6 +109,7 @@ const SectionStevo = () => {
           <Bloom mipmapBlur luminanceThreshold={0.2} />
         </EffectComposer>
       </Canvas>
+
       <Loading name={"Balsa Stevovic"} />
     </>
   );

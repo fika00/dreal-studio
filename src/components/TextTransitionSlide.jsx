@@ -1,6 +1,6 @@
 import { forwardRef, useImperativeHandle } from "react";
-const TextTransitionSlide = (props, ref) => {
-  const text = props.text.split(" ");
+const TextTransitionSlide = ({ inputText }, ref) => {
+  const text = inputText.split(" ");
 
   useImperativeHandle(ref, () => ({
     bringIn,

@@ -42,9 +42,9 @@ const WireframeWave = (props, ref) => {
   useFrame(() => {
     waveRef.current.material.uniforms.uTime.value;
     waveRef.current.material.uniforms.uTime.value += uTime;
-    waveRef2.current.material.uniforms.uTime.value += uTime;
+    // waveRef2.current.material.uniforms.uTime.value += uTime;
 
-    waveRef2.current.material.uniforms.uWaveStart.value += waveSpeedRef.current;
+    // waveRef2.current.material.uniforms.uWaveStart.value += waveSpeedRef.current;
 
     // console.log(waveRef.current.material.uniforms);
   });
@@ -52,7 +52,7 @@ const WireframeWave = (props, ref) => {
   return (
     <>
       <>
-        <mesh
+        {/* <mesh
           rotation={[degToRad(-90), 0, 0]}
           position={[0, 5.5, 0]}
           ref={waveRef2}
@@ -74,7 +74,7 @@ const WireframeWave = (props, ref) => {
               yCord: { value: 0 },
             }}
           />
-        </mesh>
+        </mesh> */}
         <points
           rotation={[degToRad(-90), 0, 0]}
           position={[0, -10, 0]}

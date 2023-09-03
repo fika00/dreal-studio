@@ -15,6 +15,7 @@ import { gsap } from "gsap";
 import "./SectionBalsa.css";
 import { useControls } from "leva";
 import {
+  Bloom,
   ChromaticAberration,
   Depth,
   DepthOfField,
@@ -68,7 +69,7 @@ const SectionBalsa = ({ isPhone }) => {
           }}
           damping={0.4}
         >
-          <Scene />
+          <Scene isPhone={isPhone} />
         </ScrollControls>
       </Canvas>
       <Loading name={"Balsa Ratkovic"} />
@@ -76,7 +77,7 @@ const SectionBalsa = ({ isPhone }) => {
   );
 };
 
-const Scene = (isPhone) => {
+const Scene = ({ isPhone }) => {
   const waveRef = useRef();
   const particleRef = useRef();
   const camRef = useRef();
@@ -100,20 +101,20 @@ const Scene = (isPhone) => {
     return deg * 0.0174533;
   };
 
-  const generateRandomXY = () => {
-    waveRef.current.resetWave();
+  // const generateRandomXY = () => {
+  //   waveRef.current.resetWave();
 
-    const xCord = Math.floor((Math.random() * 200 - 100) / 10);
-    const yCord = Math.floor((Math.random() * 200 - 200) / 4);
-    particleRef.current.position.x = xCord;
-    particleRef.current.position.z = yCord;
+  //   const xCord = Math.floor((Math.random() * 200 - 100) / 10);
+  //   const yCord = Math.floor((Math.random() * 200 - 200) / 4);
+  //   particleRef.current.position.x = xCord;
+  //   particleRef.current.position.z = yCord;
 
-    waveRef.current.updateCords(xCord, yCord);
+  //   waveRef.current.updateCords(xCord, yCord);
 
-    particleRef.current.position.y = -9;
+  //   particleRef.current.position.y = -9;
 
-    handleParticleMovement();
-  };
+  //   handleParticleMovement();
+  // };
   const handleParticleMovement = () => {
     gsap.to(particleRef.current.position, {
       y: 5.5,
@@ -195,11 +196,11 @@ const Scene = (isPhone) => {
   useFrame(() => {
     if (camRef?.current?.position?.z != null) {
       camRef.current.position.z = -scroll.offset * 5 + 5;
-      if (camRef.current.position.z < 0.3) {
-        bgColorRef.current.material.color = new Color("black");
-      } else {
-        bgColorRef.current.material.color = new Color("white");
-      }
+      // if (camRef.current.position.z < 0.3) {
+      //   bgColorRef.current.material.color = new Color("black");
+      // } else {
+      //   bgColorRef.current.material.color = new Color("white");
+      // }
       if (camRef.current.position.z <= 0.1) {
         if (!hasAppeared.current) {
           floorRef.current.handleShow();
@@ -245,7 +246,7 @@ const Scene = (isPhone) => {
 
       <mesh scale={150} ref={bgColorRef}>
         <sphereGeometry />
-        <meshBasicMaterial side={DoubleSide} color={"white"} />
+        <meshBasicMaterial side={DoubleSide} color={"black"} />
       </mesh>
 
       {triangleElements}
@@ -296,6 +297,10 @@ const Scene = (isPhone) => {
       <group position={[0, 0.5, 0]}>
         <ReflectiveFloor ref={floorRef} />
       </group>
+
+      <EffectComposer>
+        <Bloom mipmapBlur intensity={2} luminanceThreshold={0.3} />
+      </EffectComposer>
 
       {/* <Stats /> */}
     </>

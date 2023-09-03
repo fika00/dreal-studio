@@ -38,7 +38,8 @@ void main() {
 
 
     vec4 textureColor = texture2D(image, vec2(vAdjustedUV.x, vAdjustedUV.y * .8));
-    gl_FragColor = vec4((textureColor.rgb * (1. - edgeWaveMask * 3.)) - ((1. - innerRadial) * (triPattern.r * 2.)) , textureColor.a * uOpacity);
+    // gl_FragColor = vec4((textureColor.rgb * (1. - edgeWaveMask * 3.)) - ((1. - innerRadial) * (triPattern.r * 2.)) , textureColor.a * uOpacity);
+    gl_FragColor = vec4(textureColor.rgb  , textureColor.a * uOpacity * (1. - edgeWaveMask * 3.)) - ((1. - innerRadial) * (triPattern.r * 2.));
     // gl_FragColor = vec4(1. - triPattern.rgb * (innerRadial * innerRadial2), 1.);
 
 }

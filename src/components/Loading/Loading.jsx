@@ -2,6 +2,7 @@ import { Html, useProgress } from "@react-three/drei";
 import { useEffect, useRef, useState } from "react";
 import "./Loading.css";
 import loadingVideo from "/loader/loading.mp4";
+import loadingGif from "/loader/loading.gif";
 
 const Loading = ({ name }) => {
   const { active, progress, errors, item, loaded, total } = useProgress();
@@ -42,7 +43,7 @@ const Loading = ({ name }) => {
         </div>
       </div> */}
       <div className="videoContainter">
-        <video
+        {/* <video
           style={{
             width: "100%",
           }}
@@ -51,7 +52,8 @@ const Loading = ({ name }) => {
           autoPlay
           loop
           playsInline
-        />
+        /> */}
+        <img width={"100%"} src={loadingGif} alt="" />
       </div>
     </div>
   );

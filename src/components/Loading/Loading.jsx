@@ -4,7 +4,7 @@ import "./Loading.css";
 import loadingVideo from "/loader/loading.mp4";
 import loadingGif from "/loader/loading.gif";
 
-const Loading = ({ name }) => {
+const Loading = ({ name, onReady }) => {
   const { active, progress, errors, item, loaded, total } = useProgress();
 
   // const realProgress = useRef(0);
@@ -27,6 +27,7 @@ const Loading = ({ name }) => {
       setTimeout(() => {
         fadeOut();
       }, 1500);
+      onReady();
     }
     console.log(progress);
   }, [progress]);

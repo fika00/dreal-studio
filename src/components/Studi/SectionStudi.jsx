@@ -6,25 +6,22 @@ import { Canvas } from "@react-three/fiber";
 import { gsap } from "gsap";
 import { Suspense, useEffect, useRef, useState } from "react";
 import Bridge from "./components/Bridge";
-import { useImperativeHandle, forwardRef } from "react";
 import Loading from "../Loading/Loading";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 
-const SectionStudi = (props, ref) => {
+const SectionStudi = () => {
   const camRef = useRef();
   const [hasChanged, setHasChanged] = useState(false);
   const [isAbove, setIsAbove] = useState(false);
   const bgFade = useRef();
-
-  useImperativeHandle(ref, () => ({
-    dive,
-  }));
+  const isReady = useRef(false);
 
   const degToRad = (deg) => {
     return deg * 0.0174533;
   };
 
   const dive = () => {
+    isReady.current = false;
     gsap.to(camRef.current.position, {
       y: -1,
       duration: 2.5,
@@ -37,7 +34,7 @@ const SectionStudi = (props, ref) => {
       },
       onComplete: () => {
         setIsAbove(!isAbove);
-        emerge();
+        isReady.current = false;
       },
     });
     gsap.to(camRef.current.rotation, {
@@ -143,9 +140,9 @@ const SectionStudi = (props, ref) => {
           onClick={() => dive()}
         />
       </div>
-      <Loading name={"Nemanja Studovic"} />
+      <Loading name={"Nemanja Studovic"} onReady={emerge} />
     </>
   );
 };
 
-export default forwardRef(SectionStudi);
+export default SectionStudi;

@@ -128,7 +128,7 @@ const LandingPage = ({ isPhone }) => {
       <div className="navbar">
         <img
           onClick={() => setOld(!old)}
-          src={old ? logo : logoOld}
+          src={old ? logoOld : old}
           alt=""
           className="logo"
           style={{

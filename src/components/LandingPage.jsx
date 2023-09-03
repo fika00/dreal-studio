@@ -33,9 +33,6 @@ const LandingPage = ({ isPhone }) => {
   const CamRef = useRef();
   const envRef = useRef();
   const headerRef = useRef();
-  // const [isMoving, setisMoving] = useState(true);
-  const shootingStarRef = useRef();
-  const trailRef = useRef();
   const [isTrailEnabled, setTrailEnabled] = useState(true);
 
   let eyeRot = [degToRad(6), degToRad(10), degToRad(90)];
@@ -77,7 +74,7 @@ const LandingPage = ({ isPhone }) => {
           <PerspectiveCamera makeDefault fov={40} />
         </group>
         <Background />
-        <ShootingStar />
+        {/* <ShootingStar /> */}
         <Eye
           ref={eyeRef}
           rotation={[degToRad(-80), 0, 0]}

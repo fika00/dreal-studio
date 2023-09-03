@@ -14,6 +14,7 @@ const SectionStudi = (props, ref) => {
   const camRef = useRef();
   const [hasChanged, setHasChanged] = useState(false);
   const [isAbove, setIsAbove] = useState(false);
+  const bgFade = useRef();
 
   useImperativeHandle(ref, () => ({
     dive,
@@ -28,7 +29,12 @@ const SectionStudi = (props, ref) => {
       y: -1,
       duration: 2.5,
       ease: "power2.in",
-
+      onUpdate: () => {
+        if (camRef.current.position.y <= 2) {
+          bgFade.current.style.backgroundColor = "black";
+          bgFade.current.style.zIndex = "unset";
+        }
+      },
       onComplete: () => {
         setIsAbove(!isAbove);
         emerge();
@@ -49,6 +55,14 @@ const SectionStudi = (props, ref) => {
     gsap.to(camRef.current.position, {
       y: 10,
       duration: 2.5,
+      onUpdate: () => {
+        if (camRef.current.position.y >= 1.5) {
+          bgFade.current.style.backgroundColor = "transparent";
+        }
+      },
+      onComplete: () => {
+        bgFade.current.style.zIndex = -1;
+      },
       ease: "power2.Out",
     });
     gsap.to(camRef.current.rotation, {
@@ -104,21 +118,29 @@ const SectionStudi = (props, ref) => {
           exposure={2}
         />
       </Canvas>
-      <div
-        style={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          padding: "10px",
-          cursor: "pointer",
-        }}
-        onClick={() => dive()}
-      >
+      <div>
+        <div
+          ref={bgFade}
+          style={{
+            position: "absolute",
+            left: 0,
+            top: 0,
+            width: "100%",
+            height: "100%",
+            transition: ".3s",
+          }}
+        ></div>
         <ChevronDownIcon
           width={40}
           style={{
             color: "white",
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            padding: "10px",
+            cursor: "pointer",
           }}
+          onClick={() => dive()}
         />
       </div>
       <Loading name={"Nemanja Studovic"} />

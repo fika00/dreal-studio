@@ -6,7 +6,7 @@ import loadingVideo from "/loader/loading.mp4";
 const Loading = ({ name }) => {
   const { active, progress, errors, item, loaded, total } = useProgress();
 
-  const realProgress = useRef(0);
+  // const realProgress = useRef(0);
   const fadeOut = () => {
     const container = cont.style;
     container.opacity = 0;
@@ -16,12 +16,12 @@ const Loading = ({ name }) => {
   };
 
   useEffect(() => {
-    if (realProgress.current <= progress) {
-      realProgress.current = progress;
-    }
-    if (realProgress.current != 0 && progress == 0) {
-      realProgress.current = 100;
-    }
+    // if (realProgress.current <= progress) {
+    //   realProgress.current = progress;
+    // }
+    // if (realProgress.current != 0 && progress == 0) {
+    //   realProgress.current = 100;
+    // }
     if (progress.toFixed(0) == 100) {
       setTimeout(() => {
         fadeOut();

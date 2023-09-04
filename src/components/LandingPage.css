@@ -55,7 +55,7 @@
   /* background-color: aliceblue; */
 }
 .logo {
-  height: 75%;
+  height: 50%;
   margin: 10px;
 }
 .landingpage_wrapper {
@@ -91,6 +91,10 @@
   .slogan {
     font-size: 0.95rem;
     margin-top: 0;
+  }
+  .logo {
+    height: 60%;
+    margin: 10px;
   }
   .eachword {
     justify-content: center;

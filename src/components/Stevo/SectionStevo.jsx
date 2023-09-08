@@ -20,6 +20,7 @@ import {
   Noise,
   ToneMapping,
 } from "@react-three/postprocessing";
+import { Vector2 } from "three";
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import { BlendFunction } from "postprocessing";
 import Loading from "../Loading/Loading";
@@ -27,11 +28,15 @@ import TextTransitionSlide from "../TextTransitionSlide";
 import "./SectionStevo.css";
 import { gsap } from "gsap";
 
+import ScreenColorFragment from "./components/shaders/ScreenColorFragment.glsl";
+import ScreenColorVertex from "./components/shaders/ScreenColorVertex.glsl";
+
 const Scene = () => {
   const camRef = useRef();
   const camPivotRef = useRef();
   const { viewport } = useThree();
   const textRef = useRef();
+  const planeRef = useRef();
 
   useFrame(({ mouse }) => {
     // Define the rotation speed (adjust this value as needed)
@@ -46,6 +51,8 @@ const Scene = () => {
       (targetRotationY - camPivotRef.current.rotation.y) * 0.01;
     camPivotRef.current.rotation.x +=
       (targetRotationX - camPivotRef.current.rotation.x) * 0.01;
+
+    planeRef.current.material.uniforms.time.value += 0.01;
   });
   // useEffect(() => {
   //   console.log(textRef.current);
@@ -80,6 +87,17 @@ const Scene = () => {
           ref={camRef}
         />
       </group>
+      <mesh position={[0, 1.7, -1]} ref={planeRef}>
+        <planeGeometry />
+        <shaderMaterial
+          vertexShader={ScreenColorVertex}
+          fragmentShader={ScreenColorFragment}
+          uniforms={{
+            tDiffuse: { value: null },
+            time: { value: 0 },
+          }}
+        />
+      </mesh>
       {/* <Text
         strokeWidth={0.01}
         strokeColor={"white"}

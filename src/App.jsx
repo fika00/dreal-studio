@@ -47,7 +47,12 @@ function App() {
         <Routes>
           <Route exact path="/" element={<LandingPage isPhone={isPhone} />} />
           <Route path="/studi" element={<SectionStudi />} />
-          <Route path="/stevo" element={<SectionStevo />} />
+          <Route
+            path="/stevo"
+            element={
+              <SectionStevo res={[screenSize.width, screenSize.height]} />
+            }
+          />
           <Route path="/baki" element={<SectionBalsa />} />
 
           {/* <Route path="/contact" component={Contact} /> */}

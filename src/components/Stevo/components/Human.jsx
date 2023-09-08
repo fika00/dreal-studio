@@ -5,7 +5,7 @@ import {
   MeshTransmissionMaterial,
   Gltf,
 } from "@react-three/drei";
-import { useLoader, useThree, useFrame } from "@react-three/fiber";
+import { useLoader, useThree, useFrame, act } from "@react-three/fiber";
 import {
   TextureLoader,
   PMREMGenerator,
@@ -13,6 +13,7 @@ import {
   MeshBasicMaterial,
   MeshPhysicalMaterial,
   FrontSide,
+  LoopOnce,
 } from "three";
 import { useEffect } from "react";
 export function Human(props) {
@@ -152,16 +153,45 @@ export function Human(props) {
 
   const group = useRef();
   const { nodes, materials, animations } = useGLTF("models/Stevo_idle.glb");
-  const { actions } = useAnimations(animations, group);
+  const { actions, mixer } = useAnimations(animations, group);
 
   useEffect(() => {
-    actions.rigAction.setDuration(20);
+    const handleAnimationComplete = (e) => {
+      if (e.action === actions.rigAction) {
+        console.log("rigAction completed");
+        actions.rigAction2.reset().play();
+      } else if (e.action === actions.rigAction2) {
+        console.log("rigAction2 completed");
+        actions.rigAction.reset().play();
+
+        // Do something else or loop back to the first animation
+        // actions.rigAction.reset().play();
+      }
+    };
+    actions.rigAction.clampWhenFinished = true;
+    actions.rigAction2.clampWhenFinished = true;
+
+    actions.rigAction.setDuration(10);
+    actions.rigAction2.setDuration(10);
+
+    actions.rigAction.setLoop(LoopOnce, 0);
+    actions.rigAction2.setLoop(LoopOnce, 0);
+
+    mixer.addEventListener("finished", handleAnimationComplete);
+    console.log(mixer);
+
     actions.rigAction.play();
-    console.log(modelRef.current.material);
+
+    return () => {
+      // Cleanup
+      mixer.removeEventListener("finished", handleAnimationComplete);
+    };
   }, []);
-  useFrame(() => {
+  useFrame((state, delta) => {
+    // console.log(delta);
     try {
-      modelRef.current.material.userData.shader.uniforms.uTime.value += 0.3;
+      modelRef.current.material.userData.shader.uniforms.uTime.value +=
+        15 * delta;
     } catch (e) {
       console.log(e);
     }

@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import { degToRad } from "three/src/math/MathUtils";
 import {
   Bloom,
+  BrightnessContrast,
   ChromaticAberration,
   EffectComposer,
   HueSaturation,
@@ -121,10 +122,15 @@ const SectionStevo = () => {
         <Scene />
 
         <EffectComposer>
-          <ToneMapping middleGrey={0.8} />
+          <ToneMapping middleGrey={0.5} />
 
-          <ChromaticAberration offset={[0.001, 0]} />
-          <Bloom mipmapBlur luminanceThreshold={0.2} />
+          {/* <ChromaticAberration offset={[0.001, 0]} /> */}
+          <HueSaturation saturation={-1} />
+          <BrightnessContrast
+            brightness={-0.4} // brightness. min: -1, max: 1
+            contrast={0.5} // contrast: min -1, max: 1
+          />
+          <Bloom mipmapBlur luminanceThreshold={0.6} />
         </EffectComposer>
       </Canvas>
 

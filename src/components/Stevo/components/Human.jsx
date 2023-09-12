@@ -27,9 +27,9 @@ export function Human(props) {
   const movingMaterial = new MeshStandardMaterial({
     envMap: envMap,
     roughness: 0.35,
-    metalness: 0.95,
+    metalness: 0.45,
     envMapIntensity: 1.75,
-    wireframe: true,
+    // wireframe: true,
     wireframeLinewidth: 2, // Adjust the line width as needed
     wireframeLinejoin: "round", // You can also use "miter" or "bevel"
 
@@ -191,7 +191,7 @@ export function Human(props) {
     // console.log(delta);
     try {
       modelRef.current.material.userData.shader.uniforms.uTime.value +=
-        15 * delta;
+        7 * delta;
     } catch (e) {
       console.log(e);
     }

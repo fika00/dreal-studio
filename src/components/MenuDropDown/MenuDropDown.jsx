@@ -46,11 +46,18 @@ const MenuDropDown = () => {
             </Link>
           )}
         </Menu.Item>
-        <Menu.Item disabled>
-          <span className="menu-item in-progress">David Vojvoda</span>
+        <Menu.Item>
+          {({ active }) => (
+            <Link
+              to="/filip"
+              className={`${active ? "menu-item active-item" : "menu-item"}`}
+            >
+              Filip Radinovic
+            </Link>
+          )}
         </Menu.Item>
         <Menu.Item disabled>
-          <span className="menu-item in-progress">Filip Radinovic</span>
+          <span className="menu-item in-progress">David Vojvoda</span>
         </Menu.Item>
       </Menu.Items>
     </Menu>

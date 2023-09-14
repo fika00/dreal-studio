@@ -128,9 +128,9 @@ const SectionStevo = () => {
           <HueSaturation saturation={-1} />
           <BrightnessContrast
             brightness={-0.4} // brightness. min: -1, max: 1
-            contrast={0.5} // contrast: min -1, max: 1
+            contrast={0.3} // contrast: min -1, max: 1
           />
-          <Bloom mipmapBlur luminanceThreshold={0.6} />
+          <Bloom mipmapBlur luminanceThreshold={0.6} intensity={1} />
         </EffectComposer>
       </Canvas>
 

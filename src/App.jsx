@@ -1,6 +1,6 @@
 import { Suspense, useRef, useState } from "react";
 import LandingPage from "./components/LandingPage";
-// import SectionFilip from "./components/SectionFilip";
+import SectionFilip from "./components/Filip/SectionFilip";
 // import LoadingAnimation from "./components/LoadingAnimation/LoadingAnimation";
 import SectionStudi from "./components/Studi/SectionStudi";
 import SectionBalsa from "./components/Balsa/SectionBalsa";
@@ -53,6 +53,7 @@ function App() {
               <SectionStevo res={[screenSize.width, screenSize.height]} />
             }
           />
+          <Route path="/filip" element={<SectionFilip />} />
           <Route path="/baki" element={<SectionBalsa />} />
 
           {/* <Route path="/contact" component={Contact} /> */}
@@ -60,8 +61,6 @@ function App() {
         <div className="dropdown">
           <MenuDropDown />
         </div>
-
-        {/* <SectionFilip /> */}
 
         {/* <Bridge callBackFunc={handleDone()}/> */}
 

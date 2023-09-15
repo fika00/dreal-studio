@@ -1,6 +1,5 @@
 import { Canvas, extend, useFrame } from "@react-three/fiber";
 import { data } from "./components/data";
-import { dataSkull } from "./components/dataSkull";
 import * as THREE from "three";
 import { OrbitControls } from "@react-three/drei";
 // declaratively
@@ -8,20 +7,24 @@ import outlineFragmentShader from "./components/shaders/outlineFragmentShader.gl
 import outlineVertexShader from "./components/shaders/outlineVertexShader.glsl";
 import { useEffect, useRef } from "react";
 import { degToRad } from "three/src/math/MathUtils";
+import { Bloom, EffectComposer } from "@react-three/postprocessing";
 
 const Tube = ({ curve }) => {
   const matRef = useRef();
-  useEffect(() => {
-    console.log(matRef.current.material.uniforms.uTime.value);
-  }, []);
+  // useEffect(() => {
+  //   console.log(matRef.current.material.uniforms.uTime.value);
+  // }, []);
   useFrame(() => {
     matRef.current.material.uniforms.uTime.value += 0.01;
   });
   return (
     <mesh ref={matRef}>
-      <tubeGeometry args={[curve, 64, 0.001, 2, false]} />
+      <tubeGeometry args={[curve, 64, 0.0025, 2, false]} />
       <shaderMaterial
         transparent
+        depthTest={false}
+        depthWrite={false}
+        // wireframe={true}
         blending={THREE.AdditiveBlending}
         side={THREE.DoubleSide}
         uniforms={{
@@ -59,7 +62,8 @@ const Tubes = () => {
 
   // console.log(data);
 
-  dataSkull.forEach((curve) => {
+  data.forEach((curve) => {
+    console.log(curve);
     let testPoints = [];
     curve.forEach((coords) => {
       testPoints.push(new THREE.Vector3(coords[0], coords[1], coords[2]));
@@ -67,7 +71,6 @@ const Tubes = () => {
     let tempCurve = new THREE.CatmullRomCurve3(testPoints);
     testCurves.push(tempCurve);
   });
-  console.log(testCurves);
 
   return (
     <>
@@ -82,9 +85,12 @@ const SectionFilip = () => {
   return (
     <>
       <Canvas>
-        <group rotation={[degToRad(-90), 0, 0]}>
+        <group rotation={[degToRad(30), 0, 0]} position={[0, -1, 2.5]}>
           <Tubes />
         </group>
+        <EffectComposer>
+          <Bloom luminanceThreshold={0.2} intensity={2} mipmapBlur />
+        </EffectComposer>
         <OrbitControls />
       </Canvas>
     </>

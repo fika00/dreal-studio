@@ -8,7 +8,7 @@ import outlineVertexShader from "./components/shaders/outlineVertexShader.glsl";
 import { useEffect, useRef } from "react";
 import { degToRad } from "three/src/math/MathUtils";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
-
+import Loading from "../Loading/Loading";
 const Tube = ({ curve }) => {
   const matRef = useRef();
   // useEffect(() => {
@@ -93,6 +93,7 @@ const SectionFilip = () => {
         </EffectComposer>
         <OrbitControls />
       </Canvas>
+      <Loading />
     </>
   );
 };

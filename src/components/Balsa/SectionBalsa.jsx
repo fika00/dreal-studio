@@ -72,7 +72,7 @@ const SectionBalsa = ({ isPhone }) => {
           <Scene isPhone={isPhone} />
         </ScrollControls>
       </Canvas>
-      <Loading name={"Balsa Ratkovic"} />
+      <Loading />
     </>
   );
 };

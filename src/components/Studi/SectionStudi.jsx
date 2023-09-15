@@ -147,7 +147,7 @@ const SectionStudi = () => {
           onClick={() => dive()}
         />
       </div>
-      <Loading name={"Nemanja Studovic"} onReady={initiateEmerge} />
+      <Loading onReady={initiateEmerge} />
     </>
   );
 };

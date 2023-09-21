@@ -134,7 +134,7 @@ const SectionStevo = () => {
         </EffectComposer>
       </Canvas>
 
-      <Loading name={"Balsa Stevovic"} />
+      <Loading />
     </>
   );
 };

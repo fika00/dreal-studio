@@ -10,6 +10,7 @@
         float clip = smoothstep(0.01,.1, vUv.x);
 
         // vec3 finalColor = mix(step);
+        
 
       gl_FragColor.rgba = vec4(step * clip,1.);
     }

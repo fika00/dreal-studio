@@ -137,7 +137,7 @@ const LandingPage = ({ isPhone }) => {
         />
         {/* <img src={logoOld} alt="" className="logo" /> */}
       </div>
-      <Loading name={"Dreal Studio"} />
+      <Loading />
     </div>
   );
 };

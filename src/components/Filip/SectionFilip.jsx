@@ -200,7 +200,7 @@ const SectionFilip = () => {
           />
         </group>
         <EffectComposer>
-          <Bloom luminanceThreshold={0.2} intensity={2} mipmapBlur />
+          <Bloom luminanceThreshold={0.2} intensity={1} mipmapBlur />
         </EffectComposer>
         {/* <OrbitControls /> */}
         {/* </SheetProvider> */}

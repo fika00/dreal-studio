@@ -72,13 +72,13 @@ const DoorWay = () => {
   useEffect(() => {
     const animateLoop = () =>
       gsap.to(doorRef.current.material, {
-        opacity: 0.6,
+        opacity: 0.9,
         duration: dur.current,
         ease: "power2.inOut",
 
         onComplete: () => {
           gsap.to(doorRef.current.material, {
-            opacity: 1,
+            opacity: 1.5,
             duration: dur.current,
             ease: "power2.inOut",
 
@@ -150,14 +150,9 @@ const AboveWater = ({ isTransitioning }) => {
       <DoorWay isTransitioning={isTransitioning} />
 
       <EffectComposer>
-        <Bloom
-          mipmapBlur
-          radius={0.75}
-          luminanceThreshold={0.3}
-          intensity={2.5}
-        />
-        <ChromaticAberration offset={[0.0015, 0.0]} />
-        <Noise opacity={0.45} premultiply blendFunction={BlendFunction.ADD} />
+        <Bloom mipmapBlur radius={0.7} luminanceThreshold={0.1} intensity={3} />
+        {/* <ChromaticAberration offset={[0.0015, 0.0]} /> */}
+        {/* <Noise opacity={0.45} premultiply blendFunction={BlendFunction.ADD} /> */}
       </EffectComposer>
 
       {/* <OrbitControls /> */}
@@ -176,7 +171,7 @@ const AboveWater = ({ isTransitioning }) => {
         url={"/imgs/studi/studi3.png"}
       />
 
-      {/* <Stats /> */}
+      <Stats />
 
       <fog attach="fog" args={["#8ec3ef", 90, 500]} />
     </>

@@ -173,7 +173,7 @@ const AboveWater = ({ isTransitioning }) => {
         scale={[10, 20, 1]}
         transparent
         position={[0, 7, 50]}
-        url={"/imgs/studi/studi.png"}
+        url={"/imgs/studi/studi3.png"}
       />
 
       {/* <Stats /> */}

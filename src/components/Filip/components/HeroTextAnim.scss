@@ -1,0 +1,24 @@
+@font-face {
+  font-family: Helsinki;
+  src: url("fonts/helsinkixxl-black.otf");
+}
+@font-face {
+  font-family: HelsinkiThin;
+  src: url("fonts/helsinkixxl-thin.otf");
+}
+
+.word {
+  display: flex;
+  gap: 50px;
+  align-self: center;
+
+  .each-letter {
+    font-family: "HelsinkiThin", sans-serif;
+    font-size: 6rem;
+    color: white;
+    transition: 1s;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+}

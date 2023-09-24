@@ -1,0 +1,26 @@
+.custom-button {
+  display: inline;
+  justify-content: center;
+  margin: auto;
+  cursor: pointer;
+
+  border-radius: 50px;
+  border: solid 1px white;
+
+  padding: 5px 20px;
+
+  transition: 0.7s;
+
+  .button-text {
+    color: whitesmoke;
+    font-family: "HelsinkiThin", sans-serif;
+    font-size: 15px;
+    // text-transform: uppercase;
+    letter-spacing: 5px;
+    transition: 0.7s;
+  }
+}
+.custom-button:hover {
+  //   border-color: #008383;
+  box-shadow: 0 0 35px 5px #0083835e;
+}

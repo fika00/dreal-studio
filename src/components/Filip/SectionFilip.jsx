@@ -200,7 +200,7 @@ const SectionFilip = () => {
           />
         </group>
         <EffectComposer>
-          <Bloom luminanceThreshold={0.2} intensity={1} mipmapBlur />
+          <Bloom luminanceThreshold={0.8} intensity={1} mipmapBlur />
         </EffectComposer>
         {/* <OrbitControls /> */}
         {/* </SheetProvider> */}
@@ -214,10 +214,7 @@ const SectionFilip = () => {
               display: "flex",
             }}
           >
-            <ButtonDreal text={"1"} onClick={() => changeLocation(0)} />
-            <ButtonDreal text={"2"} onClick={() => changeLocation(1)} />
-            <ButtonDreal text={"3"} onClick={() => changeLocation(2)} />
-            <ButtonDreal text={"4"} onClick={() => changeLocation(3)} />
+            <ButtonDreal text={"Meet me"} onClick={() => changeLocation(1)} />
           </div>
         </div>
       </div>

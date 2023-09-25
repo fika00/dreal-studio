@@ -9,14 +9,19 @@
 
 .word {
   display: flex;
+  justify-content: center;
   gap: 50px;
   align-self: center;
+  // overflow: hidden;
+  width: 600px;
 
   .each-letter {
     font-family: "HelsinkiThin", sans-serif;
     font-size: 6rem;
     color: white;
-    transition: 1s;
+    transition: transform 1s ease-out, filter 2s ease-out;
+    // transform: translateY(120%);
+    filter: blur(40px);
   }
 }
 

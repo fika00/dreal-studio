@@ -14,16 +14,20 @@
   align-self: center;
   // overflow: hidden;
   width: 600px;
-
-  .each-letter {
-    font-family: "HelsinkiThin", sans-serif;
-    font-size: 6rem;
-    color: white;
-    transition: transform 1s ease-out, filter 2s ease-out;
-    // transform: translateY(120%);
-    filter: blur(40px);
-  }
 }
-
+.each-letter {
+  font-family: "HelsinkiThin", sans-serif;
+  font-size: 11rem;
+  color: white;
+  transition: transform 1s cubic-bezier(0.28, 0.25, 0.09, 1), filter 2s ease-out;
+  // transform: translateY(120%);
+  filter: blur(40px);
+}
 @media only screen and (max-width: 600px) {
+  .word {
+    width: 200px;
+  }
+  .each-letter {
+    font-size: 3rem;
+  }
 }

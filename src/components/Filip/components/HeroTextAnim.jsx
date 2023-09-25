@@ -1,7 +1,13 @@
 import { useEffect } from "react";
 import "./HeroTextAnim.scss";
+import { useImperativeHandle, forwardRef } from "react";
 
-const HeroTextAnim = ({ text }) => {
+const HeroTextAnim = ({ text }, ref) => {
+  useImperativeHandle(ref, () => ({
+    animate,
+    animateOut,
+  }));
+
   const letters = text.split("");
   console.log(letters);
 
@@ -11,7 +17,6 @@ const HeroTextAnim = ({ text }) => {
     let i = 0;
 
     const interval = setInterval(() => {
-      letterArray[i].style.transform = "translateY(0%)";
       letterArray[i].style.filter = "blur(0px)";
       i++;
       if (i == letterArray.length) {
@@ -20,10 +25,24 @@ const HeroTextAnim = ({ text }) => {
     }, 100);
   };
 
+  const animateOut = () => {
+    const letterArray = document.querySelectorAll(".each-letter");
+
+    let i = 0;
+
+    const interval = setInterval(() => {
+      letterArray[i].style.transform = "translateY(120%)";
+      i++;
+      if (i == letterArray.length) {
+        clearInterval(interval);
+      }
+    }, 40);
+  };
+
   useEffect(() => {
     setTimeout(() => {
       animate();
-    }, 4000);
+    }, 2000);
   }, []);
 
   return (
@@ -39,4 +58,4 @@ const HeroTextAnim = ({ text }) => {
   );
 };
 
-export default HeroTextAnim;
+export default forwardRef(HeroTextAnim);

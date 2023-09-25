@@ -20,8 +20,17 @@ import CurveToMesh from "./components/CurveToMesh";
 import gsap from "gsap";
 
 import "./SectionFilip.scss";
+
 import HeroTextAnim from "./components/HeroTextAnim";
-import ButtonDreal from "./ButtonDreal/ButtonDreal";
+import ButtonDreal from "./components/ButtonDreal/ButtonDreal";
+
+import outlineFragmentShader from "./components/shaders/outlineFragmentShader.glsl";
+import outlineVertexShader from "./components/shaders/outlineVertexShader.glsl";
+
+import heartFragmentShader from "./components/shaders/heartFragmentShader.glsl";
+import heartVertexShader from "./components/shaders/heartVertexShader.glsl";
+import Icon from "./components/Icon/Icon";
+import HeroContainer from "./components/HeroContainer/HeroContainer";
 
 // import studio from "@theatre/studio";
 // import extension from "@theatre/r3f/dist/extension";
@@ -34,82 +43,9 @@ import ButtonDreal from "./ButtonDreal/ButtonDreal";
 // studio.extend(extension);
 // studio.initialize();
 
-const CamMovement = () => {
-  const groupRef = useRef();
-  const scroll = useScroll();
-  const camRef = useRef();
-  const isAnimating = useRef(false);
-  const currentSection = useRef(0);
-  console.log(scroll);
-  const posData = [
-    [
-      [0.5, -1.51, 3.579],
-      [0.48, 0.47, 0],
-    ],
-    [
-      [-1.56, -1.51, 5.69],
-      [0, -0.59, 0],
-    ],
-    [
-      [-0.039, -8.69, 5.01],
-      [-0.009, -0.065, 0.0],
-    ],
-    [
-      [0, -14.764, 7.552],
-      [-0.16, 0, 0],
-    ],
-  ];
-
-  const changeLocation = (location) => {
-    const loc = posData[location];
-    isAnimating.current = true;
-    currentSection.current = location;
-
-    gsap.to(camRef.current.position, {
-      x: loc[0][0],
-      y: loc[0][1],
-      z: loc[0][2],
-      duration: 4,
-      ease: "power3.inOut",
-      onComplete: () => {
-        isAnimating.current = false;
-      },
-    });
-    gsap.to(camRef.current.rotation, {
-      x: loc[1][0],
-      y: loc[1][1],
-      z: loc[1][2],
-      duration: 4,
-      ease: "power3.inOut",
-      onComplete: () => {
-        isAnimating.current = false;
-      },
-    });
-  };
-  function mapRange(value, start1, stop1, start2, stop2) {
-    return start2 + (stop2 - start2) * ((value - start1) / (stop1 - start1));
-  }
-
-  return (
-    <>
-      <group ref={groupRef} position={[0, 0, 0]}>
-        <PerspectiveCamera
-          // theatreKey="Camera"
-          ref={camRef}
-          // position={[0, -1.5, 20]}
-          position={posData[0][0]}
-          rotation={posData[0][1]}
-          fov={45}
-          makeDefault
-        />
-      </group>
-      {/* <OrbitControls /> */}
-    </>
-  );
-};
-
 const SectionFilip = () => {
   const camRef = useRef();
+  const nameRef = useRef();
 
   const posData = [
     [
@@ -121,7 +57,7 @@ const SectionFilip = () => {
       [0, -0.59, 0],
     ],
     [
-      [-0.039, -8.69, 5.01],
+      [-0.039, -8.79, 5.01],
       [-0.009, -0.065, 0.0],
     ],
     [
@@ -139,9 +75,6 @@ const SectionFilip = () => {
       z: loc[0][2],
       duration: 4,
       ease: "power3.inOut",
-      onComplete: () => {
-        isAnimating.current = false;
-      },
     });
     gsap.to(camRef.current.rotation, {
       x: loc[1][0],
@@ -149,20 +82,15 @@ const SectionFilip = () => {
       z: loc[1][2],
       duration: 4,
       ease: "power3.inOut",
-      onComplete: () => {
-        isAnimating.current = false;
-      },
     });
   };
   return (
     <>
       <Canvas gl={{ preserveDrawingBuffer: true }}>
         <PerspectiveCamera
-          // theatreKey="Camera"
           ref={camRef}
-          // position={[0, -1.5, 20]}
-          position={posData[0][0]}
-          rotation={posData[0][1]}
+          position={posData[2][0]}
+          rotation={posData[2][1]}
           fov={45}
           makeDefault
         />
@@ -174,6 +102,8 @@ const SectionFilip = () => {
             materialColor={"cyan"}
             materialColor2={"black"}
             thick={0.002}
+            fragment={outlineFragmentShader}
+            vertex={outlineVertexShader}
           />
         </group>
         <group
@@ -186,6 +116,8 @@ const SectionFilip = () => {
             materialColor={"red"}
             materialColor2={"black"}
             thick={0.02}
+            fragment={heartFragmentShader}
+            vertex={heartVertexShader}
           />
         </group>
         <group
@@ -197,6 +129,8 @@ const SectionFilip = () => {
             materialColor={"cyan"}
             materialColor2={"blue"}
             thick={0.0025}
+            fragment={outlineFragmentShader}
+            vertex={outlineVertexShader}
           />
         </group>
         <EffectComposer>
@@ -207,16 +141,7 @@ const SectionFilip = () => {
       </Canvas>
 
       <div className="html_container">
-        <div className="hero-container">
-          <HeroTextAnim text={"FILIP"} />
-          <div
-            style={{
-              display: "flex",
-            }}
-          >
-            <ButtonDreal text={"Meet me"} onClick={() => changeLocation(1)} />
-          </div>
-        </div>
+        <HeroContainer />
       </div>
 
       <Loading />

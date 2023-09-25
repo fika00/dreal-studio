@@ -1,0 +1,64 @@
+.hero-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  height: auto;
+  width: 100%;
+  flex-direction: column;
+
+  .upper-part {
+    display: flex;
+    justify-content: center;
+    height: 60px;
+    overflow: hidden;
+    .upper-icons {
+      position: absolute;
+      width: 300px;
+      display: flex;
+      justify-content: center;
+      align-self: center;
+      top: 0;
+      height: 60px;
+
+      overflow: hidden;
+
+      .icon-top {
+        transition: 2s cubic-bezier(0.28, 0.25, 0.09, 1);
+        transform: translateY(110%);
+      }
+    }
+  }
+
+  .hr-divider {
+    width: 0;
+    border: 0;
+    height: 1px;
+    background-color: white;
+
+    margin: 0 auto;
+    padding: 0;
+
+    transition: 1s ease-in-out;
+  }
+  .under-hr {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    height: 60px;
+
+    .lower-icons {
+      position: absolute;
+      display: flex;
+      justify-content: space-between;
+      width: 200px;
+      bottom: 0;
+      overflow: hidden;
+
+      .icon-bottom {
+        transition: 2s cubic-bezier(0.28, 0.25, 0.09, 1);
+        transform: translateY(-120%);
+      }
+    }
+  }
+}

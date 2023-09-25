@@ -1,10 +1,15 @@
 import { useRef } from "react";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
-import outlineFragmentShader from "./shaders/outlineFragmentShader.glsl";
-import outlineVertexShader from "./shaders/outlineVertexShader.glsl";
 
-const Tube = ({ curve, materialColor, materialColor2, thick }) => {
+const Tube = ({
+  curve,
+  materialColor,
+  materialColor2,
+  thick,
+  vertex,
+  fragment,
+}) => {
   const matRef = useRef();
   // useEffect(() => {
   //   console.log(matRef.current.material.uniforms.uTime.value);
@@ -27,14 +32,21 @@ const Tube = ({ curve, materialColor, materialColor2, thick }) => {
           color: { value: new THREE.Color(materialColor) },
           color2: { value: new THREE.Color(materialColor2) },
         }}
-        fragmentShader={outlineFragmentShader}
-        vertexShader={outlineVertexShader}
+        fragmentShader={fragment}
+        vertexShader={vertex}
       />
     </mesh>
   );
 };
 
-const CurveToMesh = ({ data, materialColor, materialColor2, thick }) => {
+const CurveToMesh = ({
+  data,
+  materialColor,
+  materialColor2,
+  thick,
+  vertex,
+  fragment,
+}) => {
   const randomRange = (min, max) => Math.random() * (max - min) + min;
 
   let curves = [];
@@ -77,6 +89,8 @@ const CurveToMesh = ({ data, materialColor, materialColor2, thick }) => {
           curve={curveTemp}
           materialColor={materialColor}
           materialColor2={materialColor2}
+          fragment={fragment}
+          vertex={vertex}
         />
       ))}
     </>

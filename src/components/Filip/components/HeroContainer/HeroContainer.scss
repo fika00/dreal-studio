@@ -28,8 +28,8 @@
       .icon-top {
         cursor: pointer;
 
-        transition: 2s cubic-bezier(0.28, 0.25, 0.09, 1);
-        transform: translateY(110%);
+        transition: 1.2s cubic-bezier(0.46, -0.01, 0.44, 1);
+        transform: translateY(105%);
       }
     }
   }
@@ -62,7 +62,7 @@
 
       .icon-bottom {
         cursor: pointer;
-        transition: 2s cubic-bezier(0.28, 0.25, 0.09, 1);
+        transition: 1.2s cubic-bezier(0.46, -0.01, 0.44, 1);
         transform: translateY(-120%);
       }
     }

@@ -31,21 +31,13 @@ import heartFragmentShader from "./components/shaders/heartFragmentShader.glsl";
 import heartVertexShader from "./components/shaders/heartVertexShader.glsl";
 import Icon from "./components/Icon/Icon";
 import HeroContainer from "./components/HeroContainer/HeroContainer";
-
-// import studio from "@theatre/studio";
-// import extension from "@theatre/r3f/dist/extension";
-// import {
-//   PerspectiveCamera,
-//   SheetProvider,
-//   useCurrentSheet,
-// } from "@theatre/r3f";
-
-// studio.extend(extension);
-// studio.initialize();
+import SmallNav from "./components/SmallNav/SmallNav";
 
 const SectionFilip = () => {
   const camRef = useRef();
   const nameRef = useRef();
+  const smallNavRef = useRef();
+  const heroRef = useRef();
 
   const posData = [
     [
@@ -68,6 +60,13 @@ const SectionFilip = () => {
 
   const changeLocation = (location) => {
     const loc = posData[location];
+
+    if (location != 0) {
+      smallNavRef.current.setIsVisible(true);
+    } else {
+      smallNavRef.current.hideSmallNav();
+      heroRef.current.setIsVisible(true);
+    }
 
     gsap.to(camRef.current.position, {
       x: loc[0][0],
@@ -141,7 +140,14 @@ const SectionFilip = () => {
       </Canvas>
 
       <div className="html_container">
-        <HeroContainer onCallback={(section) => changeLocation(section)} />
+        <HeroContainer
+          ref={heroRef}
+          onCallback={(section) => changeLocation(section)}
+        />
+        <SmallNav
+          ref={smallNavRef}
+          onClickCallback={(sec) => changeLocation(sec)}
+        />
       </div>
 
       <Loading />

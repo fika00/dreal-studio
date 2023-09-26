@@ -1,3 +1,18 @@
+@keyframes loadIn {
+  0% {
+    opacity: 0%;
+    filter: blur(5px);
+  }
+  75% {
+    opacity: 0%;
+    filter: blur(5px);
+  }
+  100% {
+    opacity: 100%;
+    filter: blur(0px);
+  }
+}
+
 .custom-button {
   display: flex;
   justify-content: center;
@@ -14,6 +29,8 @@
   z-index: 1;
 
   transition: 0.7s;
+
+  animation: loadIn 4s;
 
   .button-text {
     color: whitesmoke;

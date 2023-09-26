@@ -9,6 +9,7 @@ const ButtonDreal = ({ onClick, text }) => {
       className="custom-button"
       onClick={() => {
         buttonRef.current.style.opacity = 0;
+        buttonRef.current.style.zIndex = 0;
         onClick();
       }}
     >

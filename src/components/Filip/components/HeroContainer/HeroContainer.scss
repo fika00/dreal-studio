@@ -11,6 +11,7 @@
     display: flex;
     justify-content: center;
     height: 60px;
+    position: relative;
     overflow: hidden;
     .upper-icons {
       position: absolute;
@@ -18,12 +19,15 @@
       display: flex;
       justify-content: center;
       align-self: center;
-      top: 0;
+      bottom: 0;
+
       height: 60px;
 
       overflow: hidden;
 
       .icon-top {
+        cursor: pointer;
+
         transition: 2s cubic-bezier(0.28, 0.25, 0.09, 1);
         transform: translateY(110%);
       }
@@ -39,7 +43,7 @@
     margin: 0 auto;
     padding: 0;
 
-    transition: 1s ease-in-out;
+    transition: 1s cubic-bezier(0.32, 0.06, 0.26, 0.98);
   }
   .under-hr {
     display: flex;
@@ -52,10 +56,12 @@
       display: flex;
       justify-content: space-between;
       width: 200px;
-      bottom: 0;
+      top: 0;
+      padding-top: 10px;
       overflow: hidden;
 
       .icon-bottom {
+        cursor: pointer;
         transition: 2s cubic-bezier(0.28, 0.25, 0.09, 1);
         transform: translateY(-120%);
       }

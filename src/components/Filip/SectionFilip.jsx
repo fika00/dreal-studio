@@ -89,8 +89,8 @@ const SectionFilip = () => {
       <Canvas gl={{ preserveDrawingBuffer: true }}>
         <PerspectiveCamera
           ref={camRef}
-          position={posData[2][0]}
-          rotation={posData[2][1]}
+          position={posData[0][0]}
+          rotation={posData[0][1]}
           fov={45}
           makeDefault
         />
@@ -141,7 +141,7 @@ const SectionFilip = () => {
       </Canvas>
 
       <div className="html_container">
-        <HeroContainer />
+        <HeroContainer onCallback={(section) => changeLocation(section)} />
       </div>
 
       <Loading />

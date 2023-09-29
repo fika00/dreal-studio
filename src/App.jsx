@@ -13,6 +13,7 @@ import SectionStevo from "./components/Stevo/SectionStevo";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import MenuDropDown from "./components/MenuDropDown/MenuDropDown";
 import "./App.css";
+import SectionDavid from "./components/SectionDavid/SectionDavid";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -55,6 +56,7 @@ function App() {
           />
           <Route path="/filip" element={<SectionFilip />} />
           <Route path="/baki" element={<SectionBalsa />} />
+          <Route path="/david" element={<SectionDavid />} />
 
           {/* <Route path="/contact" component={Contact} /> */}
         </Routes>

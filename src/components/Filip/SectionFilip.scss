@@ -8,6 +8,7 @@
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
   display: flex;
+  overflow: hidden;
 
   .section-picker {
     display: flex;

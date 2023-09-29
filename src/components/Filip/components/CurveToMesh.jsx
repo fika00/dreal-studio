@@ -8,14 +8,15 @@ const Tube = ({
   materialColor2,
   thick,
   vertex,
+  pulsingSpeed,
   fragment,
 }) => {
   const matRef = useRef();
   // useEffect(() => {
   //   console.log(matRef.current.material.uniforms.uTime.value);
   // }, []);
-  useFrame(() => {
-    matRef.current.material.uniforms.uTime.value += 0.01;
+  useFrame((state, delta) => {
+    matRef.current.material.uniforms.uTime.value += 0.2 * delta * pulsingSpeed;
   });
   return (
     <mesh ref={matRef}>
@@ -46,6 +47,7 @@ const CurveToMesh = ({
   thick,
   vertex,
   fragment,
+  pulsingSpeed,
 }) => {
   const randomRange = (min, max) => Math.random() * (max - min) + min;
 
@@ -84,6 +86,7 @@ const CurveToMesh = ({
     <>
       {testCurves.map((curveTemp, index) => (
         <Tube
+          pulsingSpeed={pulsingSpeed}
           key={index}
           thick={thick}
           curve={curveTemp}

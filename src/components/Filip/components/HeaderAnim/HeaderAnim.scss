@@ -1,0 +1,21 @@
+.wrapper-header-anim {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+
+  .letter-cont {
+    display: inline-flex; /* Change display to inline-block */
+
+    .each-letter-header {
+      position: relative;
+      font-family: "HelsinkiThin", sans-serif;
+      font-size: 7rem;
+      letter-spacing: 10px;
+      color: white;
+      width: 100%;
+      opacity: 0;
+      text-align: right;
+      transition: 1.2s ease-in-out;
+    }
+  }
+}

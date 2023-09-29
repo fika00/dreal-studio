@@ -32,12 +32,14 @@ import heartVertexShader from "./components/shaders/heartVertexShader.glsl";
 import Icon from "./components/Icon/Icon";
 import HeroContainer from "./components/HeroContainer/HeroContainer";
 import SmallNav from "./components/SmallNav/SmallNav";
+import AboutMe from "./components/AboutMe/AboutMe";
 
 const SectionFilip = () => {
   const camRef = useRef();
   const nameRef = useRef();
   const smallNavRef = useRef();
   const heroRef = useRef();
+  const aboutMeRef = useRef();
 
   const posData = [
     [
@@ -61,12 +63,23 @@ const SectionFilip = () => {
   const changeLocation = (location) => {
     const loc = posData[location];
 
+    const sections = [null, aboutMeRef];
+
     if (location != 0) {
       smallNavRef.current.setIsVisible(true);
     } else {
       smallNavRef.current.hideSmallNav();
       heroRef.current.setIsVisible(true);
     }
+    sections.forEach((section, index) => {
+      if (index == location && section != null) {
+        setTimeout(() => {
+          section.current.setIsVisible(true);
+        }, 1000);
+      } else if (section != null) {
+        section.current.disappear();
+      }
+    });
 
     gsap.to(camRef.current.position, {
       x: loc[0][0],
@@ -98,6 +111,7 @@ const SectionFilip = () => {
         <group rotation={[0, 0, 0]} position={[0, -1, 2.5]}>
           <CurveToMesh
             data={dataHead}
+            pulsingSpeed={1}
             materialColor={"cyan"}
             materialColor2={"black"}
             thick={0.002}
@@ -111,6 +125,7 @@ const SectionFilip = () => {
           position={[0, -10, 1.5]}
         >
           <CurveToMesh
+            pulsingSpeed={2}
             data={dataHeart}
             materialColor={"red"}
             materialColor2={"black"}
@@ -125,6 +140,7 @@ const SectionFilip = () => {
         >
           <CurveToMesh
             data={data}
+            pulsingSpeed={3}
             materialColor={"cyan"}
             materialColor2={"blue"}
             thick={0.0025}
@@ -148,6 +164,7 @@ const SectionFilip = () => {
           ref={smallNavRef}
           onClickCallback={(sec) => changeLocation(sec)}
         />
+        <AboutMe ref={aboutMeRef} />
       </div>
 
       <Loading />

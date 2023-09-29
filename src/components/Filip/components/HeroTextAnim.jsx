@@ -9,7 +9,6 @@ const HeroTextAnim = ({ text }, ref) => {
   }));
 
   const letters = text.split("");
-  console.log(letters);
 
   const animate = () => {
     const letterArray = document.querySelectorAll(".each-letter");

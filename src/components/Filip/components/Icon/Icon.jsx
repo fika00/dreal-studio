@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import "./Icon.scss";
 
-const Icon = ({ art }) => {
+const Icon = ({ art, isSmall }) => {
   const divRef = useRef();
   const [isSelected, setIsSeleced] = useState(false);
   const handleSelect = () => {
@@ -13,10 +13,12 @@ const Icon = ({ art }) => {
   return (
     <div
       ref={divRef}
-      className={`outter-circle ${isSelected ? "selected" : ""}`}
+      className={`outter-circle ${isSelected ? "selected" : ""} ${
+        isSmall ? "small" : ""
+      }`}
       onClick={handleSelect}
     >
-      <img src={art} alt="" className="icon-itself" />
+      <img src={art} alt="" className={`icon-itself`} />
     </div>
   );
 };

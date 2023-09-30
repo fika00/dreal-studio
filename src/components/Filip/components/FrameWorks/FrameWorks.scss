@@ -1,0 +1,16 @@
+.frameworks-container {
+  display: flex;
+  justify-content: start;
+  gap: 20px;
+  position: relative;
+  padding: 0 10px;
+  .framework-icons {
+    position: relative;
+    width: 50px;
+    transition: transform 1s cubic-bezier(0.4, 0.02, 0.43, 0.97),
+      opacity 1s cubic-bezier(0.93, -0.01, 0.43, 0.97);
+
+    transform: translateY(-50%);
+    opacity: 0;
+  }
+}

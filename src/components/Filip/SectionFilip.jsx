@@ -33,6 +33,8 @@ import Icon from "./components/Icon/Icon";
 import HeroContainer from "./components/HeroContainer/HeroContainer";
 import SmallNav from "./components/SmallNav/SmallNav";
 import AboutMe from "./components/AboutMe/AboutMe";
+import Hobbies from "./components/Hobbies/Hobbies";
+import Work from "./components/Work/Work";
 
 const SectionFilip = () => {
   const camRef = useRef();
@@ -40,6 +42,8 @@ const SectionFilip = () => {
   const smallNavRef = useRef();
   const heroRef = useRef();
   const aboutMeRef = useRef();
+  const hobbiesRef = useRef();
+  const workRef = useRef();
 
   const posData = [
     [
@@ -63,7 +67,7 @@ const SectionFilip = () => {
   const changeLocation = (location) => {
     const loc = posData[location];
 
-    const sections = [null, aboutMeRef];
+    const sections = [null, aboutMeRef, hobbiesRef, workRef];
 
     if (location != 0) {
       smallNavRef.current.setIsVisible(true);
@@ -165,6 +169,8 @@ const SectionFilip = () => {
           onClickCallback={(sec) => changeLocation(sec)}
         />
         <AboutMe ref={aboutMeRef} />
+        <Hobbies ref={hobbiesRef} />
+        <Work ref={workRef} />
       </div>
 
       <Loading />

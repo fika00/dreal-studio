@@ -31,6 +31,7 @@ const HeroTextAnim = ({ text }, ref) => {
 
     const interval = setInterval(() => {
       letterArray[i].style.transform = "translateY(120%)";
+
       i++;
       if (i == letterArray.length) {
         clearInterval(interval);

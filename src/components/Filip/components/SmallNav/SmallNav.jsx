@@ -54,13 +54,13 @@ const SmallNav = ({ onClickCallback }, ref) => {
         <div className="small-nav-container">
           <div onClick={() => onClickCallback(0)} className="back-to-top"></div>
           <div onClick={() => onClickCallback(1)} className="icon-section">
-            <Icon art={userIcon} />
+            <Icon art={userIcon} isSmall />
           </div>
           <div onClick={() => onClickCallback(2)} className="icon-section">
-            <Icon art={puzzleIcon} />
+            <Icon art={puzzleIcon} isSmall />
           </div>
           <div onClick={() => onClickCallback(3)} className="icon-section">
-            <Icon art={jobIcon} />
+            <Icon art={jobIcon} isSmall />
           </div>
         </div>
       )}

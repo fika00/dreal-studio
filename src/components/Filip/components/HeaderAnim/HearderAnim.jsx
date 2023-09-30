@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import "./HeaderAnim.scss";
 import { useImperativeHandle, forwardRef } from "react";
 
-const HeaderAnim = ({ text }, ref) => {
+const HeaderAnim = ({ text, small }, ref) => {
   useImperativeHandle(ref, () => ({
     handleExit,
   }));
@@ -22,6 +22,7 @@ const HeaderAnim = ({ text }, ref) => {
         -50,
         50
       )}%)`;
+      letter.style.filter = "blur(10px)";
     });
   };
 
@@ -31,6 +32,7 @@ const HeaderAnim = ({ text }, ref) => {
     letters.forEach((letter) => {
       letter.style.opacity = 1;
       letter.style.transform = "translateX(0)";
+      letter.style.filter = "blur(0)";
     });
   };
 
@@ -51,7 +53,7 @@ const HeaderAnim = ({ text }, ref) => {
                 opacity: 0,
                 transform: `translateX(${getRandomNumberInRange(-50, 50)}%)`,
               }}
-              className="each-letter-header"
+              className={`each-letter-header ${small ? "small" : ""}`}
             >
               {letter}
             </span>

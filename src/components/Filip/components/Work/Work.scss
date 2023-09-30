@@ -20,22 +20,4 @@
 
     transition: 1s ease-in-out;
   }
-  .para-div {
-    padding: 15px;
-    height: 250px;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: 1.2s ease-in-out;
-    .para-text {
-      position: relative;
-      font-family: "Roboto Condensed", sans-serif;
-      font-weight: 400;
-      // font-family: "Akkurat", sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      font-size: 1rem;
-      line-height: 1.3rem;
-      color: white;
-    }
-  }
 }

@@ -11,6 +11,12 @@
   transform: translate(-50%, -50%);
   width: 100%;
 
+  .explore-cont {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
   .about-me-divider {
     border: unset;
     height: 1px;
@@ -23,9 +29,7 @@
   .para-div {
     padding: 15px;
     height: 250px;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: 1.2s ease-in-out;
+
     .para-text {
       position: relative;
       font-family: "Roboto Condensed", sans-serif;
@@ -36,6 +40,10 @@
       font-size: 1rem;
       line-height: 1.3rem;
       color: white;
+      opacity: 0;
+
+      transform: translateY(30px);
+      transition: 1.2s ease-in-out;
     }
   }
 }

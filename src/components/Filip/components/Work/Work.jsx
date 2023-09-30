@@ -27,9 +27,27 @@ const Work = (props, ref) => {
     if (isVisible) {
       hrRef.current.style.width = "0";
       headerAnimRef.current.handleExit();
-      paraRef.current.style.transform = "translateY(30px)";
-      paraRef.current.style.opacity = 0;
+
       frameWorksRef.current.exit();
+
+      // PARAS
+
+      const paras = document.querySelectorAll(".para-text");
+
+      let i = paras.length - 1;
+
+      console.log(paras.length);
+
+      const inteval = setInterval(() => {
+        paras[i].style.transform = "translateY(30px)";
+        paras[i].style.opacity = 0;
+        i--;
+        if (i < 0) {
+          clearInterval(inteval);
+        }
+      }, 100);
+
+      // PARAS
       setTimeout(() => {
         setIsVisible(false);
       }, 1500);
@@ -42,8 +60,18 @@ const Work = (props, ref) => {
         hrRef.current.style.width = "90%";
       }, 100);
       setTimeout(() => {
-        paraRef.current.style.transform = "translateY(0)";
-        paraRef.current.style.opacity = 1;
+        const paras = document.querySelectorAll(".para-text");
+
+        let i = 0;
+
+        const inteval = setInterval(() => {
+          paras[i].style.transform = "translateY(0)";
+          paras[i].style.opacity = 1;
+          i++;
+          if (i == paras.length) {
+            clearInterval(inteval);
+          }
+        }, 100);
       }, 1200);
     }
   }, [isVisible]);

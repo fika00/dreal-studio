@@ -22,9 +22,28 @@ const AboutMe = (props, ref) => {
     if (isVisible) {
       hrRef.current.style.width = "0";
       headerAnimRef.current.handleExit();
-      paraRef.current.style.transform = "translateY(30px)";
-      paraRef.current.style.opacity = 0;
+
       exploreButtonRef.current.disappear();
+
+      // PARAS
+
+      const paras = document.querySelectorAll(".para-text");
+
+      let i = paras.length - 1;
+
+      console.log(paras.length);
+
+      const inteval = setInterval(() => {
+        paras[i].style.transform = "translateY(30px)";
+        paras[i].style.opacity = 0;
+        i--;
+        if (i < 0) {
+          clearInterval(inteval);
+        }
+      }, 100);
+
+      // PARAS
+
       setTimeout(() => {
         setIsVisible(false);
       }, 1500);
@@ -40,8 +59,19 @@ const AboutMe = (props, ref) => {
         }, 1300);
       }, 100);
       setTimeout(() => {
-        paraRef.current.style.transform = "translateY(0)";
-        paraRef.current.style.opacity = 1;
+        const paras = document.querySelectorAll(".para-text");
+
+        let i = 0;
+        console.log(paras.length);
+
+        const inteval = setInterval(() => {
+          paras[i].style.transform = "translateY(0)";
+          paras[i].style.opacity = 1;
+          i++;
+          if (i == paras.length) {
+            clearInterval(inteval);
+          }
+        }, 100);
       }, 1200);
     }
   }, [isVisible]);
@@ -62,7 +92,9 @@ const AboutMe = (props, ref) => {
               <p className="para-text">Explore some of my work.</p>
             </div>
           </div>
-          <ExploreButton ref={exploreButtonRef} text={"Explore"} />
+          <div className="explore-cont">
+            <ExploreButton ref={exploreButtonRef} text={"Explore"} />
+          </div>
         </div>
       )}
     </>

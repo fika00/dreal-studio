@@ -36,13 +36,13 @@ const TextTransitionSlide = ({ inputText }, ref) => {
   };
   return (
     <div className="transitionslidewrapper">
-      {text.map((word, index_w) => {
+      {text.map((word, index) => {
         return (
-          <div className="eachword" key={word + index_w}>
-            {word.split("").map((letter, index_l) => {
+          <div className="eachword" key={index}>
+            {word.split("").map((letter, index) => {
               return (
                 <span
-                  key={letter + index_l}
+                  key={letter + index}
                   className="TextTransitionSlide"
                   style={{
                     transform: `translateX(${generateRandomSide()})`,

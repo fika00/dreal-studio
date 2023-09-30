@@ -77,28 +77,30 @@ const AboutMe = (props, ref) => {
   return (
     <>
       {isVisible && (
-        <div className="about-me-container">
-          <div className="about-me-header">
-            <HeaderAnim ref={headerAnimRef} text={"ABOUT ME"} />
-            <hr ref={hrRef} className="about-me-divider" />
-            <div ref={paraRef} className="para-div">
-              <p className="para-text">
-                Montenegro-born, economics and programming enthusiast with a
-                deep love for the art of video and photo editing.
-              </p>
-              <p className="para-text">
-                Crafting visual wonders, one pixel at a time.
-              </p>
+        <div className="wrapper">
+          <div className="about-me-container">
+            <div className="about-me-header">
+              <HeaderAnim ref={headerAnimRef} text={"ABOUT ME"} />
+              <hr ref={hrRef} className="about-me-divider" />
+              <div ref={paraRef} className="para-div">
+                <p className="para-text">
+                  Montenegro-born, economics and programming enthusiast with a
+                  deep love for the art of video and photo editing.
+                </p>
+                <p className="para-text">
+                  Crafting visual wonders, one pixel at a time.
+                </p>
+              </div>
             </div>
-          </div>
-          {/* <div className="next-button-container">
+            {/* <div className="next-button-container">
             <div className="next-button-wrap">
               <span className="next-button-text">Explore</span>
               <hr className="under-explore" />
             </div>
           </div> */}
-          <div className="explore-cont">
-            <ExploreButton ref={contactRef} text={"Contact"} />
+            <div className="explore-cont">
+              <ExploreButton ref={contactRef} text={"Contact"} />
+            </div>
           </div>
         </div>
       )}

@@ -78,22 +78,24 @@ const AboutMe = (props, ref) => {
   return (
     <>
       {isVisible && (
-        <div className="about-me-container">
-          <div className="about-me-header">
-            <HeaderAnim small ref={headerAnimRef} text={"HOBBIES"} />
-            <hr ref={hrRef} className="about-me-divider" />
-            <div ref={paraRef} className="para-div">
-              <p className="para-text">
-                Passionate about video editing, photo manipulation, music
-                production, and web experiences, I craft captivating multimedia
-                adventures. Join me on a journey through the realms of
-                creativity
-              </p>
-              <p className="para-text">Explore some of my work.</p>
+        <div className="wrapper">
+          <div className="about-me-container">
+            <div className="about-me-header">
+              <HeaderAnim small ref={headerAnimRef} text={"HOBBIES"} />
+              <hr ref={hrRef} className="about-me-divider" />
+              <div ref={paraRef} className="para-div">
+                <p className="para-text">
+                  Passionate about video editing, photo manipulation, music
+                  production, and web experiences, I craft captivating
+                  multimedia adventures. Join me on a journey through the realms
+                  of creativity
+                </p>
+                <p className="para-text">Explore some of my work.</p>
+              </div>
             </div>
-          </div>
-          <div className="explore-cont">
-            <ExploreButton ref={exploreButtonRef} text={"Explore"} />
+            <div className="explore-cont">
+              <ExploreButton ref={exploreButtonRef} text={"Explore"} />
+            </div>
           </div>
         </div>
       )}

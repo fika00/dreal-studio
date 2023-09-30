@@ -45,7 +45,7 @@ const Work = (props, ref) => {
         if (i < 0) {
           clearInterval(inteval);
         }
-      }, 100);
+      }, 150);
 
       // PARAS
       setTimeout(() => {
@@ -71,7 +71,7 @@ const Work = (props, ref) => {
           if (i == paras.length) {
             clearInterval(inteval);
           }
-        }, 100);
+        }, 150);
       }, 1200);
     }
   }, [isVisible]);

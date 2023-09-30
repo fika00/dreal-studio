@@ -40,7 +40,7 @@ const AboutMe = (props, ref) => {
         if (i < 0) {
           clearInterval(inteval);
         }
-      }, 100);
+      }, 150);
 
       // PARAS
 
@@ -57,7 +57,7 @@ const AboutMe = (props, ref) => {
         setTimeout(() => {
           exploreButtonRef.current.appear();
         }, 1300);
-      }, 100);
+      }, 150);
       setTimeout(() => {
         const paras = document.querySelectorAll(".para-text");
 

@@ -17,7 +17,7 @@ const FrameWorks = ({ frameworks }, ref) => {
       if (i == icons.length) {
         clearInterval(interval);
       }
-    }, 150);
+    }, 100);
   };
   const exit = () => {
     const icons = document.querySelectorAll(".framework-icons");
@@ -30,12 +30,12 @@ const FrameWorks = ({ frameworks }, ref) => {
       if (i == icons.length) {
         clearInterval(interval);
       }
-    }, 150);
+    }, 100);
   };
   useEffect(() => {
     setTimeout(() => {
       enter();
-    }, 1000);
+    }, 1300);
   }, []);
   return (
     <div className="frameworks-container">

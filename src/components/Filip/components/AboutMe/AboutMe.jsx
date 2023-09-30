@@ -40,7 +40,7 @@ const AboutMe = (props, ref) => {
         if (i < 0) {
           clearInterval(inteval);
         }
-      }, 100);
+      }, 150);
 
       // PARAS
       setTimeout(() => {
@@ -57,8 +57,6 @@ const AboutMe = (props, ref) => {
       setTimeout(() => {
         const paras = document.querySelectorAll(".para-text");
 
-        paras[1].style.transform = "translateY(0)";
-        paras[1].style.opacity = 1;
         let i = 0;
 
         const inteval = setInterval(() => {
@@ -68,7 +66,7 @@ const AboutMe = (props, ref) => {
           if (i == paras.length) {
             clearInterval(inteval);
           }
-        }, 100);
+        }, 150);
 
         contactRef.current.appear();
       }, 1200);

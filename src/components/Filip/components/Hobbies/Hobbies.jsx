@@ -94,7 +94,7 @@ const AboutMe = (props, ref) => {
               </div>
             </div>
             <div className="explore-cont">
-              <ExploreButton ref={exploreButtonRef} text={"Explore"} />
+              <ExploreButton ref={exploreButtonRef} text={"Explore"} red />
             </div>
           </div>
         </div>

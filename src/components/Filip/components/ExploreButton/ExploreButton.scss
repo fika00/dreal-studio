@@ -1,6 +1,10 @@
+$cyanColor: #00a3a3;
+$redColor: #e40000;
+
 .explore-container {
   display: inline-flex;
   flex-direction: column;
+  cursor: pointer;
   //   width: 125px;
   .explore-wrap {
     display: flex;
@@ -17,6 +21,7 @@
         text-transform: uppercase;
         font-size: 40px;
         color: white;
+        transition: 1.5s ease;
       }
     }
   }
@@ -29,5 +34,27 @@
     backdrop-filter: invert(90%);
     transition: 1.5s ease;
     align-self: flex-start;
+  }
+}
+
+.explore-container:hover {
+  .each-explore-letter {
+    .explore-text {
+      color: $cyanColor;
+    }
+  }
+  .under-explore {
+    background-color: $cyanColor;
+  }
+
+  &.red:hover {
+    .each-explore-letter {
+      .explore-text {
+        color: $redColor;
+      }
+    }
+    .under-explore {
+      background-color: $redColor;
+    }
   }
 }

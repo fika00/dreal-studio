@@ -3,7 +3,7 @@ import "./ExploreButton.scss";
 import { useEffect } from "react";
 import { forwardRef, useImperativeHandle } from "react";
 
-const ExploreButton = ({ text }, ref) => {
+const ExploreButton = ({ text, red }, ref) => {
   useImperativeHandle(ref, () => ({
     appear,
     disappear,
@@ -49,7 +49,7 @@ const ExploreButton = ({ text }, ref) => {
   };
 
   return (
-    <div className="explore-container">
+    <div className={`explore-container ${red ? "red" : ""}`}>
       <div className="explore-wrap">
         {letters.map((letter, index) => (
           <div className="each-explore-letter" key={index}>

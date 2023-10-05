@@ -35,9 +35,11 @@ import SmallNav from "./components/SmallNav/SmallNav";
 import AboutMe from "./components/AboutMe/AboutMe";
 import Hobbies from "./components/Hobbies/Hobbies";
 import Work from "./components/Work/Work";
+import VideoPlane from "./components/VideoPlane/VideoPlane";
 
 const SectionFilip = () => {
   const camRef = useRef();
+  const camMovementRef = useRef();
   const nameRef = useRef();
   const smallNavRef = useRef();
   const heroRef = useRef();
@@ -61,6 +63,10 @@ const SectionFilip = () => {
     [
       [0, -14.764, 7.552],
       [-0.16, 0, 0],
+    ],
+    [
+      [-0.039, -8.79, 2.4],
+      [-0.3, 0.065, 0.0],
     ],
   ];
 
@@ -100,18 +106,14 @@ const SectionFilip = () => {
       ease: "power3.inOut",
     });
   };
+
   return (
     <>
       <Canvas gl={{ preserveDrawingBuffer: true }}>
-        <PerspectiveCamera
-          ref={camRef}
-          position={posData[0][0]}
-          rotation={posData[0][1]}
-          fov={45}
-          makeDefault
-        />
+        <group ref={camRef} position={posData[0][0]} rotation={posData[0][1]}>
+          <PerspectiveCamera fov={45} makeDefault ref={camMovementRef} />
+        </group>
         {/* <SheetProvider sheet={sheet}> */}
-        {/* <CamMovement /> */}
         <group rotation={[0, 0, 0]} position={[0, -1, 2.5]}>
           <CurveToMesh
             data={dataHead}
@@ -137,6 +139,9 @@ const SectionFilip = () => {
             fragment={heartFragmentShader}
             vertex={heartVertexShader}
           />
+          {/* <group scale={2} position={[-1, 0, 5]}>
+            <VideoPlane />
+          </group> */}
         </group>
         <group
           rotation={[degToRad(-30), 0, degToRad(180)]}
@@ -169,7 +174,7 @@ const SectionFilip = () => {
           onClickCallback={(sec) => changeLocation(sec)}
         />
         <AboutMe ref={aboutMeRef} />
-        <Hobbies ref={hobbiesRef} />
+        <Hobbies ref={hobbiesRef} onCallback={() => changeLocation(4)} />
         <Work ref={workRef} />
       </div>
 

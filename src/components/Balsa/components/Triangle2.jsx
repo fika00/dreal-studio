@@ -40,10 +40,10 @@ const Triangle2 = forwardRef((props, ref) => {
       // if (triangleRef.current.material.uniforms.uTimePattern.value >= 1) {
       //   triangleRef.current.material.uniforms.uTimePattern.value = 0.0;
       // }
-      if (props.isMain) {
-        triangleRef.current.material.uniforms.uScroll.value =
-          scroll.offset * 0.75;
-      }
+      // if (props.isMain) {
+      //   triangleRef.current.material.uniforms.uScroll.value =
+      //     scroll.offset * 0.75;
+      // }
     }
   });
 

@@ -63,6 +63,6 @@ void main() {
     gl_FragColor = vec4(vec3(0.) , 1. - dist);
     
     // gl_FragColor = vec4(vec3(0.) + vec3(.4,.2,.8) * radial, 1. - dist);
-    gl_FragColor = vec4(vec3(0,1.,1.), 1. - dist);
+    gl_FragColor = vec4(vec3(2.,1.,0.), 1. - dist);
     // gl_FragColor = vec4(radial) ;
 }

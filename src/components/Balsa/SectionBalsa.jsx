@@ -62,15 +62,15 @@ const SectionBalsa = ({ isPhone }) => {
   return (
     <>
       <Canvas>
-        <ScrollControls
+        {/* <ScrollControls
           pages={3}
           style={{
             opacity: 0,
           }}
           damping={0.4}
-        >
-          <Scene isPhone={isPhone} />
-        </ScrollControls>
+        > */}
+        <Scene isPhone={isPhone} />
+        {/* </ScrollControls> */}
       </Canvas>
       <Loading />
     </>
@@ -191,11 +191,11 @@ const Scene = ({ isPhone }) => {
     }
   }, []);
 
-  const scroll = useScroll();
+  // const scroll = useScroll();
 
   useFrame(() => {
     if (camRef?.current?.position?.z != null) {
-      camRef.current.position.z = -scroll.offset * 5 + 5;
+      // camRef.current.position.z = -scroll.offset * 5 + 5;
       // if (camRef.current.position.z < 0.3) {
       //   bgColorRef.current.material.color = new Color("black");
       // } else {
@@ -301,7 +301,7 @@ const Scene = ({ isPhone }) => {
       <EffectComposer>
         <Bloom mipmapBlur intensity={2} luminanceThreshold={0.3} />
       </EffectComposer>
-
+      <OrbitControls />
       {/* <Stats /> */}
     </>
   );

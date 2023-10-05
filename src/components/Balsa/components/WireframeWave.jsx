@@ -84,7 +84,7 @@ const WireframeWave = (props, ref) => {
           <shaderMaterial
             fragmentShader={WaveFragmentBottom}
             vertexShader={WaveVertexBottom}
-            // wireframe
+            wireframe
             transparent
             // linewidth={10}
             uniforms={{

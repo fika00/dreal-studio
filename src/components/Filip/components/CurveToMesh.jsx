@@ -23,7 +23,7 @@ const Tube = ({
       <tubeGeometry args={[curve, 64, thick, 2, false]} />
       <shaderMaterial
         transparent
-        depthTest={false}
+        // depthTest={false}
         depthWrite={false}
         // wireframe={true}
         blending={THREE.AdditiveBlending}

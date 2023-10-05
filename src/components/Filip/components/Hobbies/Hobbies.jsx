@@ -94,7 +94,12 @@ const AboutMe = (props, ref) => {
               </div>
             </div>
             <div className="explore-cont">
-              <ExploreButton ref={exploreButtonRef} text={"Explore"} red />
+              <ExploreButton
+                ref={exploreButtonRef}
+                text={"Explore"}
+                red
+                callbackProp={props.onCallback}
+              />
             </div>
           </div>
         </div>

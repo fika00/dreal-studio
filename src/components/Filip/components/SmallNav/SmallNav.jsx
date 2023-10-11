@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { forwardRef, useImperativeHandle } from "react";
 
-const SmallNav = ({ onClickCallback }, ref) => {
+const SmallNav = ({ onClickCallback, isPhone }, ref) => {
   useImperativeHandle(ref, () => ({
     setIsVisible,
     hideSmallNav,
@@ -43,6 +43,7 @@ const SmallNav = ({ onClickCallback }, ref) => {
   };
 
   useEffect(() => {
+    console.log(isPhone);
     if (isVisible) {
       showSmallNav();
     }
@@ -53,13 +54,22 @@ const SmallNav = ({ onClickCallback }, ref) => {
       {isVisible && (
         <div className="small-nav-container">
           <div onClick={() => onClickCallback(0)} className="back-to-top"></div>
-          <div onClick={() => onClickCallback(1)} className="icon-section">
+          <div
+            onClick={() => onClickCallback(1)}
+            className={`icon-section ${!isPhone ? "is-Pc" : ""}`}
+          >
             <Icon art={userIcon} isSmall />
           </div>
-          <div onClick={() => onClickCallback(2)} className="icon-section">
+          <div
+            onClick={() => onClickCallback(2)}
+            className={`icon-section ${!isPhone ? `is-Pc` : ``}`}
+          >
             <Icon art={puzzleIcon} isSmall />
           </div>
-          <div onClick={() => onClickCallback(3)} className="icon-section">
+          <div
+            onClick={() => onClickCallback(3)}
+            className={`icon-section ${!isPhone ? `is-Pc` : ``}`}
+          >
             <Icon art={jobIcon} isSmall />
           </div>
         </div>

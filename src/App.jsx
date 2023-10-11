@@ -54,7 +54,10 @@ function App() {
               <SectionStevo res={[screenSize.width, screenSize.height]} />
             }
           />
-          <Route path="/filip" element={<SectionFilip />} />
+          <Route
+            path="/filip"
+            element={<SectionFilip isPhone={isPhoneProp} />}
+          />
           <Route path="/baki" element={<SectionBalsa />} />
           <Route path="/david" element={<SectionDavid />} />
 

@@ -24,4 +24,14 @@
     transform: translateX(75px);
     cursor: pointer;
   }
+  .is-Pc {
+    transform: translateX(-85px);
+  }
+}
+@media only screen and (min-width: 601px) {
+  .small-nav-container {
+    right: unset;
+    bottom: unset;
+    left: 10px;
+  }
 }

@@ -36,8 +36,9 @@ import AboutMe from "./components/AboutMe/AboutMe";
 import Hobbies from "./components/Hobbies/Hobbies";
 import Work from "./components/Work/Work";
 import VideoPlane from "./components/VideoPlane/VideoPlane";
+import VideoSlide from "./components/VideoSlide/VideoSlide";
 
-const SectionFilip = () => {
+const SectionFilip = ({ isPhone }) => {
   const camRef = useRef();
   const camMovementRef = useRef();
   const nameRef = useRef();
@@ -46,6 +47,7 @@ const SectionFilip = () => {
   const aboutMeRef = useRef();
   const hobbiesRef = useRef();
   const workRef = useRef();
+  const videoplaneRef = useRef();
 
   const posData = [
     [
@@ -139,9 +141,13 @@ const SectionFilip = () => {
             fragment={heartFragmentShader}
             vertex={heartVertexShader}
           />
-          {/* <group scale={2} position={[-1, 0, 5]}>
-            <VideoPlane />
-          </group> */}
+          <group
+            scale={2}
+            position={[-0.5, -1, 9]}
+            rotation={[degToRad(-15), 0, degToRad(5)]}
+          >
+            <VideoPlane ref={videoplaneRef} />
+          </group>
         </group>
         <group
           rotation={[degToRad(-30), 0, degToRad(180)]}
@@ -170,12 +176,20 @@ const SectionFilip = () => {
           onCallback={(section) => changeLocation(section)}
         />
         <SmallNav
+          isPhone={isPhone}
           ref={smallNavRef}
           onClickCallback={(sec) => changeLocation(sec)}
         />
         <AboutMe ref={aboutMeRef} />
-        <Hobbies ref={hobbiesRef} onCallback={() => changeLocation(4)} />
+        <Hobbies
+          ref={hobbiesRef}
+          onCallback={() => {
+            changeLocation(4);
+            videoplaneRef.current.appear();
+          }}
+        />
         <Work ref={workRef} />
+        {/* <VideoSlide /> */}
       </div>
 
       <Loading />

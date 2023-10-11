@@ -4,12 +4,18 @@ import { useImperativeHandle, forwardRef } from "react";
 
 import "./Hobbies.scss";
 import ExploreButton from "../ExploreButton/ExploreButton";
+import premiere_icon from "/imgs/filip/hobbies/premiere-icon.svg";
+import photoshop_icon from "/imgs/filip/hobbies/photoshop-icon.svg";
+import blender_icon from "/imgs/filip/hobbies/blender-icon.svg";
+import aftereffects_icon from "/imgs/filip/hobbies/aftereffects-icon.svg";
+import FrameWorks from "../FrameWorks/FrameWorks";
 
 const AboutMe = (props, ref) => {
   const [isVisible, setIsVisible] = useState(false);
   const headerAnimRef = useRef();
   const paraRef = useRef();
   const exploreButtonRef = useRef();
+  const frameworksRef = useRef();
 
   useImperativeHandle(ref, () => ({
     setIsVisible,
@@ -32,6 +38,8 @@ const AboutMe = (props, ref) => {
       let i = paras.length - 1;
 
       console.log(paras.length);
+
+      frameworksRef.current.exit();
 
       const inteval = setInterval(() => {
         paras[i].style.transform = "translateY(30px)";
@@ -93,6 +101,15 @@ const AboutMe = (props, ref) => {
                 <p className="para-text">Explore some of my work.</p>
               </div>
             </div>
+            <FrameWorks
+              frameworks={[
+                aftereffects_icon,
+                photoshop_icon,
+                premiere_icon,
+                blender_icon,
+              ]}
+              ref={frameworksRef}
+            />
             <div className="explore-cont">
               <ExploreButton
                 ref={exploreButtonRef}

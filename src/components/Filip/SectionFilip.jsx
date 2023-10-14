@@ -93,6 +93,10 @@ const SectionFilip = ({ isPhone }) => {
       }
     });
 
+    if (location != 4) {
+      videoplaneRef.current.disappear();
+    }
+
     gsap.to(camRef.current.position, {
       x: loc[0][0],
       y: loc[0][1],
@@ -143,10 +147,10 @@ const SectionFilip = ({ isPhone }) => {
           />
           <group
             scale={2}
-            position={[-0.5, -1, 9]}
+            position={[-0.5, -5, 10.5]}
             rotation={[degToRad(-15), 0, degToRad(5)]}
           >
-            <VideoPlane ref={videoplaneRef} />
+            <VideoPlane ref={videoplaneRef} isPhone={isPhone} />
           </group>
         </group>
         <group

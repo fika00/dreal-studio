@@ -4,13 +4,20 @@
   gap: 20px;
   position: relative;
   padding: 0 10px;
+  margin-top: 20px;
+  margin-bottom: 30px;
   .framework-icons {
     position: relative;
     width: 50px;
     transition: transform 1s cubic-bezier(0.4, 0.02, 0.43, 0.97),
-      opacity 1.1s cubic-bezier(0.93, -0.01, 0.43, 0.97);
+      opacity 1.1s cubic-bezier(0.93, -0.01, 0.43, 0.97), filter 0.5s,
+      -webkit-filter 0.5s;
 
     transform: translateY(-50%);
     opacity: 0;
+  }
+  .framework-icons:hover {
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.438));
+    -webkit-filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.438));
   }
 }

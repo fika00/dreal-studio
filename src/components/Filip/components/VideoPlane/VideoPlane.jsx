@@ -8,7 +8,7 @@ import dissolveFragment from "../shaders/dissolveFragmentShader.glsl";
 import dissolveVertex from "../shaders/dissolveVertexShader.glsl";
 import gsap from "gsap";
 import { useEffect } from "react";
-import { useImperativeHandle, forwardRef } from "react";
+import { useImperativeHandle, forwardRef, useState } from "react";
 
 export function VideoPlane(props, ref) {
   useImperativeHandle(ref, () => ({
@@ -17,24 +17,50 @@ export function VideoPlane(props, ref) {
   }));
   const materialRef = useRef();
   const { nodes, materials } = useGLTF("/models/VideoPlane.glb");
-  const texture = useVideoTexture(vid1_hevc);
+  const videoPlayerProps = {
+    start: false,
+  };
+  const texture = useVideoTexture(vid1_hevc, videoPlayerProps);
+
+  const videoRef = useRef();
+  const bgBlur = document.querySelector(".html_container");
+  const isPlaying = useRef(false);
+  const scale = props.isPhone ? 0.75 : 2;
 
   useEffect(() => {
     console.log(materialRef.current);
+    stopVideo();
   }, []);
   const appear = () => {
+    playVideo();
+    bgBlur.style.backdropFilter = "blur(0.5px)";
+    bgBlur.style.webkitBackdropFilter = "blur(0.5px)";
+
     gsap.to(materialRef.current, {
       opacity: 1,
-      duration: 5,
+      duration: 6,
       ease: "power3.inOut",
     });
   };
   const disappear = () => {
     gsap.to(materialRef.current, {
       opacity: 0,
-      duration: 5,
+      duration: 3,
       ease: "power3.inOut",
+      onComplete: () => {
+        stopVideo();
+      },
     });
+  };
+  const playVideo = () => {
+    texture.image.play();
+  };
+  const stopVideo = () => {
+    texture.image.pause();
+    texture.image.currentTime = 0;
+    console.log(texture.image);
+    bgBlur.style.backdropFilter = "blur(1.5px)";
+    bgBlur.style.webkitBackdropFilter = "blur(1.5px)";
   };
 
   return (
@@ -43,12 +69,12 @@ export function VideoPlane(props, ref) {
         castShadow
         receiveShadow
         geometry={nodes.VideoPlane.geometry}
-        scale={[1.77 * 2, 1, 1 * 2]}
+        scale={[1.77 * scale, 1, 1 * scale]}
       >
         <meshBasicMaterial
           side={BackSide}
           map={texture}
-          depthWrite={true}
+          depthWrite={false}
           transparent
           opacity={0}
           ref={materialRef}

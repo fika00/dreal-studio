@@ -31,7 +31,11 @@ const SmallNav = ({ onClickCallback, isPhone }, ref) => {
     const sectionIcons = document.querySelectorAll(".icon-section");
     let i = 0;
     const interval = setInterval(() => {
-      sectionIcons[i].style.transform = "translateX(75px)";
+      if (isPhone) {
+        sectionIcons[i].style.transform = "translateX(75px)";
+      } else {
+        sectionIcons[i].style.transform = "translateX(-75px)";
+      }
       i++;
       if (i == sectionIcons.length) {
         clearInterval(interval);

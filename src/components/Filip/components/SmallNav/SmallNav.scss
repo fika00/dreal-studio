@@ -1,6 +1,6 @@
 .small-nav-container {
   position: absolute;
-  width: 60px;
+  // width: 60px;
   height: 220px;
   display: flex;
   flex-direction: column;
@@ -10,6 +10,7 @@
   right: 0;
   bottom: 0;
   z-index: 1;
+  // background-color: aqua;
 
   .back-to-top {
     width: 10px;

@@ -23,7 +23,7 @@ const FrameWorks = ({ frameworks }, ref) => {
     const icons = document.querySelectorAll(".framework-icons");
     let i = 0;
     const interval = setInterval(() => {
-      icons[i].style.transform = "translateY(-50%)";
+      icons[i].style.transform = "translateY(50%)";
       icons[i].style.opacity = 0;
 
       i++;

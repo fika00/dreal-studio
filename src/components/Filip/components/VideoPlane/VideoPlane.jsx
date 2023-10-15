@@ -36,16 +36,18 @@ export function VideoPlane(props, ref) {
     bgBlur.style.backdropFilter = "blur(0.5px)";
     bgBlur.style.webkitBackdropFilter = "blur(0.5px)";
 
-    gsap.to(materialRef.current, {
-      opacity: 1,
-      duration: 6,
-      ease: "power3.inOut",
-    });
+    setTimeout(() => {
+      gsap.to(materialRef.current, {
+        opacity: 1,
+        duration: 3,
+        ease: "power3.inOut",
+      });
+    }, 1500);
   };
   const disappear = () => {
     gsap.to(materialRef.current, {
       opacity: 0,
-      duration: 3,
+      duration: 2,
       ease: "power3.inOut",
       onComplete: () => {
         stopVideo();

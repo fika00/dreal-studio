@@ -14,7 +14,7 @@ const EnviromentLights = () => {
       <group ref={lightRef}>
         <Lightformer
           form="ring" // circle | ring | rect (optional, default = rect)
-          intensity={1} // power level (optional = 1)
+          intensity={1 / 8} // power level (optional = 1)
           color="#61f1ff" // (optional = white)
           position={[0, 1, -5]}
           scale={[10, 5]} // Scale it any way you prefer (optional = [1, 1])
@@ -23,7 +23,7 @@ const EnviromentLights = () => {
 
         <Lightformer
           form="rect" // circle | ring | rect (optional, default = rect)
-          intensity={0.7} // power level (optional = 1)
+          intensity={0.7 / 8} // power level (optional = 1)
           color="#00efff" // (optional = white)
           position={[0, 1, 5]}
           scale={[5, 5]} // Scale it any way you prefer (optional = [1, 1])

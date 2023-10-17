@@ -19,7 +19,7 @@ export function DavidHuman(props) {
             color={"white"}
             roughness={0.11}
             metalness={0.9}
-            envMapIntensity={1}
+            envMapIntensity={10}
           />
         </mesh>
       </group>

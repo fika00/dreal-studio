@@ -17,7 +17,7 @@ export function EyeModel(props) {
   });
 
   return (
-    <e.group
+    <group
       {...props}
       dispose={null}
       scale={10}
@@ -37,7 +37,7 @@ export function EyeModel(props) {
           color={"white"}
           roughness={0.11}
           metalness={0.9}
-          envMapIntensity={1}
+          envMapIntensity={10}
         />
       </mesh>
       <mesh
@@ -51,10 +51,10 @@ export function EyeModel(props) {
           color={"white"}
           roughness={0.11}
           metalness={0.9}
-          envMapIntensity={1}
+          envMapIntensity={10}
         />
       </mesh>
-    </e.group>
+    </group>
   );
 }
 

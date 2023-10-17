@@ -3,6 +3,9 @@ import "./SubHeader.scss";
 import { useImperativeHandle, forwardRef } from "react";
 
 const HeaderDavidAnim = ({ text, small }, ref) => {
+  useImperativeHandle(ref, () => ({
+    handleExit,
+  }));
   const words = text.split(" ");
   console.log(words);
 
@@ -11,30 +14,40 @@ const HeaderDavidAnim = ({ text, small }, ref) => {
   };
 
   const handleExit = () => {
-    const letters = document.querySelectorAll(".sub-header-each-word");
+    const letters = document.querySelectorAll(".sub-header-text");
 
-    letters.forEach((letter) => {
-      letter.style.opacity = 0;
-      letter.style.transform = `translateY(-100%)`;
-      letter.style.filter = "blur(10px)";
-    });
+    let i = 0;
+    const interval = setInterval(() => {
+      letters[i].style.opacity = 1;
+      letters[i].style.transform = "translateY(-100%)";
+      letters[i].style.filter = "blur(3px)";
+      i++;
+      if (i == letters.length) {
+        clearInterval(interval);
+      }
+    }, 150);
   };
 
   const handleEnter = () => {
-    const letters = document.querySelectorAll(".sub-header-each-word");
-
-    letters.forEach((letter) => {
-      letter.style.opacity = 1;
-      letter.style.transform = "translateY(0)";
-      letter.style.filter = "blur(0)";
-    });
+    const letters = document.querySelectorAll(".sub-header-text");
+    let i = 0;
+    const interval = setInterval(() => {
+      letters[i].style.opacity = 1;
+      letters[i].style.transform = "translateY(0)";
+      letters[i].style.filter = "blur(0)";
+      i++;
+      if (i == letters.length) {
+        clearInterval(interval);
+      }
+    }, 150);
   };
 
   useEffect(() => {
     setTimeout(() => {
+      // handleExit();
       handleEnter();
       console.log("Entered");
-    }, 750);
+    }, 2000);
   }, []);
 
   return (
@@ -42,7 +55,7 @@ const HeaderDavidAnim = ({ text, small }, ref) => {
       <div className="sub-header-cont">
         {words.map((word, index) => (
           <div className="sub-header-each-word" key={index}>
-            {word}
+            <span className="sub-header-text">{word}</span>
           </div>
         ))}
       </div>

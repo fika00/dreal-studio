@@ -5,12 +5,18 @@
   gap: 20px;
   width: 100%;
   justify-content: flex-end;
-  margin: 20px 0;
   .sub-header-each-word {
     display: flex;
     font-family: "Montserrat", sans-serif;
     font-weight: 300;
-    font-size: 2rem;
+    font-size: 1.7rem;
+    overflow: hidden;
+
     color: white;
+    .sub-header-text {
+      transform: translateY(-100%);
+      position: relative;
+      transition: 1.7s cubic-bezier(0.28, 0.2, 0.18, 0.98);
+    }
   }
 }

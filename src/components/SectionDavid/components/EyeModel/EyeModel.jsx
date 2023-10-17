@@ -20,7 +20,14 @@ export function EyeModel(props) {
   });
 
   return (
-    <e.group {...props} dispose={null} scale={10} theatreKey="EyeModel">
+    <e.group
+      {...props}
+      dispose={null}
+      scale={10}
+      position={[-1.195, -2.122, 5.423]}
+      rotation={[-1.05, -3, 0]}
+      theatreKey="EyeModel"
+    >
       <mesh
         castShadow
         receiveShadow

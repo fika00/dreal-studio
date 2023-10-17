@@ -14,9 +14,6 @@ export function EyeModel(props) {
   useFrame((state, delta) => {
     t += 1 * delta;
     const sin = Math.sin(t);
-    console.log(mesh1Ref.current.material);
-    // mesh1Ref.current.emissiveIntensity = (sin + 1) / 2;
-    // mesh2Ref.current.emissiveIntensity = (sin + 1) / 2;
   });
 
   return (

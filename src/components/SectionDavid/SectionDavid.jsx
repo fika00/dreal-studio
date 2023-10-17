@@ -27,6 +27,7 @@ import "./SectionDavid.scss";
 import Effects from "./components/Effects/Effects";
 import * as THREE from "three";
 import EyeModel from "./components/EyeModel/EyeModel";
+import Section1 from "./components/Section1/Section1";
 
 studio.extend(extension);
 studio.initialize();
@@ -41,9 +42,6 @@ const SectionDavid = () => {
     [
       [2.243, 5.343, -3.813],
       [0, -3.95, 0],
-      //
-      // [1.236, 5.013, -2.584],
-      // [2.981, 0.766, -3.034],
     ],
     [
       [0.473, 5.757, 1.97],
@@ -89,18 +87,6 @@ const SectionDavid = () => {
             />
             <DavidHuman />
             <EyeModel />
-            {/* <SpotLightWithHelper
-          theatreKey="SpotLight 1"
-          position={[0, 0, 0]}
-          intensity={1}
-          showHelper={true}
-        /> */}
-            {/* <SpotLightWithHelper
-            theatreKey="SpotLight 2"
-            position={[0, 0, 0]}
-            intensity={1}
-            showHelper={true}
-          /> */}
 
             <Environment
               frames={Infinity}
@@ -153,6 +139,8 @@ const SectionDavid = () => {
           Section4
         </button>
       </div>
+
+      <Section1 />
 
       <Loading />
     </>

@@ -29,7 +29,7 @@ export function Human(props) {
     roughness: 0.35,
     metalness: 0.45,
     envMapIntensity: 1.75,
-    // wireframe: true,
+    wireframe: true,
     wireframeLinewidth: 2, // Adjust the line width as needed
     wireframeLinejoin: "round", // You can also use "miter" or "bevel"
 

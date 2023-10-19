@@ -1,44 +1,30 @@
-import { MeshReflectorMaterial } from "@react-three/drei";
+import { MeshReflectorMaterial, Reflector } from "@react-three/drei";
 import { useState } from "react";
 import { useImperativeHandle, forwardRef } from "react";
 
 const ReflectiveFloor = (props, ref) => {
-  useImperativeHandle(ref, () => ({
-    handleShow,
-    handleHide,
-  }));
-
   const degToRad = (deg) => {
     return deg * 0.0174533;
   };
-  const [isVisible, setIsVisible] = useState(false);
 
-  const handleShow = () => {
-    setIsVisible(true);
-  };
-  const handleHide = () => {
-    setIsVisible(false);
-  };
   return (
     <>
-      <mesh scale={15} position={[0, -1, 0]} rotation={[degToRad(-90), 0, 0]}>
+      <mesh
+        position={[0, -0.7, 0]}
+        rotation={[-Math.PI / 2, 0, Math.PI / 2]}
+        scale={10}
+      >
         <planeGeometry />
         <MeshReflectorMaterial
-          color="gray"
-          blur={[500, 250]}
-          resolution={2024}
-          mixBlur={10}
-          mixStrength={200}
-          metalness={0.999}
-          roughness={0.05}
-          mirror={0}
-          opacity={isVisible ? 1 : 0}
-          depthWrite={false}
-          transparent
+          color={"#080808"}
+          resolution={256}
+          mixStrength={75}
+          blur={[512, 256]}
+          mixBlur={1}
         />
       </mesh>
     </>
   );
 };
 
-export default forwardRef(ReflectiveFloor);
+export default ReflectiveFloor;

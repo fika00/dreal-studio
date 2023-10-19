@@ -123,14 +123,9 @@ const SectionStevo = () => {
 
         <EffectComposer>
           <ToneMapping middleGrey={0.5} />
-
+          <Bloom mipmapBlur luminanceThreshold={0.3} intensity={3} />
           {/* <ChromaticAberration offset={[0.001, 0]} /> */}
-          <HueSaturation saturation={-1} />
-          <BrightnessContrast
-            brightness={-0.4} // brightness. min: -1, max: 1
-            contrast={0.3} // contrast: min -1, max: 1
-          />
-          <Bloom mipmapBlur luminanceThreshold={0.6} intensity={1} />
+          {/* <HueSaturation saturation={-1} /> */}
         </EffectComposer>
       </Canvas>
 

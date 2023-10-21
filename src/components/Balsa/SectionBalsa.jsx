@@ -102,7 +102,7 @@ const Scene = ({ isPhone }) => {
       <Screens />
       <Image url={balsa} transparent scale={1.15} position={[0, -0.1, 0]} />
 
-      {/* <ReflectiveFloor /> */}
+      <ReflectiveFloor />
 
       <ambientLight intensity={0.5} />
 

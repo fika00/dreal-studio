@@ -28,6 +28,7 @@ import Loading from "../Loading/Loading";
 import TextTransitionSlide from "../TextTransitionSlide";
 import "./SectionStevo.css";
 import { gsap } from "gsap";
+import { BlurPass } from "postprocessing";
 
 import ScreenColorFragment from "./components/shaders/ScreenColorFragment.glsl";
 import ScreenColorVertex from "./components/shaders/ScreenColorVertex.glsl";
@@ -129,6 +130,7 @@ const SectionStevo = () => {
         </EffectComposer>
       </Canvas>
 
+      <div className="html-stevo-container"></div>
       <Loading />
     </>
   );

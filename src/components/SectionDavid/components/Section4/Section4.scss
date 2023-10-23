@@ -1,0 +1,32 @@
+.section4-container {
+  position: absolute;
+  width: 600px;
+  height: 300px;
+  left: 10%;
+  top: 20%;
+  // background-color: aquamarine;
+  .para-div {
+    margin-top: 7px;
+    padding-left: 75px;
+    padding-right: 20px;
+    .para-text {
+      position: relative;
+      text-align: right;
+      line-height: 1.4rem;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 500;
+      font-size: 1.2rem;
+      color: white;
+      transform: translateY(20%);
+      opacity: 0;
+      transition: 1s ease-in-out;
+    }
+    .left {
+      text-align: left;
+    }
+  }
+  .lefty {
+    padding-left: 0px;
+    padding-right: 100px;
+  }
+}

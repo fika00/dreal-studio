@@ -16,6 +16,8 @@ import {
   LoopOnce,
 } from "three";
 import { useEffect } from "react";
+
+import vertexShader from "./shaders/ScreenColorVertex.glsl";
 export function Human(props) {
   const texture = useLoader(TextureLoader, "./models/textures/standard.png");
   const { gl, scene } = useThree();
@@ -34,10 +36,11 @@ export function Human(props) {
     wireframeLinejoin: "round", // You can also use "miter" or "bevel"
 
     // side: FrontSide,
-    flatShading: false,
 
     onBeforeCompile: (shader) => {
       shader.uniforms.uTime = { value: 0 };
+
+      // shader.vertexShader = vertexShader;
 
       shader.fragmentShader =
         `
@@ -69,6 +72,7 @@ export function Human(props) {
        
             #ifdef USE_ENVMAP
             
+
     
         vec3 getIBLIrradiance( const in vec3 normal ) {
     
@@ -141,12 +145,6 @@ export function Human(props) {
             `
       );
 
-      shader.fragmentShader = shader.fragmentShader.replace(
-        `void main() {`,
-        `void main() {
-        if (gl_FrontFacing == false) discard;`
-      );
-
       movingMaterial.userData.shader = shader;
     },
   });
@@ -155,38 +153,38 @@ export function Human(props) {
   const { nodes, materials, animations } = useGLTF("models/Stevo_idle.glb");
   const { actions, mixer } = useAnimations(animations, group);
 
-  useEffect(() => {
-    const handleAnimationComplete = (e) => {
-      if (e.action === actions.rigAction) {
-        console.log("rigAction completed");
-        actions.rigAction2.reset().play();
-      } else if (e.action === actions.rigAction2) {
-        console.log("rigAction2 completed");
-        actions.rigAction.reset().play();
+  // useEffect(() => {
+  //   const handleAnimationComplete = (e) => {
+  //     if (e.action === actions.rigAction) {
+  //       console.log("rigAction completed");
+  //       actions.rigAction2.reset().play();
+  //     } else if (e.action === actions.rigAction2) {
+  //       console.log("rigAction2 completed");
+  //       actions.rigAction.reset().play();
 
-        // Do something else or loop back to the first animation
-        // actions.rigAction.reset().play();
-      }
-    };
-    actions.rigAction.clampWhenFinished = true;
-    actions.rigAction2.clampWhenFinished = true;
+  //       // Do something else or loop back to the first animation
+  //       // actions.rigAction.reset().play();
+  //     }
+  //   };
+  //   actions.rigAction.clampWhenFinished = true;
+  //   actions.rigAction2.clampWhenFinished = true;
 
-    actions.rigAction.setDuration(10);
-    actions.rigAction2.setDuration(10);
+  //   actions.rigAction.setDuration(10);
+  //   actions.rigAction2.setDuration(10);
 
-    actions.rigAction.setLoop(LoopOnce, 0);
-    actions.rigAction2.setLoop(LoopOnce, 0);
+  //   actions.rigAction.setLoop(LoopOnce, 0);
+  //   actions.rigAction2.setLoop(LoopOnce, 0);
 
-    mixer.addEventListener("finished", handleAnimationComplete);
-    console.log(mixer);
+  //   mixer.addEventListener("finished", handleAnimationComplete);
+  //   console.log(mixer);
 
-    actions.rigAction.play();
+  //   actions.rigAction.play();
 
-    return () => {
-      // Cleanup
-      mixer.removeEventListener("finished", handleAnimationComplete);
-    };
-  }, []);
+  //   return () => {
+  //     // Cleanup
+  //     mixer.removeEventListener("finished", handleAnimationComplete);
+  //   };
+  // }, []);
   useFrame((state, delta) => {
     // console.log(delta);
     try {
@@ -196,6 +194,10 @@ export function Human(props) {
       console.log(e);
     }
   });
+
+  useEffect(() => {
+    console.log(modelRef.current.material);
+  }, []);
 
   return (
     <group ref={group} {...props} dispose={null}>

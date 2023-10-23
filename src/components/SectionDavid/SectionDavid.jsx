@@ -22,6 +22,8 @@ import EyeModel from "./components/EyeModel/EyeModel";
 import Section1 from "./components/Section1/Section1";
 import Section2 from "./components/Section2/Section2";
 import Section3 from "./components/Section3/Section3";
+import Section4 from "./components/Section4/Section4";
+
 import DavidSmallNav from "./components/SmallNav/DavidSmallNav";
 import CameraRig from "./components/CameraRig/CameraRig";
 
@@ -41,6 +43,7 @@ const SectionDavid = () => {
   const section1Ref = useRef();
   const section2Ref = useRef();
   const section3Ref = useRef();
+  const section4Ref = useRef();
   const smallNavRef = useRef();
 
   //   useEffect(() => {
@@ -65,7 +68,7 @@ const SectionDavid = () => {
     ],
   ];
 
-  const sections = [section1Ref, section2Ref, section3Ref, null];
+  const sections = [section1Ref, section2Ref, section3Ref, section4Ref];
 
   const changeLocation = (location) => {
     const loc = posData[location];
@@ -160,6 +163,7 @@ const SectionDavid = () => {
       <Section1 callBackProp={() => changeLocation(1)} ref={section1Ref} />
       <Section2 ref={section2Ref} />
       <Section3 ref={section3Ref} />
+      <Section4 ref={section4Ref} />
 
       <DavidSmallNav
         ref={smallNavRef}

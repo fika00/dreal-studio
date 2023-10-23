@@ -1,13 +1,19 @@
-import { useRef } from "react";
-import { Environment, Float } from "@react-three/drei";
+import { useEffect, useRef, useState } from "react";
+import { Environment, Float, useVideoTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { Lightformer } from "@react-three/drei";
 import Effects from "../Effects/Effects";
+import vid1_hevc from "/imgs/filip/videocontent/collection.mp4";
+import { degToRad } from "three/src/math/MathUtils";
 
 const EnviromentLights = () => {
   const lightRef = useRef();
 
-  // useFrame(() => (lightRef.current.rotation.x += 0.01));
+  // useFrame(() => {
+  //   lightRef.current.rotation.x += 0.01;
+  // });
+
+  const texture = useVideoTexture(vid1_hevc);
 
   return (
     <>
@@ -29,8 +35,15 @@ const EnviromentLights = () => {
           scale={[5, 5]} // Scale it any way you prefer (optional = [1, 1])
           target={[0, 1, 0]} // Target position (optional = undefined)
         />
+        {/* <mesh
+          //  rotation={[degToRad(180), 0, 0]}
+          position={[0, 1, -5]}
+          scale={7}
+        >
+          <planeGeometry args={[1.77, 1]} />
+          <meshBasicMaterial map={texture} />
+        </mesh> */}
       </group>
-      {/* <Effects /> */}
     </>
   );
 };

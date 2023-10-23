@@ -9,7 +9,7 @@ import { BlendFunction } from "postprocessing";
 
 const Effects = () => {
   return (
-    <EffectComposer renderPriority={1}>
+    <EffectComposer>
       <ToneMapping middleGrey={0.3} />
       <Bloom intensity={0.5} luminanceThreshold={0.45} mipmapBlur />
       <Noise premultiply opacity={0.8} />

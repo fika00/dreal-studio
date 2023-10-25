@@ -2,7 +2,7 @@ import ButtonDavid from "../ButtonDavid/ButtonDavid";
 import HeaderDavid from "../Header/HeaderDavid";
 import SubHeader from "../SubHeader/SubHeader";
 import { useEffect, useRef, useState } from "react";
-import "./section4.scss";
+import "./Section4.scss";
 import { useImperativeHandle, forwardRef } from "react";
 
 import ae from "/imgs/david/ae white-01.svg";

@@ -52,7 +52,7 @@ const SectionDavid = ({ isPhone }) => {
   //   });
   const mobilePosData = [
     [
-      [3.2, 5.704, -3.481],
+      [2.6, 5.704, -3.081],
       [0, -3.95, 0],
     ],
     [

@@ -30,3 +30,18 @@
     padding-right: 100px;
   }
 }
+@media only screen and (max-width: 600px) {
+  .section3-container {
+    width: 100%;
+    left: 5%;
+    // transform: translateX(+50%);
+    .para-div {
+      .para-text {
+        font-size: 1rem;
+      }
+    }
+    .lefty {
+      padding-right: 150px;
+    }
+  }
+}

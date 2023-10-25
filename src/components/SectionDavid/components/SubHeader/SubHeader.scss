@@ -20,3 +20,14 @@
     }
   }
 }
+
+@media only screen and (max-width: 600px) {
+  .sub-header-cont {
+    gap: 0.5rem;
+    .sub-header-each-word {
+      .sub-header-text {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}

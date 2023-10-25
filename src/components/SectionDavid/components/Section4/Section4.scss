@@ -30,3 +30,20 @@
     padding-right: 100px;
   }
 }
+@media only screen and (max-width: 600px) {
+  .section4-container {
+    width: auto;
+    right: 0;
+    // transform: translateX(+50%);
+    .para-div {
+      .para-text {
+        font-size: 1rem;
+      }
+    }
+    .lefty {
+      width: auto;
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+  }
+}

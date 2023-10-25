@@ -47,3 +47,16 @@
 .oneword {
   gap: 0;
 }
+
+@media only screen and (max-width: 600px) {
+  .wrapper-header-david-anim {
+    .each-word {
+      height: 3rem;
+      .letter-cont-david {
+        .each-letter-header-david {
+          font-size: 3.7rem;
+        }
+      }
+    }
+  }
+}

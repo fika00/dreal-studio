@@ -80,7 +80,7 @@ const section4 = ({ callBackProp }, ref) => {
   return (
     <>
       {isVisible && (
-        <div className="section3-container">
+        <div className="section4-container">
           <HeaderDavid text={"Graphic design"} ref={headerRef} />
           <div
             style={{

@@ -59,7 +59,10 @@ function App() {
             element={<SectionFilip isPhone={isPhoneProp} />}
           />
           <Route path="/baki" element={<SectionBalsa />} />
-          <Route path="/david" element={<SectionDavid />} />
+          <Route
+            path="/david"
+            element={<SectionDavid isPhone={isPhoneProp} />}
+          />
 
           {/* <Route path="/contact" component={Contact} /> */}
         </Routes>

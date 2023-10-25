@@ -16,7 +16,7 @@ import { RectAreaLight } from "three";
 import EnviromentLights from "./components/EnviromentLights/EnviromentLights";
 import gsap from "gsap";
 import "./SectionDavid.scss";
-import Effects from "./components/Effects/Effects";
+import PostProcessingEffects from "./components/PostProcessingEffects/PostProcessingEffects";
 import * as THREE from "three";
 import EyeModel from "./components/EyeModel/EyeModel";
 import Section1 from "./components/Section1/Section1";
@@ -36,7 +36,8 @@ import CameraRig from "./components/CameraRig/CameraRig";
 // studio.extend(extension);
 // studio.initialize();
 
-const SectionDavid = () => {
+const SectionDavid = ({ isPhone }) => {
+  console.log(isPhone);
   // const sheet = getProject("Davido").sheet("Scene");
   const camRef = useRef();
 
@@ -49,7 +50,26 @@ const SectionDavid = () => {
   //   useEffect(() => {
   //     console.log("DAVIDO");
   //   });
-  const posData = [
+  const mobilePosData = [
+    [
+      [3.2, 5.704, -3.481],
+      [0, -3.95, 0],
+    ],
+    [
+      [0.2, 5.54, 2.11],
+      [0.1, -6.37, 0],
+    ],
+    [
+      [1.6, 3.08, -0.83],
+      [-0.1, -3.72, 0],
+    ],
+    [
+      [1.4, -1.65, 0.712],
+      [-0.2, -3.65, 0],
+    ],
+  ];
+
+  const PcPosData = [
     [
       [1.266, 5.504, -2.281],
       [0, -3.95, 0],
@@ -71,6 +91,14 @@ const SectionDavid = () => {
   const sections = [section1Ref, section2Ref, section3Ref, section4Ref];
 
   const changeLocation = (location) => {
+    let posData = [];
+
+    if (isPhone) {
+      posData = mobilePosData;
+    } else {
+      posData = PcPosData;
+    }
+
     const loc = posData[location];
 
     smallNavRef.current.setCurrentPos(location);
@@ -107,68 +135,48 @@ const SectionDavid = () => {
       <Canvas>
         <Suspense fallback={null}>
           {/* <SheetProvider sheet={sheet}> */}
-          <group ref={camRef} position={posData[0][0]} rotation={posData[0][1]}>
-            <CameraRig />
+          <group
+            ref={camRef}
+            position={isPhone ? mobilePosData[0][0] : PcPosData[0][0]}
+            rotation={isPhone ? mobilePosData[0][1] : PcPosData[0][1]}
+          >
+            <CameraRig isPhone={isPhone} />
           </group>
           <DavidHuman />
           <EyeModel />
 
-          <Environment frames={Infinity} resolution={256} background blur={0.9}>
-            <EnviromentLights />
-          </Environment>
+          <EnviromentLights />
           {/* <ambientLight /> */}
-          <Effects />
           {/* </SheetProvider> */}
           {/* <OrbitControls /> */}
 
           {/* <Stats /> */}
         </Suspense>
+        <PostProcessingEffects />
       </Canvas>
-      {/* 
-      <div className="button-testing">
-        <button
-          className="buttonitself"
-          onClick={() => {
-            changeLocation(0);
-          }}
-        >
-          Section1
-        </button>
-        <button
-          className="buttonitself"
-          onClick={() => {
-            changeLocation(1);
-          }}
-        >
-          Section2
-        </button>
-        <button
-          className="buttonitself"
-          onClick={() => {
-            changeLocation(2);
-          }}
-        >
-          Section3
-        </button>
-        <button
-          className="buttonitself"
-          onClick={() => {
-            changeLocation(3);
-          }}
-        >
-          Section4
-        </button>
-      </div> */}
 
-      <Section1 callBackProp={() => changeLocation(1)} ref={section1Ref} />
-      <Section2 ref={section2Ref} />
-      <Section3 ref={section3Ref} />
-      <Section4 ref={section4Ref} />
+      <div
+        className="html-david-container"
+        style={{
+          // backgroundColor: "wheat",
+          width: "100%",
+          height: "100%",
+          position: "absolute",
+          top: 0,
+          left: 0,
+          overflow: "hidden",
+        }}
+      >
+        <Section1 callBackProp={() => changeLocation(1)} ref={section1Ref} />
+        <Section2 ref={section2Ref} />
+        <Section3 ref={section3Ref} />
+        <Section4 ref={section4Ref} />
 
-      <DavidSmallNav
-        ref={smallNavRef}
-        navCallback={(loc) => changeLocation(loc)}
-      />
+        <DavidSmallNav
+          ref={smallNavRef}
+          navCallback={(loc) => changeLocation(loc)}
+        />
+      </div>
       <Loading />
     </>
   );

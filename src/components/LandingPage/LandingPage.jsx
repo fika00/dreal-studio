@@ -1,5 +1,5 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import Eye from "./Eye";
+import Eye from "./components/Eye";
 import { Cloud, Stars } from "@react-three/drei";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -19,16 +19,18 @@ import {
   ToneMapping,
   SelectiveBloom,
 } from "@react-three/postprocessing";
-import Background from "./Background";
-import TextTransitionSlide from "./TextTransitionSlide";
+import Background from "./components/Background";
+import TextTransitionSlide from "./components/TextTransitionSlide";
 import { BlendFunction, KernelSize } from "postprocessing";
 import { MeshBasicMaterial } from "three";
 import logo from "/imgs/logo_fresh.svg";
 import logoOld from "/imgs/logo.svg";
 
 import { gsap } from "gsap";
-import ShootingStar from "./ShootingStar";
-import Loading from "./Loading/Loading";
+import ShootingStar from "./components/ShootingStar";
+import Loading from "../Loading/Loading";
+import EnvironmentLandingLights from "./components/EnvironmentLights/EnvironmentLandingLights";
+import LandingPagePPE from "./components/LandingPagePPE/LandingPagePPE";
 
 const LandingPage = ({ isPhone }) => {
   const eyeRef = useRef();
@@ -77,7 +79,7 @@ const LandingPage = ({ isPhone }) => {
         >
           <PerspectiveCamera makeDefault fov={40} />
         </group>
-        <Background />
+        {/* <Background /> */}
         {/* <ShootingStar /> */}
         <Eye
           ref={eyeRef}
@@ -105,8 +107,7 @@ const LandingPage = ({ isPhone }) => {
           segments={30}
         />
         {/* <Cloud scale={1} speed={0.2} position={[2.5, -2, -1]} opacity={1} /> */}
-        <EffectComposer>
-          <ToneMapping middleGrey={0.6} />
+        {/* <EffectComposer>
           <Noise premultiply blendFunction={BlendFunction.ADD} />
           <Bloom
             // mipmapBlur
@@ -114,7 +115,10 @@ const LandingPage = ({ isPhone }) => {
             luminanceThreshold={0.35}
             kernelSize={KernelSize.VERY_LARGE}
           />
-        </EffectComposer>
+        </EffectComposer> */}
+        <ambientLight color={"#dabcff"} intensity={0.15} />
+        <LandingPagePPE />
+        <EnvironmentLandingLights />
       </Canvas>
       <div className="landingtext">
         <div className="landingh">

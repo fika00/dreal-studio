@@ -25,7 +25,6 @@ import { Vector2 } from "three";
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import { BlendFunction } from "postprocessing";
 import Loading from "../Loading/Loading";
-import TextTransitionSlide from "../TextTransitionSlide";
 import "./SectionStevo.css";
 import { gsap } from "gsap";
 import { BlurPass } from "postprocessing";

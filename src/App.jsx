@@ -1,5 +1,4 @@
 import { Suspense, useRef, useState } from "react";
-import LandingPage from "./components/LandingPage";
 import SectionFilip from "./components/Filip/SectionFilip";
 // import LoadingAnimation from "./components/LoadingAnimation/LoadingAnimation";
 import SectionStudi from "./components/Studi/SectionStudi";
@@ -14,6 +13,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import MenuDropDown from "./components/MenuDropDown/MenuDropDown";
 import "./App.css";
 import SectionDavid from "./components/SectionDavid/SectionDavid";
+import LandingPage from "./components/LandingPage/LandingPage";
 
 function App() {
   const [count, setCount] = useState(0);

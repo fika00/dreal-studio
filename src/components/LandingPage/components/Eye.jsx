@@ -170,13 +170,7 @@ const Eye = (props, ref) => {
   const texture = useLoader(TextureLoader, "./models/textures/c2.jpg");
 
   const envMap = pmrem.fromEquirectangular(texture).texture;
-  const eyelidcol = new Color(props.bgcolor);
-  // const metalic = new MeshStandardMaterial({
-  //   roughness: 0.2,
-  //   metalness: 0.8,
-  //   envMapIntensity: 1,
-  //   flatShading: false,
-  // });
+
   const movingMaterial = new MeshStandardMaterial({
     envMap: envMap,
     roughness: 0.2,
@@ -285,13 +279,6 @@ const Eye = (props, ref) => {
       movingMaterial.userData.shader = shader;
     },
   });
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     // console.log(movingMaterial.userData.shader);
-  //     ready.current = true;
-  //     console.log(pupilRef.current.material.userData.shader.uniforms.uTime);
-  //   }, 1200);
-  // }, []);
 
   return (
     <group ref={group} {...props} dispose={null}>
@@ -324,11 +311,18 @@ const Eye = (props, ref) => {
           ref={pupilRef}
           castShadow
           receiveShadow
-          material={movingMaterial}
+          // material={movingMaterial}
           geometry={nodes.eye.geometry}
           morphTargetDictionary={nodes.eye.morphTargetDictionary}
           morphTargetInfluences={nodes.eye.morphTargetInfluences}
-        ></mesh>
+        >
+          <meshStandardMaterial
+            color={"white"}
+            roughness={0.2}
+            metalness={0.8}
+            envMapIntensity={10}
+          />
+        </mesh>
       </group>
       <group position={[-0.3, 0, 0]} ref={camRef}>
         {/* <OrbitControls /> */}

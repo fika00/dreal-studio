@@ -10,14 +10,14 @@ const EnviromentLights = () => {
   const lightRef = useRef();
 
   useFrame((state, delta) => {
-    lightRef.current.rotation.x += 0.5 * delta;
+    lightRef.current.rotation.x += 0.25 * delta;
   });
 
   const texture = useVideoTexture(vid1_hevc);
 
   return (
     <>
-      <Environment frames={Infinity} resolution={256} background blur={0.9}>
+      <Environment frames={Infinity} resolution={512} background blur={0.9}>
         <group ref={lightRef}>
           <Lightformer
             form="ring" // circle | ring | rect (optional, default = rect)

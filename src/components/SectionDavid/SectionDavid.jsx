@@ -146,7 +146,7 @@ const SectionDavid = ({ isPhone }) => {
           <EyeModel />
 
           <EnviromentLights />
-          {/* <ambientLight /> */}
+          <ambientLight intensity={0.2} />
           {/* </SheetProvider> */}
           {/* <OrbitControls /> */}
 

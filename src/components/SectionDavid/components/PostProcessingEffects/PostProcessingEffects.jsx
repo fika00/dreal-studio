@@ -32,9 +32,9 @@ const PostProcessingEffects = () => {
         <Effects disableGamma>
           <unrealBloomPass
             threshold={0.65}
-            strength={0.4}
+            strength={0.45}
             radius={1.5}
-            mipmapBlur={true}
+            mipmapBlur
           />
           <outputPass args={[THREE.ACESFilmicToneMapping]} />
         </Effects>

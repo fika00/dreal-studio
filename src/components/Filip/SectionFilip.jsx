@@ -37,6 +37,7 @@ import Hobbies from "./components/Hobbies/Hobbies";
 import Work from "./components/Work/Work";
 import VideoPlane from "./components/VideoPlane/VideoPlane";
 import VideoSlide from "./components/VideoSlide/VideoSlide";
+import FilipPostProcessing from "./components/FilipPostProcessing/FilipPostProcessing";
 
 const SectionFilip = ({ isPhone }) => {
   const camRef = useRef();
@@ -115,7 +116,7 @@ const SectionFilip = ({ isPhone }) => {
 
   return (
     <>
-      <Canvas gl={{ preserveDrawingBuffer: true }}>
+      <Canvas>
         <group ref={camRef} position={posData[0][0]} rotation={posData[0][1]}>
           <PerspectiveCamera fov={45} makeDefault ref={camMovementRef} />
         </group>
@@ -167,9 +168,10 @@ const SectionFilip = ({ isPhone }) => {
             vertex={outlineVertexShader}
           />
         </group>
-        <EffectComposer>
+        {/* <EffectComposer>
           <Bloom luminanceThreshold={0.8} intensity={1} mipmapBlur />
-        </EffectComposer>
+        </EffectComposer> */}
+        <FilipPostProcessing />
         {/* <OrbitControls /> */}
         {/* </SheetProvider> */}
       </Canvas>

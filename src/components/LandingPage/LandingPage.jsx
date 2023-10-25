@@ -80,13 +80,14 @@ const LandingPage = ({ isPhone }) => {
           <PerspectiveCamera makeDefault fov={40} />
         </group>
         {/* <Background /> */}
-        {/* <ShootingStar /> */}
+        <ShootingStar />
         <Eye
           ref={eyeRef}
           rotation={[degToRad(-80), 0, 0]}
           position={[0, -1.15, 2.5]}
           scale={1.3}
         />
+        {/* <Stars radius={500} /> */}
         <Sparkles size={0.6} scale={5} speed={0.05} count={300} opacity={0.5} />
         <Cloud
           scale={0.3}

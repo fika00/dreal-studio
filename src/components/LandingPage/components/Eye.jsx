@@ -315,12 +315,14 @@ const Eye = (props, ref) => {
           geometry={nodes.eye.geometry}
           morphTargetDictionary={nodes.eye.morphTargetDictionary}
           morphTargetInfluences={nodes.eye.morphTargetInfluences}
+          flatShading={false}
         >
           <meshStandardMaterial
             color={"white"}
             roughness={0.2}
             metalness={0.8}
             envMapIntensity={10}
+            flatShading={false}
           />
         </mesh>
       </group>

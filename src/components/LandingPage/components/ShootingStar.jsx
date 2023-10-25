@@ -83,7 +83,7 @@ const ShootingStar = () => {
           target={shootingStarRef}
           width={1}
           length={8}
-          color={"hotpink"}
+          color={"#dabcff"}
           attenuation={(t) => t * t}
         ></Trail>
       )}

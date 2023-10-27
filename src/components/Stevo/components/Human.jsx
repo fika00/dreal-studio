@@ -146,12 +146,11 @@ export function Human(props) {
   // });
 
   const movingMaterial = new MeshStandardMaterial({
-    roughness: 0.3,
-    metalness: 0.9,
+    roughness: 0.15,
+    metalness: 1,
     wireframe: true,
-    envMapIntensity: 20,
-
-    // side: FrontSide,
+    envMapIntensity: 15,
+    vertexShader: vertexShader,
 
     // onBeforeCompile: (shader) => {
     //   shader.uniforms.uTime = { value: 0 };

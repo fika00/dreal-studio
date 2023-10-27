@@ -9,7 +9,7 @@ const EnviromentLightsStevo = () => {
   const lightRef = useRef();
 
   useFrame((state, delta) => {
-    lightRef.current.rotation.x += 1 * delta;
+    lightRef.current.rotation.x += 0.6 * delta;
   });
 
   const texture = useVideoTexture(vid1_hevc);
@@ -17,11 +17,11 @@ const EnviromentLightsStevo = () => {
   return (
     <>
       <Environment frames={Infinity} resolution={1024} background blur={1}>
-        <group ref={lightRef}>
+        <group ref={lightRef} rotation={[3.2, 0, 0]}>
           <Lightformer
             form="ring" // circle | ring | rect (optional, default = rect)
-            intensity={1} // power level (optional = 1)
-            color="#800080" // (optional = white)
+            intensity={1 / 5} // power level (optional = 1)
+            color="#00dbda" // (optional = white)
             position={[0, 1, -5]}
             scale={[10, 5]} // Scale it any way you prefer (optional = [1, 1])
             target={[0, 1, 0]} // Target position (optional = undefined)
@@ -29,8 +29,8 @@ const EnviromentLightsStevo = () => {
 
           <Lightformer
             form="rect" // circle | ring | rect (optional, default = rect)
-            intensity={0.6} // power level (optional = 1)
-            color="#7489a5" // (optional = white)
+            intensity={1 / 5} // power level (optional = 1)
+            color="#ff5d1b" // (optional = white)
             position={[0, 1, 5]}
             scale={[5, 5]} // Scale it any way you prefer (optional = [1, 1])
             target={[0, 1, 0]} // Target position (optional = undefined)

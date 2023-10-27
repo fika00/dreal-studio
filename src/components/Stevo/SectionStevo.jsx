@@ -31,6 +31,8 @@ import { BlurPass } from "postprocessing";
 
 import ScreenColorFragment from "./components/shaders/ScreenColorFragment.glsl";
 import ScreenColorVertex from "./components/shaders/ScreenColorVertex.glsl";
+import EnviromentLightsStevo from "./components/EnviromentLightsStevo/EnviromentLightsStevo";
+import PostProcessingEffectsStevo from "./components/PostProcessingEffectsStevo/PostProcessingEffectsStevo";
 
 const Scene = () => {
   const camRef = useRef();
@@ -52,29 +54,7 @@ const Scene = () => {
       (targetRotationY - camPivotRef.current.rotation.y) * 0.01;
     camPivotRef.current.rotation.x +=
       (targetRotationX - camPivotRef.current.rotation.x) * 0.01;
-
-    planeRef.current.material.uniforms.time.value += 0.01;
   });
-  // useEffect(() => {
-  //   console.log(textRef.current);
-  //   const blinking = () => {
-  //     const dur = Math.random() / 2;
-  //     console.log(dur);
-  //     gsap.to(textRef.current, {
-  //       fillOpacity: 0,
-  //       duration: dur,
-  //       // ease: "power3.inOut",
-  //       onComplete: () =>
-  //         gsap.to(textRef.current, {
-  //           fillOpacity: 1,
-  //           duration: dur,
-  //           // ease: "power3.inOut",
-  //           onComplete: () => blinking(),
-  //         }),
-  //     });
-  //   };
-  //   blinking();
-  // }, []);
 
   return (
     <>
@@ -88,17 +68,7 @@ const Scene = () => {
           ref={camRef}
         />
       </group>
-      <mesh position={[0, 1.7, -1]} ref={planeRef}>
-        <planeGeometry />
-        <shaderMaterial
-          vertexShader={ScreenColorVertex}
-          fragmentShader={ScreenColorFragment}
-          uniforms={{
-            tDiffuse: { value: null },
-            time: { value: 0 },
-          }}
-        />
-      </mesh>
+
       {/* <Text
         strokeWidth={0.01}
         strokeColor={"white"}
@@ -121,15 +91,12 @@ const SectionStevo = () => {
       <Canvas>
         <Scene />
 
-        <EffectComposer>
-          <ToneMapping middleGrey={0.5} />
-          <Bloom mipmapBlur luminanceThreshold={0.3} intensity={3} />
-          {/* <ChromaticAberration offset={[0.001, 0]} /> */}
-          {/* <HueSaturation saturation={-1} /> */}
-        </EffectComposer>
+        <EnviromentLightsStevo />
+        <PostProcessingEffectsStevo />
+        {/* <OrbitControls /> */}
       </Canvas>
 
-      <div className="html-stevo-container"></div>
+      {/* <div className="html-stevo-container"></div> */}
       <Loading />
     </>
   );

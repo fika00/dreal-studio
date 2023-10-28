@@ -74,8 +74,8 @@ const ShootingStar = () => {
   return (
     <>
       <mesh ref={shootingStarRef} scale={0.1} position={[-7, 6, -9]}>
-        <sphereGeometry args={[0.1]} />
-        <meshBasicMaterial color={"black"} toneMapped={false} />
+        <boxGeometry args={[0.1, 0.1, 0.1]} />
+        <meshBasicMaterial opacity={0} transparent />
       </mesh>
       {isTrailEnabled && (
         <Trail

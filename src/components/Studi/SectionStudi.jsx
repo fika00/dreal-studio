@@ -82,7 +82,7 @@ const SectionStudi = () => {
 
   return (
     <>
-      <Canvas dpr={0.75}>
+      <Canvas>
         {/* <Html
         style={{
           opacity: 1,

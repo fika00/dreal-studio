@@ -45,6 +45,7 @@ import { ContentSlide } from "./ContentSlide";
 import { degToRad } from "three/src/math/MathUtils";
 import { Water } from "./Water2";
 import { MeshBasicMaterial } from "three";
+import EnviromentLightsStudi from "./EnviromentLightsStudi/EnviromentLightsStudi";
 
 extend({ Water, Fog: THREE.Fog });
 
@@ -157,12 +158,12 @@ const AboveWater = ({ isTransitioning }) => {
 
       {/* <OrbitControls /> */}
 
-      <mesh position={[0, -60, 0]} scale={[150, 100, 150]}>
+      {/* <mesh position={[0, -60, 0]} scale={[150, 100, 150]}>
         <sphereGeometry />
         <LayerMaterial toneMapped={false} side={THREE.DoubleSide}>
           <Color color={"black"} />
         </LayerMaterial>
-      </mesh>
+      </mesh> */}
 
       <Image
         scale={[10, 20, 1]}
@@ -170,6 +171,8 @@ const AboveWater = ({ isTransitioning }) => {
         position={[0, 7, 50]}
         url={"/imgs/studi/studi3.png"}
       />
+
+      <EnviromentLightsStudi />
 
       <Stats />
 

@@ -38,6 +38,8 @@ import Work from "./components/Work/Work";
 import VideoPlane from "./components/VideoPlane/VideoPlane";
 import VideoSlide from "./components/VideoSlide/VideoSlide";
 import FilipPostProcessing from "./components/FilipPostProcessing/FilipPostProcessing";
+import Brain from "./components/Brain/Brain";
+import BackgroundParticles from "./components/Background/BackgroundParticles";
 
 const SectionFilip = ({ isPhone }) => {
   const camRef = useRef();
@@ -49,6 +51,7 @@ const SectionFilip = ({ isPhone }) => {
   const hobbiesRef = useRef();
   const workRef = useRef();
   const videoplaneRef = useRef();
+  const brainRef = useRef();
 
   const posData = [
     [
@@ -75,6 +78,12 @@ const SectionFilip = ({ isPhone }) => {
 
   const changeLocation = (location) => {
     const loc = posData[location];
+
+    if (location == 1) {
+      brainRef.current.appear();
+    } else {
+      brainRef.current.disappear();
+    }
 
     const sections = [null, aboutMeRef, hobbiesRef, workRef];
 
@@ -122,6 +131,9 @@ const SectionFilip = ({ isPhone }) => {
         </group>
         {/* <SheetProvider sheet={sheet}> */}
         <group rotation={[0, 0, 0]} position={[0, -1, 2.5]}>
+          <Brain count={1} ref={brainRef} />
+          {/* <BackgroundParticles count={3} /> */}
+          {/* <Brain count={1} /> */}
           <CurveToMesh
             data={dataHead}
             pulsingSpeed={1}

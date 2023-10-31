@@ -103,7 +103,11 @@ const Brain = ({ count }, ref) => {
     trailRef.current.fadeOut(1.5);
   };
 
-  return <PointTrail ref={trailRef} />;
+  return (
+    <group position={[0, 0, -0.75]}>
+      <PointTrail ref={trailRef} />;
+    </group>
+  );
 };
 
 export default forwardRef(Brain);

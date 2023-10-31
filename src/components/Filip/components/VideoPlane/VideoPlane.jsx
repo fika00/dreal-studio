@@ -23,7 +23,7 @@ export function VideoPlane(props, ref) {
   const texture = useVideoTexture(vid1_hevc, videoPlayerProps);
 
   const videoRef = useRef();
-  const bgBlur = document.querySelector(".html_container");
+  const bgBlur = document.querySelector(".html_container-filip");
   const isPlaying = useRef(false);
   const scale = props.isPhone ? 0.75 : 2;
 
@@ -33,8 +33,8 @@ export function VideoPlane(props, ref) {
   }, []);
   const appear = () => {
     playVideo();
-    bgBlur.style.backdropFilter = "blur(0.5px)";
-    bgBlur.style.webkitBackdropFilter = "blur(0.5px)";
+    bgBlur.style.backdropFilter = "blur(0.1px)";
+    bgBlur.style.webkitBackdropFilter = "blur(0.1px)";
 
     setTimeout(() => {
       gsap.to(materialRef.current, {
@@ -62,7 +62,7 @@ export function VideoPlane(props, ref) {
     texture.image.currentTime = 0;
     console.log(texture.image);
     bgBlur.style.backdropFilter = "blur(1.5px)";
-    bgBlur.style.webkitBackdropFilter = "blur(1.5px)";
+    bgBlur.style.webkitBackdropFilter = "blur(1px)";
   };
 
   return (

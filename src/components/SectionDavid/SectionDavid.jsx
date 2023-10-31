@@ -109,6 +109,9 @@ const SectionDavid = ({ isPhone }) => {
       z: loc[0][2],
       duration: 4,
       ease: "power3.inOut",
+      onComplete: () => {
+        smallNavRef.current.setIsNavigatable(true);
+      },
     });
     gsap.to(camRef.current.rotation, {
       x: loc[1][0],

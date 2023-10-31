@@ -7,7 +7,7 @@
 
     void main() {
         float prog = smoothstep(-1.,1.,sin(vUv.x * 10. + uTime * 3.));
-        vec3 step = mix(color*.25,color2 * .3,prog);
+        vec3 step = mix(color*.7,color2 * .3,prog);
         float clip = smoothstep(0.01,.1, vUv.x);
 
         // vec3 finalColor = mix(step);

@@ -100,7 +100,7 @@ const Scene = ({ isPhone }) => {
         position={[0, 0.4, 4]}
       />
       <Screens />
-      <Image url={balsa} transparent scale={1.15} position={[0, -0.1, 0]} />
+      <Image url={balsa} transparent scale={1.15} position={[0, -0.15, 0]} />
 
       <ReflectiveFloor />
 

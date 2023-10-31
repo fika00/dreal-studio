@@ -40,6 +40,7 @@ import VideoSlide from "./components/VideoSlide/VideoSlide";
 import FilipPostProcessing from "./components/FilipPostProcessing/FilipPostProcessing";
 import Brain from "./components/Brain/Brain";
 import BackgroundParticles from "./components/Background/BackgroundParticles";
+import Projects from "./components/Projects/Projects";
 
 const SectionFilip = ({ isPhone }) => {
   const camRef = useRef();
@@ -52,6 +53,7 @@ const SectionFilip = ({ isPhone }) => {
   const workRef = useRef();
   const videoplaneRef = useRef();
   const brainRef = useRef();
+  const projectsRef = useRef();
 
   const posData = [
     [
@@ -113,6 +115,9 @@ const SectionFilip = ({ isPhone }) => {
       z: loc[0][2],
       duration: 4,
       ease: "power3.inOut",
+      onComplete: () => {
+        smallNavRef.current.setIsNavigatable(true);
+      },
     });
     gsap.to(camRef.current.rotation, {
       x: loc[1][0],
@@ -132,8 +137,7 @@ const SectionFilip = ({ isPhone }) => {
         {/* <SheetProvider sheet={sheet}> */}
         <group rotation={[0, 0, 0]} position={[0, -1, 2.5]}>
           <Brain count={1} ref={brainRef} />
-          {/* <BackgroundParticles count={3} /> */}
-          {/* <Brain count={1} /> */}
+          <BackgroundParticles count={3} />
           <CurveToMesh
             data={dataHead}
             pulsingSpeed={1}
@@ -188,7 +192,7 @@ const SectionFilip = ({ isPhone }) => {
         {/* </SheetProvider> */}
       </Canvas>
 
-      <div className="html_container">
+      <div className="html_container-filip">
         <HeroContainer
           ref={heroRef}
           onCallback={(section) => changeLocation(section)}
@@ -206,7 +210,8 @@ const SectionFilip = ({ isPhone }) => {
             videoplaneRef.current.appear();
           }}
         />
-        <Work ref={workRef} />
+        <Work ref={workRef} isPhone={isPhone} />
+
         {/* <VideoSlide /> */}
       </div>
 

@@ -18,8 +18,8 @@ const PointTrail = () => {
 
     pointRef.current.position.z = Math.sin(time) * 7;
     pointRef.current.position.x = Math.cos(time) * 3;
-    groupRef.current.rotation.x += (delta / 10) * speed;
-    groupRef.current.rotation.z += (delta / 4) * speed;
+    // groupRef.current.rotation.x += (delta / 10) * speed;
+    // groupRef.current.rotation.z += (delta / 4) * speed;
   });
   return (
     <>
@@ -55,7 +55,7 @@ const BackgroundParticles = ({ count }) => {
     trailArr.push(
       <group
         key={i}
-        position={[0, (i + 1) * -3, 0]}
+        position={[0, (i + 1) * -2, 0]}
         // rotation={[i + 1 * step, 0, 0]}
       >
         <PointTrail />

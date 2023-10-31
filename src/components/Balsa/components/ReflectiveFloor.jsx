@@ -29,7 +29,7 @@ const ReflectiveFloor = (props, ref) => {
           color={"#080808"}
           resolution={512}
           mixStrength={75}
-          blur={[512, 256]}
+          blur={[720, 720]}
           mixBlur={1}
           // normalMap={nm}
           roughnessMap={roughness}

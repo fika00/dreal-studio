@@ -1,0 +1,12 @@
+.projects-container {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  transform: translateY(-50%);
+
+  opacity: 0;
+  transition: 1s;
+
+  //   background-color: aqua;
+  // height: 100px;
+}

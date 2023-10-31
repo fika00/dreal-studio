@@ -12,8 +12,10 @@ const SmallNav = ({ onClickCallback, isPhone }, ref) => {
   useImperativeHandle(ref, () => ({
     setIsVisible,
     hideSmallNav,
+    setIsNavigatable,
   }));
   const [isVisible, setIsVisible] = useState(false);
+  const [isNavigatable, setIsNavigatable] = useState(true);
 
   const showSmallNav = () => {
     const sectionIcons = document.querySelectorAll(".icon-section");
@@ -46,6 +48,13 @@ const SmallNav = ({ onClickCallback, isPhone }, ref) => {
     }, 1500);
   };
 
+  const navigate = (dir) => {
+    if (isNavigatable) {
+      onClickCallback(dir);
+      setIsNavigatable(false);
+    }
+  };
+
   useEffect(() => {
     console.log(isPhone);
     if (isVisible) {
@@ -57,21 +66,21 @@ const SmallNav = ({ onClickCallback, isPhone }, ref) => {
     <>
       {isVisible && (
         <div className="small-nav-container">
-          <div onClick={() => onClickCallback(0)} className="back-to-top"></div>
+          <div onClick={() => navigate(0)} className="back-to-top"></div>
           <div
-            onClick={() => onClickCallback(1)}
+            onClick={() => navigate(1)}
             className={`icon-section ${!isPhone ? "is-Pc" : ""}`}
           >
             <Icon art={userIcon} isSmall />
           </div>
           <div
-            onClick={() => onClickCallback(2)}
+            onClick={() => navigate(2)}
             className={`icon-section ${!isPhone ? `is-Pc` : ``}`}
           >
             <Icon art={puzzleIcon} isSmall />
           </div>
           <div
-            onClick={() => onClickCallback(3)}
+            onClick={() => navigate(3)}
             className={`icon-section ${!isPhone ? `is-Pc` : ``}`}
           >
             <Icon art={jobIcon} isSmall />

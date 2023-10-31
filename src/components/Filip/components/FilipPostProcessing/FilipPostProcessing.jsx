@@ -11,15 +11,20 @@ import { Canvas, extend } from "@react-three/fiber";
 import { Effects } from "@react-three/drei";
 import * as THREE from "three";
 import { ToneMappingMode } from "postprocessing";
-import { UnrealBloomPass, HorizontalBlurShader } from "three-stdlib";
+import { UnrealBloomPass } from "three-stdlib";
 import { OutputPass } from "three/examples/jsm/postprocessing/OutputPass";
 
-extend({ UnrealBloomPass, OutputPass, HorizontalBlurShader });
+extend({ UnrealBloomPass, OutputPass });
 
 const FilipPostProcessing = () => {
   return (
     <Effects disableGamma>
-      <unrealBloomPass threshold={0.6} strength={0.4} radius={0.75} />
+      <unrealBloomPass
+        threshold={0.3}
+        strength={0.3}
+        radius={1}
+        // args={[THREE.SubtractiveBlending]}
+      />
       <outputPass args={[THREE.ACESFilmicToneMapping]} />
     </Effects>
   );

@@ -6,14 +6,17 @@ import { useImperativeHandle, forwardRef } from "react";
 const DavidSmallNav = ({ navCallback }, ref) => {
   useImperativeHandle(ref, () => ({
     setCurrentPos,
+    setIsNavigatable,
   }));
+  const [isNavigatable, setIsNavigatable] = useState(true);
   const [currentPos, setCurrentPos] = useState(0);
   const leftRef = useRef();
   const rightRef = useRef();
 
   const changePos = (dir) => {
-    if (currentPos + dir >= 0 && currentPos + dir <= 3) {
+    if (currentPos + dir >= 0 && currentPos + dir <= 3 && isNavigatable) {
       navCallback(currentPos + dir);
+      setIsNavigatable(false);
     }
   };
   useEffect(() => {

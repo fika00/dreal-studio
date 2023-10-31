@@ -1,0 +1,28 @@
+.contact-container {
+  padding: 30px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  .contact-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    overflow: hidden;
+    .contact-text-anim {
+      position: relative;
+      text-decoration: none;
+      text-align: right;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      font-family: "Roboto Condensed", sans-serif;
+      color: white;
+
+      transform: translateY(100%);
+
+      transition: color 0.25s, transform 1s;
+    }
+    .contact-text-anim:hover {
+      color: #4e918f;
+    }
+  }
+}

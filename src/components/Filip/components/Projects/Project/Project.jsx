@@ -12,10 +12,12 @@ const Project = ({ title, text, callbackFunc }, ref) => {
   const projectRef = useRef();
 
   let progress = 0;
+
   const animate = () => {
+    const targetHeight = projectRef.current.scrollHeight + "px";
     // projectRef.current.style.opacity = 1;
     // projectRef.current.style.filter = "blur(0px)";
-    projectRef.current.style.maxHeight = "200px";
+    projectRef.current.style.maxHeight = targetHeight;
     setTimeout(() => {
       // projectRef.current.style.opacity = 0;
       projectRef.current.style.maxHeight = "0px";

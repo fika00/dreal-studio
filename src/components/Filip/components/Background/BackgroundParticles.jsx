@@ -3,7 +3,7 @@ import { Point, Points, Trail } from "@react-three/drei";
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-const PointTrail = () => {
+const PointTrail = (color) => {
   const pointRef = useRef();
 
   const groupRef = useRef();
@@ -49,6 +49,10 @@ const PointTrail = () => {
 const BackgroundParticles = ({ count }) => {
   const trailArr = [];
 
+  const col = new THREE.Color(0.65, 0.91, 0.9);
+  //.65 .91 .9
+  //7 0 0
+
   const step = 6.28319 / count;
 
   for (let i = 0; i <= count; i++) {
@@ -58,7 +62,7 @@ const BackgroundParticles = ({ count }) => {
         position={[0, (i + 1) * -2, 0]}
         // rotation={[i + 1 * step, 0, 0]}
       >
-        <PointTrail />
+        <PointTrail color={col} />
       </group>
     );
   }

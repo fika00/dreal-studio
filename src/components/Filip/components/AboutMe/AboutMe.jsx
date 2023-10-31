@@ -4,12 +4,14 @@ import { useImperativeHandle, forwardRef } from "react";
 
 import "./AboutMe.scss";
 import ExploreButton from "../ExploreButton/ExploreButton";
+import Contact from "./Contact/Contact";
 
 const AboutMe = (props, ref) => {
   const [isVisible, setIsVisible] = useState(false);
   const headerAnimRef = useRef();
   const paraRef = useRef();
   const contactRef = useRef();
+  const contactLinksRef = useRef();
 
   useImperativeHandle(ref, () => ({
     setIsVisible,
@@ -22,6 +24,8 @@ const AboutMe = (props, ref) => {
     if (isVisible) {
       hrRef.current.style.width = "0";
       headerAnimRef.current.handleExit();
+
+      contactLinksRef.current.setIsVisible(false);
 
       contactRef.current.disappear();
 
@@ -97,8 +101,22 @@ const AboutMe = (props, ref) => {
             </div>
           </div> */}
             <div className="explore-cont">
-              <ExploreButton ref={contactRef} text={"Contact"} />
+              <ExploreButton
+                ref={contactRef}
+                text={"Contact"}
+                callbackProp={() => contactLinksRef.current.toggleIsVisible()}
+              />
             </div>
+            <Contact
+              links={[
+                ["filipradinovic2@gmail.com", "mailto:name@email.com"],
+                [
+                  "@radinovicfilip",
+                  "https://www.instagram.com/radinovicfilip/",
+                ],
+              ]}
+              ref={contactLinksRef}
+            />
           </div>
         </div>
       )}

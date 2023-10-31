@@ -2,8 +2,12 @@ import { useState, useRef } from "react";
 import Project from "./Project/Project";
 import "./Projects.scss";
 import { useEffect } from "react";
+import { useImperativeHandle, forwardRef } from "react";
 
-const Projects = () => {
+const Projects = (props, ref) => {
+  useImperativeHandle(ref, () => ({
+    disappear,
+  }));
   const projRef = useRef();
   const containerRef = useRef();
 
@@ -32,6 +36,10 @@ const Projects = () => {
     }
   };
 
+  const disappear = () => {
+    containerRef.current.style.opacity = 0;
+  };
+
   useEffect(() => {
     containerRef.current.style.opacity = 1;
     projRef.current.animate();
@@ -51,4 +59,4 @@ const Projects = () => {
   );
 };
 
-export default Projects;
+export default forwardRef(Projects);

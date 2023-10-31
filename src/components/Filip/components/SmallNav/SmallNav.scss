@@ -18,6 +18,8 @@
     border-radius: 5px;
     border: solid 1px white;
     align-self: center;
+    transition: 1s ease-in-out;
+    transform: scale(0);
     cursor: pointer;
   }
   .icon-section {

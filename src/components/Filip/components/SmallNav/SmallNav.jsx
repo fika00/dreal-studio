@@ -5,7 +5,7 @@ import puzzleIcon from "/imgs/filip/puzzle.svg";
 
 import "./SmallNav.scss";
 import { useEffect } from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { forwardRef, useImperativeHandle } from "react";
 
 const SmallNav = ({ onClickCallback, isPhone }, ref) => {
@@ -16,9 +16,13 @@ const SmallNav = ({ onClickCallback, isPhone }, ref) => {
   }));
   const [isVisible, setIsVisible] = useState(false);
   const [isNavigatable, setIsNavigatable] = useState(true);
+  const backToTopRef = useRef();
 
   const showSmallNav = () => {
     const sectionIcons = document.querySelectorAll(".icon-section");
+    setTimeout(() => {
+      backToTopRef.current.style.transform = "scale(1)";
+    }, 1500);
     let i = 0;
     const interval = setInterval(() => {
       sectionIcons[i].style.transform = "translateX(0)";
@@ -31,6 +35,8 @@ const SmallNav = ({ onClickCallback, isPhone }, ref) => {
   };
   const hideSmallNav = () => {
     const sectionIcons = document.querySelectorAll(".icon-section");
+    backToTopRef.current.style.transform = "scale(0)";
+
     let i = 0;
     const interval = setInterval(() => {
       if (isPhone) {
@@ -56,7 +62,6 @@ const SmallNav = ({ onClickCallback, isPhone }, ref) => {
   };
 
   useEffect(() => {
-    console.log(isPhone);
     if (isVisible) {
       showSmallNav();
     }
@@ -66,7 +71,11 @@ const SmallNav = ({ onClickCallback, isPhone }, ref) => {
     <>
       {isVisible && (
         <div className="small-nav-container">
-          <div onClick={() => navigate(0)} className="back-to-top"></div>
+          <div
+            onClick={() => navigate(0)}
+            className="back-to-top"
+            ref={backToTopRef}
+          ></div>
           <div
             onClick={() => navigate(1)}
             className={`icon-section ${!isPhone ? "is-Pc" : ""}`}

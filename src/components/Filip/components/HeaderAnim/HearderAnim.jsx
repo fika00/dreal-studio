@@ -7,7 +7,6 @@ const HeaderAnim = ({ text, small }, ref) => {
     handleExit,
   }));
   const letters = text.split("");
-  console.log(letters);
 
   const getRandomNumberInRange = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -39,7 +38,6 @@ const HeaderAnim = ({ text, small }, ref) => {
   useEffect(() => {
     setTimeout(() => {
       handleEnter();
-      console.log("Entered");
     }, 750);
   }, []);
 

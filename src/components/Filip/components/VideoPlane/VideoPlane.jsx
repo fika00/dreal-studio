@@ -28,7 +28,6 @@ export function VideoPlane(props, ref) {
   const scale = props.isPhone ? 0.75 : 2;
 
   useEffect(() => {
-    console.log(materialRef.current);
     stopVideo();
   }, []);
   const appear = () => {
@@ -60,7 +59,6 @@ export function VideoPlane(props, ref) {
   const stopVideo = () => {
     texture.image.pause();
     texture.image.currentTime = 0;
-    console.log(texture.image);
     bgBlur.style.backdropFilter = "blur(1.5px)";
     bgBlur.style.webkitBackdropFilter = "blur(1px)";
   };

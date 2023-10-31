@@ -37,8 +37,6 @@ const AboutMe = (props, ref) => {
 
       let i = paras.length - 1;
 
-      console.log(paras.length);
-
       frameworksRef.current.exit();
 
       const inteval = setInterval(() => {
@@ -70,7 +68,6 @@ const AboutMe = (props, ref) => {
         const paras = document.querySelectorAll(".para-text");
 
         let i = 0;
-        console.log(paras.length);
 
         const inteval = setInterval(() => {
           paras[i].style.transform = "translateY(0)";

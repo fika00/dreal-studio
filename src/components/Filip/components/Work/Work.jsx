@@ -15,6 +15,7 @@ const Work = (props, ref) => {
   const [isVisible, setIsVisible] = useState(false);
   const headerAnimRef = useRef();
   const frameWorksRef = useRef();
+  const projectsRef = useRef();
 
   const paraRef = useRef();
   useImperativeHandle(ref, () => ({
@@ -26,6 +27,7 @@ const Work = (props, ref) => {
 
   const disappear = () => {
     if (isVisible) {
+      projectsRef.current.disappear();
       hrRef.current.style.width = "0";
       headerAnimRef.current.handleExit();
 
@@ -36,8 +38,6 @@ const Work = (props, ref) => {
       const paras = document.querySelectorAll(".para-text");
 
       let i = paras.length - 1;
-
-      console.log(paras.length);
 
       const inteval = setInterval(() => {
         paras[i].style.transform = "translateY(30px)";
@@ -108,7 +108,7 @@ const Work = (props, ref) => {
               />
             </div>
           </div>
-          {!props.isPhone && <Projects />}
+          {!props.isPhone && <Projects ref={projectsRef} />}
         </>
       )}
     </>

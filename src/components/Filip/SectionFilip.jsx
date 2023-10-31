@@ -41,10 +41,10 @@ import FilipPostProcessing from "./components/FilipPostProcessing/FilipPostProce
 import Brain from "./components/Brain/Brain";
 import BackgroundParticles from "./components/Background/BackgroundParticles";
 import Projects from "./components/Projects/Projects";
+import CameraRig from "./components/CameraRig/CameraRig";
 
 const SectionFilip = ({ isPhone }) => {
   const camRef = useRef();
-  const camMovementRef = useRef();
   const nameRef = useRef();
   const smallNavRef = useRef();
   const heroRef = useRef();
@@ -132,12 +132,12 @@ const SectionFilip = ({ isPhone }) => {
     <>
       <Canvas>
         <group ref={camRef} position={posData[0][0]} rotation={posData[0][1]}>
-          <PerspectiveCamera fov={45} makeDefault ref={camMovementRef} />
+          <CameraRig />
         </group>
         {/* <SheetProvider sheet={sheet}> */}
         <group rotation={[0, 0, 0]} position={[0, -1, 2.5]}>
           <Brain count={1} ref={brainRef} />
-          <BackgroundParticles count={3} />
+          <BackgroundParticles count={15} />
           <CurveToMesh
             data={dataHead}
             pulsingSpeed={1}

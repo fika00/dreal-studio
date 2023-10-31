@@ -13,14 +13,14 @@ const Project = ({ title, text, callbackFunc }, ref) => {
 
   let progress = 0;
   const animate = () => {
-    projectRef.current.style.opacity = 1;
-    projectRef.current.style.filter = "blur(0px)";
+    // projectRef.current.style.opacity = 1;
+    // projectRef.current.style.filter = "blur(0px)";
     projectRef.current.style.maxHeight = "200px";
     setTimeout(() => {
-      projectRef.current.style.opacity = 0;
+      // projectRef.current.style.opacity = 0;
       projectRef.current.style.maxHeight = "0px";
 
-      projectRef.current.style.filter = "blur(5px)";
+      // projectRef.current.style.filter = "blur(5px)";
       setTimeout(() => {
         callbackFunc();
       }, 2000);

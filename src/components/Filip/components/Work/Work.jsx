@@ -27,7 +27,9 @@ const Work = (props, ref) => {
 
   const disappear = () => {
     if (isVisible) {
-      projectsRef.current.disappear();
+      if (!props.isPhone) {
+        projectsRef.current.disappear();
+      }
       hrRef.current.style.width = "0";
       headerAnimRef.current.handleExit();
 

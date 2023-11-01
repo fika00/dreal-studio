@@ -42,6 +42,7 @@ import Brain from "./components/Brain/Brain";
 import BackgroundParticles from "./components/Background/BackgroundParticles";
 import Projects from "./components/Projects/Projects";
 import CameraRig from "./components/CameraRig/CameraRig";
+import BackGroundLightsFilip from "./components/BackGroundLights/BackGroundLights";
 
 const SectionFilip = ({ isPhone }) => {
   const camRef = useRef();
@@ -54,6 +55,7 @@ const SectionFilip = ({ isPhone }) => {
   const videoplaneRef = useRef();
   const brainRef = useRef();
   const projectsRef = useRef();
+  const envRef = useRef();
 
   const posData = [
     [
@@ -91,7 +93,10 @@ const SectionFilip = ({ isPhone }) => {
 
     if (location != 0) {
       smallNavRef.current.setIsVisible(true);
+      envRef.current.showRed();
     } else {
+      envRef.current.hideRed();
+
       smallNavRef.current.hideSmallNav();
       heroRef.current.setIsVisible(true);
     }
@@ -188,6 +193,7 @@ const SectionFilip = ({ isPhone }) => {
           <Bloom luminanceThreshold={0.8} intensity={1} mipmapBlur />
         </EffectComposer> */}
         <FilipPostProcessing />
+        <BackGroundLightsFilip ref={envRef} />
         {/* <OrbitControls /> */}
         {/* </SheetProvider> */}
       </Canvas>

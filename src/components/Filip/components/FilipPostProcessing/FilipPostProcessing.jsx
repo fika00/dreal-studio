@@ -13,6 +13,8 @@ import * as THREE from "three";
 import { ToneMappingMode } from "postprocessing";
 import { UnrealBloomPass } from "three-stdlib";
 import { OutputPass } from "three/examples/jsm/postprocessing/OutputPass";
+import { useEffect } from "react";
+import { useThree } from "@react-three/fiber";
 
 extend({ UnrealBloomPass, OutputPass });
 

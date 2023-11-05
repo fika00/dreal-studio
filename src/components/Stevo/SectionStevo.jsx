@@ -82,6 +82,17 @@ const Scene = () => {
       >
         steev
       </Text> */}
+      <Html transform>
+        <div className="stevo-cont">
+          <h1
+            style={{
+              color: "white",
+            }}
+          >
+            Stevo
+          </h1>
+        </div>
+      </Html>
     </>
   );
 };

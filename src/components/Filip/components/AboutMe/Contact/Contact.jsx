@@ -27,9 +27,9 @@ const Contact = ({ links }, ref) => {
     <div className="contact-container">
       {links.map((contact, index) => (
         <div className="contact-wrapper" key={index}>
-          <Link className="contact-text-anim" to={contact[1]}>
+          <a target="_blank" className="contact-text-anim" href={contact[1]}>
             {contact[0]}
-          </Link>
+          </a>
         </div>
       ))}
     </div>

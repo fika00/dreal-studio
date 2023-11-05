@@ -196,6 +196,50 @@ const SectionFilip = ({ isPhone }) => {
         <BackGroundLightsFilip ref={envRef} />
         {/* <OrbitControls /> */}
         {/* </SheetProvider> */}
+
+        {!isPhone && (
+          <>
+            <Html
+              scale={0.2}
+              rotation={[0, degToRad(-25), 0]}
+              position={[0.5, -1.7, 2]}
+              transform
+              style={{
+                width: "1600px",
+              }}
+            >
+              <AboutMe ref={aboutMeRef} />
+            </Html>
+
+            <Html
+              scale={0.3}
+              position={[-0.5, -16, 0]}
+              transform
+              style={{
+                width: "1600px",
+              }}
+            >
+              <Work ref={workRef} isPhone={isPhone} />
+            </Html>
+            <Html
+              scale={0.15}
+              rotation={[0, degToRad(5), 0]}
+              position={[0, -9, 1.5]}
+              transform
+              style={{
+                width: "1600px",
+              }}
+            >
+              <Hobbies
+                ref={hobbiesRef}
+                onCallback={() => {
+                  changeLocation(4);
+                  videoplaneRef.current.appear();
+                }}
+              />
+            </Html>
+          </>
+        )}
       </Canvas>
 
       <div className="html_container-filip">
@@ -208,16 +252,19 @@ const SectionFilip = ({ isPhone }) => {
           ref={smallNavRef}
           onClickCallback={(sec) => changeLocation(sec)}
         />
-        <AboutMe ref={aboutMeRef} />
-        <Hobbies
-          ref={hobbiesRef}
-          onCallback={() => {
-            changeLocation(4);
-            videoplaneRef.current.appear();
-          }}
-        />
-        <Work ref={workRef} isPhone={isPhone} />
-
+        {isPhone && (
+          <>
+            <AboutMe ref={aboutMeRef} />
+            <Hobbies
+              ref={hobbiesRef}
+              onCallback={() => {
+                changeLocation(4);
+                videoplaneRef.current.appear();
+              }}
+            />
+            <Work ref={workRef} isPhone={isPhone} />
+          </>
+        )}
         {/* <VideoSlide /> */}
       </div>
 

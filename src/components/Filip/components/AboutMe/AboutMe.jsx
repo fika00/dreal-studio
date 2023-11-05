@@ -109,7 +109,10 @@ const AboutMe = (props, ref) => {
             </div>
             <Contact
               links={[
-                ["filipradinovic2@gmail.com", "mailto:name@email.com"],
+                [
+                  "filipradinovic2@gmail.com",
+                  "mailto:filipradinovic2@gmail.com",
+                ],
                 [
                   "@radinovicfilip",
                   "https://www.instagram.com/radinovicfilip/",

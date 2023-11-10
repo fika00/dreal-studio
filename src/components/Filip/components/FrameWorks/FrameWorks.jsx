@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useRef } from "react";
 import "./FrameWorks.scss";
 import { useImperativeHandle, forwardRef } from "react";
 
@@ -32,6 +33,7 @@ const FrameWorks = ({ frameworks }, ref) => {
       }
     }, 100);
   };
+
   useEffect(() => {
     setTimeout(() => {
       enter();
@@ -41,9 +43,28 @@ const FrameWorks = ({ frameworks }, ref) => {
     <div className="frameworks-container">
       {frameworks.map((framework, index) => {
         return (
-          <img src={framework} key={index} className="framework-icons" alt="" />
+          <Framework key={index} image={framework[0]} text={framework[1]} />
         );
       })}
+    </div>
+  );
+};
+
+const Framework = (props) => {
+  const spanRef = useRef();
+
+  const frameworkTextAppear = () => {
+    spanRef.current.style.opacity = 1;
+  };
+  const frameworkTextDisappear = () => {
+    spanRef.current.style.opacity = 0;
+  };
+  return (
+    <div className="framework-cont">
+      <img src={props.image} className="framework-icons" />
+      <span ref={spanRef} className="framework-text">
+        {props.text}
+      </span>
     </div>
   );
 };

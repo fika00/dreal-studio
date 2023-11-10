@@ -100,10 +100,10 @@ const AboutMe = (props, ref) => {
             </div>
             <FrameWorks
               frameworks={[
-                aftereffects_icon,
-                photoshop_icon,
-                premiere_icon,
-                blender_icon,
+                [aftereffects_icon, "After Effects"],
+                [photoshop_icon, "Photoshop"],
+                [premiere_icon, "Premiere"],
+                [blender_icon, "Blender"],
               ]}
               ref={frameworksRef}
             />

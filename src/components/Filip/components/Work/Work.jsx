@@ -9,6 +9,7 @@ import threejs from "/imgs/filip/threejs-icon.svg";
 import react from "/imgs/filip/react-icon.svg";
 import nextjs from "/imgs/filip/nextjs-icon.svg";
 import unity from "/imgs/filip/unity-icon.svg";
+import python from "/imgs/filip/python-icon.svg";
 import Projects from "../Projects/Projects";
 
 const Work = (props, ref) => {
@@ -98,15 +99,15 @@ const Work = (props, ref) => {
                   </p>
                 </div>
               </div>
-              {/* <div className="next-button-container">
-            <div className="next-button-wrap">
-              <span className="next-button-text">Explore</span>
-              <hr className="under-explore" />
-            </div>
-          </div> */}
               <FrameWorks
                 ref={frameWorksRef}
-                frameworks={[nextjs, react, threejs, unity]}
+                frameworks={[
+                  [nextjs, "NextJs"],
+                  [react, "React"],
+                  [threejs, "ThreeJs"],
+                  [unity, "Unity"],
+                  [python, "Python"],
+                ]}
               />
             </div>
           </div>

@@ -322,13 +322,14 @@ const Eye = (props, ref) => {
             roughness={0.2}
             metalness={0.8}
             envMapIntensity={10}
-            flatShading={false}
           />
         </mesh>
       </group>
       <group position={[-0.3, 0, 0]} ref={camRef}>
         {/* <OrbitControls /> */}
       </group>
+
+      {/* <ambientLight color={"#007d83"} intensity={0.1} /> */}
     </group>
   );
 };

@@ -271,8 +271,8 @@ const SectionFilip = ({ isPhone }) => {
           <filter id="noise">
             <feTurbulence
               type="fractalNoise"
-              baseFrequency=".8"
-              numOctaves="4"
+              baseFrequency=".75"
+              numOctaves="5"
               stitchTiles="stitch"
             ></feTurbulence>
             <feColorMatrix type="saturate" values="0"></feColorMatrix>

@@ -11,6 +11,7 @@ import nextjs from "/imgs/filip/nextjs-icon.svg";
 import unity from "/imgs/filip/unity-icon.svg";
 import python from "/imgs/filip/python-icon.svg";
 import Projects from "../Projects/Projects";
+import VideoPlayer from "../VideoPlayer/VideoPlayer";
 
 const Work = (props, ref) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -28,9 +29,9 @@ const Work = (props, ref) => {
 
   const disappear = () => {
     if (isVisible) {
-      if (!props.isPhone) {
-        projectsRef.current.disappear();
-      }
+      // if (!props.isPhone) {
+      //   projectsRef.current.disappear();
+      // }
       hrRef.current.style.width = "0";
       headerAnimRef.current.handleExit();
 
@@ -111,7 +112,6 @@ const Work = (props, ref) => {
               />
             </div>
           </div>
-          {!props.isPhone && <Projects ref={projectsRef} />}
         </>
       )}
     </>

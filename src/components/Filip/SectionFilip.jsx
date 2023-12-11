@@ -43,6 +43,7 @@ import BackgroundParticles from "./components/Background/BackgroundParticles";
 import Projects from "./components/Projects/Projects";
 import CameraRig from "./components/CameraRig/CameraRig";
 import BackGroundLightsFilip from "./components/BackGroundLights/BackGroundLights";
+import VideoPlayer from "./components/VideoPlayer/VideoPlayer";
 
 const SectionFilip = ({ isPhone }) => {
   const camRef = useRef();
@@ -220,6 +221,9 @@ const SectionFilip = ({ isPhone }) => {
               }}
             >
               <Work ref={workRef} isPhone={isPhone} />
+            </Html>
+            <Html scale={0.3} transform position={[-4, -16, 0]}>
+              <VideoPlayer />
             </Html>
             <Html
               scale={0.15}

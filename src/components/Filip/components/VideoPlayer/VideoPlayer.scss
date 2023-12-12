@@ -4,6 +4,8 @@
   aspect-ratio: 1.861;
   width: 550px;
   z-index: 0;
+  transition: 2s;
+  opacity: 1;
   //   background-color: aqua;
 
   .black-screen {
@@ -46,21 +48,15 @@
     }
 
     .left {
-      background: linear-gradient(to right, black, transparent);
-      background-position: -2rem;
-      background-repeat: no-repeat;
     }
     .right {
-      background: linear-gradient(to left, black, transparent);
-      background-position: 2rem;
-      background-repeat: no-repeat;
     }
 
     .right:hover {
-      background-position: 0rem;
+      background-color: #2b2c2fbd;
     }
     .left:hover {
-      background-position: 0rem;
+      background-color: #2b2c2fbd;
     }
   }
 }

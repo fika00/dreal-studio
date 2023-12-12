@@ -57,6 +57,7 @@ const SectionFilip = ({ isPhone }) => {
   const brainRef = useRef();
   const projectsRef = useRef();
   const envRef = useRef();
+  const videoPlayerRef = useRef();
 
   const posData = [
     [
@@ -110,7 +111,11 @@ const SectionFilip = ({ isPhone }) => {
         section.current.disappear();
       }
     });
-
+    if (location == 3) {
+      videoPlayerRef.current.setIsVisible(true);
+    } else {
+      videoPlayerRef.current.disappear();
+    }
     if (location != 4) {
       videoplaneRef.current.disappear();
     }
@@ -143,7 +148,7 @@ const SectionFilip = ({ isPhone }) => {
         {/* <SheetProvider sheet={sheet}> */}
         <group rotation={[0, 0, 0]} position={[0, -1, 2.5]}>
           <Brain count={1} ref={brainRef} />
-          <BackgroundParticles count={15} />
+          <BackgroundParticles count={10} />
           <CurveToMesh
             data={dataHead}
             pulsingSpeed={1}
@@ -222,8 +227,8 @@ const SectionFilip = ({ isPhone }) => {
             >
               <Work ref={workRef} isPhone={isPhone} />
             </Html>
-            <Html scale={0.3} transform position={[-4, -16, 0]}>
-              <VideoPlayer />
+            <Html scale={0.3} transform position={[-3.7, -16, 0]}>
+              <VideoPlayer ref={videoPlayerRef} />
             </Html>
             <Html
               scale={0.15}

@@ -58,6 +58,7 @@ const SectionFilip = ({ isPhone }) => {
   const projectsRef = useRef();
   const envRef = useRef();
   const videoPlayerRef = useRef();
+  const videoPlayerObj = useRef();
 
   const posData = [
     [
@@ -80,6 +81,11 @@ const SectionFilip = ({ isPhone }) => {
       [-0.039, -8.79, 2.4],
       [-0.3, 0.065, 0.0],
     ],
+  ];
+
+  const fullscreenPos = [
+    [-3.7, -16, 0],
+    [0, 0, 0],
   ];
 
   const changeLocation = (location) => {
@@ -138,6 +144,10 @@ const SectionFilip = ({ isPhone }) => {
       ease: "power3.inOut",
     });
   };
+
+  useEffect(() => {
+    console.log(videoPlayerObj.current);
+  }, []);
 
   return (
     <>
@@ -227,7 +237,12 @@ const SectionFilip = ({ isPhone }) => {
             >
               <Work ref={workRef} isPhone={isPhone} />
             </Html>
-            <Html scale={0.3} transform position={[-3.7, -16, 0]}>
+            <Html
+              ref={videoPlayerObj}
+              scale={0.8}
+              // transform
+              position={[-3.2, -14.4, 3]}
+            >
               <VideoPlayer ref={videoPlayerRef} />
             </Html>
             <Html
@@ -261,6 +276,7 @@ const SectionFilip = ({ isPhone }) => {
           ref={smallNavRef}
           onClickCallback={(sec) => changeLocation(sec)}
         />
+
         {isPhone && (
           <>
             <AboutMe ref={aboutMeRef} />

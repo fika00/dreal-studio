@@ -1,15 +1,17 @@
 import { useRef } from "react";
 import "./ButtonDreal.scss";
 
-const ButtonDreal = ({ onClick, text }) => {
+const ButtonDreal = ({ onClick, text, noHide }) => {
   const buttonRef = useRef();
   return (
     <div
       ref={buttonRef}
       className="custom-button"
       onClick={() => {
-        buttonRef.current.style.opacity = 0;
-        buttonRef.current.style.zIndex = 0;
+        if (!noHide) {
+          buttonRef.current.style.opacity = 0;
+          buttonRef.current.style.zIndex = 0;
+        }
         onClick();
       }}
     >

@@ -11,6 +11,12 @@
   transform: translate(-50%, -50%);
   width: 100%;
 
+  z-index: 10;
+
+  .para-div {
+    position: relative;
+  }
+
   .about-me-divider {
     border: unset;
     height: 1px;
@@ -19,5 +25,9 @@
     width: 0;
 
     transition: 1s ease-in-out;
+  }
+  .view-more-button {
+    position: relative;
+    z-index: 3;
   }
 }

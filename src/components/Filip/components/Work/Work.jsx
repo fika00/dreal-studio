@@ -12,12 +12,15 @@ import unity from "/imgs/filip/unity-icon.svg";
 import python from "/imgs/filip/python-icon.svg";
 import Projects from "../Projects/Projects";
 import VideoPlayer from "../VideoPlayer/VideoPlayer";
+import ButtonDreal from "../ButtonDreal/ButtonDreal";
 
 const Work = (props, ref) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isPlayerVisible, setIsPlayerVisible] = useState(false);
   const headerAnimRef = useRef();
   const frameWorksRef = useRef();
   const projectsRef = useRef();
+  const videoPlayerRef = useRef();
 
   const paraRef = useRef();
   useImperativeHandle(ref, () => ({
@@ -39,18 +42,20 @@ const Work = (props, ref) => {
 
       // PARAS
 
-      const paras = document.querySelectorAll(".para-text");
+      if (!isPlayerVisible) {
+        const paras = document.querySelectorAll(".para-text");
 
-      let i = paras.length - 1;
+        let i = paras.length - 1;
 
-      const inteval = setInterval(() => {
-        paras[i].style.transform = "translateY(30px)";
-        paras[i].style.opacity = 0;
-        i--;
-        if (i < 0) {
-          clearInterval(inteval);
-        }
-      }, 150);
+        const inteval = setInterval(() => {
+          paras[i].style.transform = "translateY(30px)";
+          paras[i].style.opacity = 0;
+          i--;
+          if (i < 0) {
+            clearInterval(inteval);
+          }
+        }, 150);
+      }
 
       // PARAS
       setTimeout(() => {
@@ -65,18 +70,20 @@ const Work = (props, ref) => {
         hrRef.current.style.width = "90%";
       }, 100);
       setTimeout(() => {
-        const paras = document.querySelectorAll(".para-text");
+        if (!isPlayerVisible) {
+          const paras = document.querySelectorAll(".para-text");
 
-        let i = 0;
+          let i = 0;
 
-        const inteval = setInterval(() => {
-          paras[i].style.transform = "translateY(0)";
-          paras[i].style.opacity = 1;
-          i++;
-          if (i == paras.length) {
-            clearInterval(inteval);
-          }
-        }, 150);
+          const inteval = setInterval(() => {
+            paras[i].style.transform = "translateY(0)";
+            paras[i].style.opacity = 1;
+            i++;
+            if (i == paras.length) {
+              clearInterval(inteval);
+            }
+          }, 150);
+        }
       }, 1200);
     }
   }, [isVisible]);
@@ -89,6 +96,7 @@ const Work = (props, ref) => {
               <div className="about-me-header">
                 <HeaderAnim ref={headerAnimRef} text={"WORK"} />
                 <hr ref={hrRef} className="about-me-divider" />
+
                 <div ref={paraRef} className="para-div">
                   <p className="para-text">
                     From web development and game design to machine learning, my
@@ -98,6 +106,7 @@ const Work = (props, ref) => {
                   <p className="para-text">
                     Crafting visual wonders, one pixel at a time.
                   </p>
+                  <VideoPlayer ref={videoPlayerRef} isPhone={props.isPhone} />
                 </div>
               </div>
               <FrameWorks
@@ -109,6 +118,14 @@ const Work = (props, ref) => {
                   [unity, "Unity"],
                   [python, "Python"],
                 ]}
+              />
+
+              <ButtonDreal
+                text={"See more"}
+                noHide={true}
+                onClick={() => {
+                  videoPlayerRef.current.toggleVisibility();
+                }}
               />
             </div>
           </div>

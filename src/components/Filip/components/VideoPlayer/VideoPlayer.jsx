@@ -17,11 +17,12 @@ import arrow from "/imgs/david/nav-icon.svg";
 import { useEffect, useRef, useState } from "react";
 import { Html } from "@react-three/drei";
 
-const VideoPlayer = ({ callbackProp }, ref) => {
+const VideoPlayer = ({ callbackProp, isPhone }, ref) => {
   const [currentVid, setCurrentVid] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [isReady, setIsReady] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [phoneVisibility, setIsPhoneVisible] = useState(false);
   const videos = [site1, site2, site3, site4, site5];
 
   const blackScreenRef = useRef();
@@ -31,6 +32,7 @@ const VideoPlayer = ({ callbackProp }, ref) => {
   useImperativeHandle(ref, () => ({
     setIsVisible,
     disappear,
+    toggleVisibility,
   }));
 
   const disappear = () => {
@@ -62,6 +64,12 @@ const VideoPlayer = ({ callbackProp }, ref) => {
   };
 
   useEffect(() => {
+    if (isPhone) {
+      setIsVisible(true);
+    }
+  }, []);
+
+  useEffect(() => {
     if (isVisible) {
       if (isReady) {
         blackScreenRef.current.style.opacity = 0;
@@ -71,11 +79,17 @@ const VideoPlayer = ({ callbackProp }, ref) => {
     }
   }, [isReady, isVisible]);
 
+  const toggleVisibility = () => {
+    setIsPhoneVisible((prev) => !prev);
+  };
+
   return (
     <>
       {isVisible && (
         <div
-          className={`site-video-player ${isFullscreen ? `bigger` : ``}`}
+          className={`site-video-player ${phoneVisibility && `visible`} ${
+            isFullscreen ? `bigger` : ``
+          }`}
           ref={wrapperRef}
         >
           <div className="video-container">
@@ -96,20 +110,22 @@ const VideoPlayer = ({ callbackProp }, ref) => {
                   <img src={arrow} alt="" className="arrow left-arrow" />
                 </div>
               </div>
-              <div
-                className="nav-button fullscreen"
-                onClick={() => toggleFullscreen()}
-              >
+              {!isPhone && (
                 <div
-                  className={`arrow-container  ${isFullscreen ? `isFS` : ``}`}
+                  className="nav-button fullscreen"
+                  onClick={() => toggleFullscreen()}
                 >
-                  <img
-                    src={isFullscreen ? enterfs : exitfs}
-                    alt="Enter Fullscreen"
-                    className="fullscreen-icon"
-                  />
+                  <div
+                    className={`arrow-container  ${isFullscreen ? `isFS` : ``}`}
+                  >
+                    <img
+                      src={isFullscreen ? enterfs : exitfs}
+                      alt="Enter Fullscreen"
+                      className="fullscreen-icon"
+                    />
+                  </div>
                 </div>
-              </div>
+              )}
               <div className="nav-button right" onClick={() => navigate(1)}>
                 <div className={`arrow-container`}>
                   <img src={arrow} alt="" className="arrow right-arrow" />

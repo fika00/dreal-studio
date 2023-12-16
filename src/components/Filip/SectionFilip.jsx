@@ -117,13 +117,15 @@ const SectionFilip = ({ isPhone }) => {
         section.current.disappear();
       }
     });
-    if (location == 3) {
-      videoPlayerRef.current.setIsVisible(true);
-    } else {
-      videoPlayerRef.current.disappear();
-    }
-    if (location != 4) {
-      videoplaneRef.current.disappear();
+    if (!isPhone) {
+      if (location == 3) {
+        videoPlayerRef.current.setIsVisible(true);
+      } else {
+        videoPlayerRef.current.disappear();
+      }
+      if (location != 4) {
+        videoplaneRef.current.disappear();
+      }
     }
 
     gsap.to(camRef.current.position, {
@@ -245,6 +247,7 @@ const SectionFilip = ({ isPhone }) => {
             >
               <VideoPlayer ref={videoPlayerRef} />
             </Html>
+
             <Html
               scale={0.15}
               rotation={[0, degToRad(5), 0]}
@@ -267,6 +270,18 @@ const SectionFilip = ({ isPhone }) => {
       </Canvas>
 
       <div className="html_container-filip">
+        <svg id="texture" className="noise-texture">
+          <filter id="noise">
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency=".75"
+              numOctaves="5"
+              stitchTiles="stitch"
+            ></feTurbulence>
+            <feColorMatrix type="saturate" values="0"></feColorMatrix>
+          </filter>
+          <rect width="100%" height="100%" filter="url(#noise)"></rect>
+        </svg>
         <HeroContainer
           ref={heroRef}
           onCallback={(section) => changeLocation(section)}
@@ -291,19 +306,6 @@ const SectionFilip = ({ isPhone }) => {
           </>
         )}
         {/* <VideoSlide /> */}
-
-        <svg id="texture" className="noise-texture">
-          <filter id="noise">
-            <feTurbulence
-              type="fractalNoise"
-              baseFrequency=".75"
-              numOctaves="5"
-              stitchTiles="stitch"
-            ></feTurbulence>
-            <feColorMatrix type="saturate" values="0"></feColorMatrix>
-          </filter>
-          <rect width="100%" height="100%" filter="url(#noise)"></rect>
-        </svg>
       </div>
 
       <Loading />

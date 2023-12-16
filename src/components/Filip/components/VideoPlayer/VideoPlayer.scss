@@ -16,6 +16,19 @@
     align-self: center;
     box-shadow: 0 0 100px 50px rgba(255, 255, 255, 0.116);
 
+    --clipper: polygon(0 0, calc(100% - 32px) 0, 100% 32px, 100% 100%, 0 100%);
+
+    clip-path: polygon(
+      0 0,
+      calc(100% - 32px) 0,
+      100% 32px,
+      100% 100%,
+      32px 100%,
+      0 calc(100% - 32px)
+    );
+
+    transition: clip-path 1s;
+
     .black-screen {
       width: 100%;
       height: 100%;
@@ -58,8 +71,11 @@
           .left-arrow {
             transform: scale(-1);
             margin: auto;
+            padding-left: 3px;
           }
           .right-arrow {
+            padding-left: 3px;
+
             margin: auto;
           }
         }
@@ -91,4 +107,24 @@
 }
 .bigger {
   width: 1000px;
+
+  .video-container {
+    clip-path: polygon(0 0, 100% 0, 100% 0, 100% 100%, 0 100%, 0 100%);
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .site-video-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    margin: 20px 0;
+    z-index: 4;
+    opacity: 0;
+  }
+  .visible {
+    opacity: 1;
+  }
 }

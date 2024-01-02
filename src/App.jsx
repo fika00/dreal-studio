@@ -6,7 +6,6 @@ import SectionBalsa from "./components/Balsa/SectionBalsa";
 import { Canvas, extend, useFrame } from "@react-three/fiber";
 import { Html, ScrollControls } from "@react-three/drei";
 import Loading from "./components/Loading/Loading";
-import Bridge from "./components/Studi/components/Bridge";
 import DiveIcon from "/icons/chevron-down-sharp.svg";
 import SectionStevo from "./components/Stevo/SectionStevo";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
@@ -69,8 +68,6 @@ function App() {
         <div className="dropdown">
           <MenuDropDown />
         </div>
-
-        {/* <Bridge callBackFunc={handleDone()}/> */}
 
         {/* <LoadingAnimation /> */}
         {/* </Suspense> */}

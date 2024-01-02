@@ -30,6 +30,9 @@ button {
   font-size: 10px;
   letter-spacing: 2px;
 }
+.menu-item:active {
+  outline: "none";
+}
 .menu-list-cont {
   position: absolute;
   /* width: 300px; */

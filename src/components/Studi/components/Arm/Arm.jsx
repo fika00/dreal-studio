@@ -1,17 +1,20 @@
 import React, { useEffect, useRef } from "react";
 import { useGLTF, useTexture } from "@react-three/drei";
 import { useFrame, useLoader } from "@react-three/fiber";
+import ArmFragment from "../shaders/ArmFragment.glsl";
+import ArmVertex from "../shaders/ArmVertex.glsl";
+
+import { useThree } from "@react-three/fiber";
 
 export function Arm(props) {
   const { nodes } = useGLTF("models/studi_ruka.glb");
   const mask = useTexture(props.mask);
-  const emissionIntensity = useRef();
+  const armRef = useRef();
+  const { camera } = useThree();
 
-  let time = 0;
-
-  useEffect(() => {
-    console.log(emissionIntensity.current.material.emissionIntensity);
-  }, []);
+  useFrame((state, delta) => {
+    armRef.current.material.uniforms.uTime.value += 1 * delta;
+  });
 
   return (
     <group {...props} dispose={null}>
@@ -19,17 +22,16 @@ export function Arm(props) {
         castShadow
         receiveShadow
         geometry={nodes["333001"].geometry}
-        // position={[0.237, 1.582, 0.021]}
-        // rotation={[Math.PI / 2, 0, 0]}
-        ref={emissionIntensity}
-        // scale={0.05}
+        ref={armRef}
       >
-        <meshStandardMaterial
-          color={"gray"}
-          emissiveMap={mask}
-          roughness={0.2}
-          metalness={1}
-          emissive={"white"}
+        <shaderMaterial
+          fragmentShader={ArmFragment}
+          vertexShader={ArmVertex}
+          // wireframe
+          uniforms={{
+            uTatooMask: { value: mask },
+            uTime: { value: 0 },
+          }}
         />
       </mesh>
     </group>

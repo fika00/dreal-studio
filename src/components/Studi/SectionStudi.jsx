@@ -18,6 +18,9 @@ const SectionStudi = () => {
 
         {/* <OrbitControls /> */}
         <EnvMap />
+        <EffectComposer>
+          <Bloom mipmapBlur intensity={2} luminanceThreshold={0.2} />
+        </EffectComposer>
         {/* <PP /> */}
       </Canvas>
 

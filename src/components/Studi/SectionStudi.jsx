@@ -56,12 +56,12 @@ const SectionStudi = () => {
         <PP />
       </Canvas>
 
-      <div className="hit-boxes">
+      {/* <div className="hit-boxes">
         <div className="hit-boxes-upper"></div>
         <div className="hit-boxes-lower"></div>
-      </div>
+      </div> */}
 
-      {/* <Loading /> */}
+      <Loading />
     </>
   );
 };

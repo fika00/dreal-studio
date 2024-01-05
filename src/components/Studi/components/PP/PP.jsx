@@ -12,7 +12,7 @@ import { Effects, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import { OutputPass } from "three/examples/jsm/postprocessing/OutputPass";
 
-import smoke from "/imgs/studi/smoke.jpg";
+import smoke from "/imgs/studi/smoke2.jpg";
 import { AtmosphericBloom } from "./SmokyBloom/AtmosphericBloom";
 import { useEffect, useRef } from "react";
 
@@ -31,7 +31,7 @@ const PP = () => {
       <AtmosphericBloom
         maskTexture={smokeTexture}
         mipmapBlur
-        intensity={1}
+        intensity={2.5}
         luminanceThreshold={0.5}
         ref={bloomRef}
       />

@@ -3,12 +3,15 @@ import { useGLTF, useTexture } from "@react-three/drei";
 import { useFrame, useLoader } from "@react-three/fiber";
 import ArmFragment from "../shaders/ArmFragment.glsl";
 import ArmVertex from "../shaders/ArmVertex.glsl";
+import smoke from "/imgs/studi/curl.png";
 
 import { useThree } from "@react-three/fiber";
 
 export function Arm(props) {
   const { nodes } = useGLTF("models/studi_ruka.glb");
   const mask = useTexture(props.mask);
+  const smokeTexture = useTexture(smoke);
+
   const armRef = useRef();
   const { camera } = useThree();
 
@@ -27,10 +30,12 @@ export function Arm(props) {
         <shaderMaterial
           fragmentShader={ArmFragment}
           vertexShader={ArmVertex}
+          transparent
           // wireframe
           uniforms={{
             uTatooMask: { value: mask },
             uTime: { value: 0 },
+            uSmoke: { value: smokeTexture },
           }}
         />
       </mesh>

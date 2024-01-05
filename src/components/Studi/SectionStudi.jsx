@@ -49,7 +49,7 @@ const SectionStudi = () => {
         <Arm mask={mask} position={[-2, 2, 0]} scale={0.04} />
         <Arm mask={mask} position={[2, -2, 0]} scale={[-0.04, -0.04, 0.04]} />
 
-        <OrbitControls />
+        {/* <OrbitControls /> */}
         <EnvMap />
         {/* <Smoke /> */}
 

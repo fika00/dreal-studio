@@ -45,7 +45,7 @@ const SectionStudi = () => {
         </div>
       </div> */}
       <Canvas>
-        <PerspectiveCamera position={[0, 0, 7]} makeDefault />
+        <PerspectiveCamera position={[0, 0, 5.5]} makeDefault />
         <Arm mask={mask} position={[-2, 2, 0]} scale={0.04} />
         <Arm mask={mask} position={[2, -2, 0]} scale={[-0.04, -0.04, 0.04]} />
 

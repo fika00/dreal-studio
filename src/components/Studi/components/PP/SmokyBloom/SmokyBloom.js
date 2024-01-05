@@ -53,6 +53,8 @@ export class SmokyBloom extends Effect {
     resolutionX = width,
     resolutionY = height,
     maskTexture = null,
+    maskTexture2 = null,
+
     smokeUTime = 0,
   } = {}) {
     super("SmokyBloom", fragmentShader, {
@@ -61,14 +63,17 @@ export class SmokyBloom extends Effect {
         ["map", new Uniform(null)],
         ["intensity", new Uniform(intensity)],
         ["maskTexture", new Uniform(null)],
+        ["maskTexture2", new Uniform(null)],
+
         ["smokeUTime", new Uniform(0)],
       ]),
     });
     this.maskTexture = maskTexture;
+    this.maskTexture2 = maskTexture2;
 
     this.uniforms.get("maskTexture").value = this.maskTexture;
+    this.uniforms.get("maskTexture2").value = this.maskTexture2;
 
-    console.log(this.uniforms.get("maskTexture"));
     /**
      * A render target.
      *

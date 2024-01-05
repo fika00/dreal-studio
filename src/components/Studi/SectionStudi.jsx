@@ -15,8 +15,8 @@ import EnvMap from "./components/EnvMap/EnvMap";
 import Smoke from "./components/Smoke/Smoke";
 import "./SectionStudi.scss";
 
-import demo1 from "/imgs/studi/content/video/demo1.mp4";
-import demo2 from "/imgs/studi/content/video/demo2.mp4";
+// import demo1 from "/imgs/studi/content/video/demo1.mp4";
+// import demo2 from "/imgs/studi/content/video/demo2.mp4";
 import { AtmosphericBloom } from "./components/PP/SmokyBloom/AtmosphericBloom";
 import smoke from "/imgs/studi/curl.png";
 import PP from "./components/PP/PP";
